@@ -3,13 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
-    "build": "ng build",
+    "start": "node server",
+    "build": "ng build --prod",
     "backend": "nodemon server",
+    "front": "ng build --watch",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "deploy": "git subtree push --prefix quizApp heroku master"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
@@ -34,7 +34,6 @@
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "hammerjs": "^2.0.8",
-    "mongoose": "^5.5.12",
     "pg": "^7.11.0",
     "rxjs": "~6.5.2",
     "tslib": "^1.9.0",

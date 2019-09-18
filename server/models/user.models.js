@@ -1,5 +1,5 @@
 
-const pool = require("../connections");
+const pool = require("../config/connections");
 const bcrypt = require('bcrypt');
 
 function createUser(req, res){

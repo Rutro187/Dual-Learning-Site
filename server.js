@@ -1,14 +1,13 @@
 const express = require('express');
+require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000
-const quizRoutes = require('./routes/quiz.routes');
-const userRoutes = require('./routes/user.routes');
+const quizRoutes = require('./server/routes/quiz.routes');
+const userRoutes = require('./server/routes/user.routes');
 const bodyParser = require("body-parser");
 
 app.use(bodyParser.json());
 app.use(express.static(__dirname+"/dist/quizApp"));
-// Activate this later for production
-// app.use(express.static(__dirname+'/dist'))
 
 app.use('/quizzes', quizRoutes);
 

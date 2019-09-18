@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const quizAPI = require('../models/quiz.models')
-let pool = require('../connections.js')
 
 router.get('/getQuizById/:token', (req, res)=>{
     quizAPI.getQuiz(req, res);
