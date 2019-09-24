@@ -1,9 +1,8 @@
-<app-nav-bar></app-nav-bar>
 <!-- Refactor with reactive forms someday -->
-<div class="flex">
+<div class="flex background">
 
     <mat-card class="width30 matCard sticky">
-
+  
       <mat-card-header class="center">
         <mat-card-title class="titleFont">Whip Up a Quiz</mat-card-title>
       </mat-card-header>
@@ -33,57 +32,62 @@
           <button mat-raised-button color="accent" type="submit" (click)="quizFormSubmit()">Create
             Quiz</button>
         </mat-card-actions>
-
+  
       </mat-card-content>
-<!-- thank you message hidden until submit -->
-
-<div class="tokenMessage" id="thankYou">
-          <mat-card-subtitle>Your quiz has been submitted!</mat-card-subtitle>
-          <mat-card-content>The token below can be shared to access the quiz. </mat-card-content>
-          <mat-card-content>{{currentQuizToken}}</mat-card-content>
-          <mat-card-content>*Only those who are logged-in can take the quiz.*</mat-card-content>
-          
-          <a href="https://quizwhip.herokuapp.com/quiz_guard"> https://quizwhip.herokuapp.com/quiz_guard</a>
-
-   <mat-card-actions class="center">
+      <!-- thank you message hidden until submit -->
+  
+      <div class="tokenMessage" id="thankYou">
+        <mat-card-subtitle>Your quiz has been submitted!</mat-card-subtitle>
+        <mat-card-content>The token below can be shared to access the quiz. </mat-card-content>
+        <mat-card-content>{{currentQuizToken}}</mat-card-content>
+        <mat-card-content>*Only those who are logged-in can take the quiz.*</mat-card-content>
+  
+        <a href="https://quizwhip.herokuapp.com/quiz_guard"> https://quizwhip.herokuapp.com/quiz_guard</a>
+  
+        <mat-card-actions class="center">
           <button mat-raised-button color="primary" (click)="dashboardButton() ">Admin Dashboard</button>
         </mat-card-actions>
-        </div>
+      </div>
     </mat-card>
-
-
-
+  
+  
+  
     <!-- Create and Add Questions -->
-    <mat-card class="width70 matCard">
-        <div class="mat-elevation-z8" *ngFor="let question of questions; let qi = index">
-           <form class="padding">
-              <mat-card-title class="padding">Question #{{qi+1}}</mat-card-title>
-            <mat-form-field class="questionField" appearance="fill">
-                <mat-label>Insert Question Here</mat-label>
-                <input matInput [(ngModel)]="question.prompt" [name]="'prompt'+qi">
-               
-            </mat-form-field>
-            <button class="btnMargin" mat-raised-button color="primary" (click)=removeQuestion(qi)>Remove Question</button>
-           
-          
-             <div class="padding"> Select the radio button next to the correct choice. </div>
-          
-              <ng-container *ngFor="let choice of questions[qi].choices; let ci = index; trackBy:trackByFn">
-                 
-                   <mat-radio-group [name]="'correct' + qi" [(ngModel)]="question.correct"> 
-                <mat-radio-button [value]="qi + ci">  </mat-radio-button>
-                <mat-form-field appearance="fill">
-                    <mat-label>Insert Multiple Choice</mat-label>
-                    <input matInput [(ngModel)]="questions[qi].choices[ci]" [name]="'choice'+qi+ci">
-                </mat-form-field>
-                <button class="btnMargin" mat-raised-button color="primary" (click)="removeChoice(question, ci)">Remove Choice</button>
-           
-         </mat-radio-group> </ng-container>  
-          </form>
-            <button class="btnMargin" mat-raised-button color="primary" (click)=addChoice(qi)>Add Choice</button>
+    <mat-card class="width70 matCard see-through">
+      <div class="mat-elevation-z8 white" *ngFor="let question of questions; let qi = index">
+        <form class="padding">
+          <mat-card-title class="padding">Question #{{qi+1}}</mat-card-title>
+          <div class="flexBox">
+          <mat-form-field class="questionField" appearance="fill">
+            <mat-label>Insert Question Here</mat-label>
+            <input matInput [(ngModel)]="question.prompt" [name]="'prompt'+qi">
+          </mat-form-field>
+          <button class="btnMargin" mat-raised-button color="primary" (click)=removeQuestion(qi)><mat-icon>delete</mat-icon></button>
         </div>
-            <mat-card-actions class="btnMargin center">
-                <button  mat-raised-button color="primary" (click)=addQuestion() type="submit">Add New Question</button>
-            </mat-card-actions>
+  
+  
+          <div class="padding"> Select the radio button next to the correct choice. </div>
+  
+          <ng-container *ngFor="let choice of questions[qi].choices; let ci = index; trackBy:trackByFn">
+  
+            <mat-radio-group class="flexBox" [name]="'correct' + qi" [(ngModel)]="question.correct">
+  
+              <mat-radio-button class="align" [value]="qi + ci"> </mat-radio-button>
+              <mat-form-field class="textInput" appearance="fill">
+  
+                <mat-label>Insert Multiple Choice</mat-label>
+                <input matInput  [(ngModel)]="questions[qi].choices[ci]" [name]="'choice'+qi+ci">
+              </mat-form-field>
+              <button class="btnMargin" mat-raised-button color="primary" (click)="removeChoice(question, ci)"><mat-icon>clear</mat-icon></button>
+  
+            </mat-radio-group>
+  
+          </ng-container>
+        </form>
+        <button class="btnMargin" mat-raised-button color="primary" (click)=addChoice(qi)><mat-icon>add</mat-icon></button>
+      </div>
+      <mat-card-actions class="btnMargin center">
+        <button mat-raised-button color="primary" (click)=addQuestion() type="submit">Add New Question</button>
+      </mat-card-actions>
     </mat-card>
-    </div>
+  </div>
