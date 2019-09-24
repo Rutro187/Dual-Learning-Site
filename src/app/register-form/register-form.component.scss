@@ -1,11 +1,66 @@
-mat-card{
-    width: 70%;
-    margin: auto;
-}
 mat-form-field{
-    width: 60%;
-    margin-left: 20%;
+  width: 60%;
+  margin-left: 20%;
 }
+
 mat-card-title{
-    text-align: center;
+  text-align: center;
+}
+
+.background {
+  background-image: linear-gradient(#0e2340,  #EE7623);
+}
+  
+.full-page {
+  height: 100vh;
+  // background-size: auto;
+}
+  
+mat-card {
+  max-width: 330px;
+  padding: 30px;
+  margin: 0 auto;
+  margin-top: 10%;
+  background-color: rgb(255,255,255,0.95);
+  box-shadow: none !important;
+}
+  
+  
+.center {
+  margin: auto;
+  padding-top: 10px;
+  text-align: center;
+}
+
+.spacing {
+  padding-bottom: 50px;
+}
+
+.left {
+  flex-basis: 50%;
+}
+
+.flex {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.first-card {
+  background-color: rgba(0,0,0,0);
+  color: white;
+}
+
+.second-card {
+  height: 400px;
+}
+  
+
+@media (max-width: 768px) {
+  .left {
+    flex-basis: 100%;
+  }
+
+  .flex {
+    flex-flow: row wrap;
+  }
 }

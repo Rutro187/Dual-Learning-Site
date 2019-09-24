@@ -4,6 +4,7 @@ import { QuizServiceService, Quiz, Questions } from '../services/quiz-service.se
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { UserServiceService } from '../services/user-service.service';
+import { NavbarService } from '../navbar.service';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class QuizFormComponent implements OnInit {
   quizToken;
 
 
-  constructor( private quizService: QuizServiceService, private router: Router, private userServ: UserServiceService) { }
+  constructor( private quizService: QuizServiceService, private router: Router, private userServ: UserServiceService, public navbar: NavbarService) { }
 
   questions: Array<Object> = [
     {
@@ -99,6 +100,5 @@ this.showThankYou();
 
 
   ngOnInit() {
-
   }
 }

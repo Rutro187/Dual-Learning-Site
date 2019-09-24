@@ -85,3 +85,7 @@ $quiz-app-theme: mat-light-theme($quiz-app-primary, $quiz-app-accent);
 *{
     font-family: 'Montserrat', sans-serif;
 }
+
+body {
+    margin: 0;
+}
