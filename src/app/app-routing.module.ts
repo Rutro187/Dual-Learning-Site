@@ -15,12 +15,12 @@ const routes: Routes = [
 
 
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent, canActivate: [UserGuard]},
-  { path: 'register', component: RegisterFormComponent, canActivate: [UserGuard] },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AdminGuard] },
-  { path: 'quiz_form', component: QuizFormComponent, canActivate: [AdminGuard] },
-  { path: 'quiz_guard', component: QuizGuardComponent, canActivate: [LoggedInGuard]},
-  { path: 'take_quiz',  component: DisplayQuizComponent, canActivate: [LoggedInGuard]}
+  { path: 'login', component: LoginComponent},
+  { path: 'register', component: RegisterFormComponent},
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'quiz_form', component: QuizFormComponent },
+  { path: 'quiz_guard', component: QuizGuardComponent},
+  { path: 'take_quiz',  component: DisplayQuizComponent}
 ];
 
 

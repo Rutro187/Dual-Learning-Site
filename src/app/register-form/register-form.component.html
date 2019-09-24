@@ -1,15 +1,18 @@
 <app-nav-bar></app-nav-bar>
-<section fxLayout="row wrap" fxLayoutAlign="center center">
-  <!-- <mat-card>
-      <mat-card-content>
-      </mat-card-content>
-      <mat-card-actions>
-        
-      </mat-card-actions>
-    </mat-card> -->
-</section>
+<div class="background full-page">
 
-<mat-card>
+
+        <mat-card class="left first-card">
+          <mat-card-title class="center spacing"><b>Welcome to Quiz Whip!</b></mat-card-title>
+          <mat-card-content>
+            <p><i>Create and manage quizes and tests</i></p>
+            <p><i>Easily share with students</i></p>
+            <p><i>Manage scores and track progress</i></p>
+          </mat-card-content>
+        </mat-card>
+      
+
+<mat-card class="left second-card">
   <mat-card-title>Register for QuizWhip account</mat-card-title>
   <form autocomplete="off" fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
     <mat-card-content>
@@ -40,7 +43,7 @@
       <mat-hint>Not more than 60 characters long.</mat-hint>
       <!-- <mat-error *ngIf="hasError('password', 'required')">Password is required</mat-error>
       <mat-error *ngIf="hasError('password', 'maxlength')">You have more than 60 characters</mat-error> -->
-    </mat-form-field>
+    </mat-form-field><br><br>
 
     <mat-card-actions>
       <mat-card-actions align="center">
@@ -50,6 +53,7 @@
     </mat-card-actions>
   </form>
 </mat-card>
+</div>
 <div *ngIf="error"><p>{{error}}</p></div>
 
 <!-- Previous form below -->

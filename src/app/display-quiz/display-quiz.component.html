@@ -1,39 +1,51 @@
-<app-nav-bar></app-nav-bar>
 <form #questionForm="ngForm">
+  <div class="flex background">
 
-  <div class="flex">
-
-    <mat-card class="width70">
-      
-      <mat-card-title class="center quizTitle">{{quiz?.title}}</mat-card-title>
+    <mat-card class="questionContainer">
+      <mat-card-title class="center">Ben's Quiz</mat-card-title>
       <br>
-      <div class="questionContainer">
-        <mat-card-subtitle class="questionText"> {{currentQuestion}}</mat-card-subtitle>
-
-        <mat-radio-group name="question" aria-label="Select an option"
-          *ngFor="let currentChoice of currentChoices; let i = index">
-          <ol>
-            <mat-radio-button value="i" (change)="onSelectionChange(currentChoice, i)">{{currentChoice}}</mat-radio-button>
+      <div>
+        <mat-card-subtitle>In your opinion, what would you say is the meaning of life?</mat-card-subtitle>
+        <mat-radio-group name="question" aria-label="Select an option">
+          <ol class="answer">
+            <mat-radio-button value="1" (change)="onSelectionChange(currentChoice, i)"></mat-radio-button>
+            Fuck him if he seems like he'd be
+              good at it, but he's a little too boring or poor for my taste
+          </ol>
+          <ol class="answer">
+            <mat-radio-button value="2" (change)="onSelectionChange(currentChoice, i)"></mat-radio-button>
+            Marry him if he's rich, because
+              then I could buy all of the shit that I want and I won't have to work
+          </ol>
+          <ol class="answer">
+            <mat-radio-button value="3" (change)="onSelectionChange(currentChoice, i)"></mat-radio-button>
+            Kill him if the time is right and
+              I get the chance and take all of the insurance money
+          </ol>
+          <ol class="answer">
+            <mat-radio-button value="4" (change)="onSelectionChange(currentChoice, i)">
+            </mat-radio-button>
+            All of the above
           </ol>
         </mat-radio-group>
         <br>
         <mat-card-actions>
-            <button color="primary" mat-raised-button id="previousB"  (click)="previousQuestion()" mat-button> Previous Question</button>
-          <button color="primary" mat-raised-button id="nextBt" (click)="nextQuestion()" [disabled]="nextButton" mat-button> Next Question</button>
-          <button mat-raised-button color="accent" (click)="submitButton()" id="searchsubmit" mat-button>
-            Submit</button>
+          <button color="primary" mat-raised-button id="previousB" (click)="previousQuestion()" mat-button> Previous Question</button>
+          <button color="primary" mat-raised-button id="nextB" (click)="nextQuestion()" [disabled]="nextButton" mat-button> Next Question</button>
+          <button mat-raised-button color="accent" (click)="submitButton()" id="searchsubmit" mat-button>Submit</button>
         </mat-card-actions>
       </div>
-      <div class="questionContainer" id="thankYou">
-        <mat-card-subtitle class="questionText"> Thank you for taking the quiz!</mat-card-subtitle>
-        You answered {{userScore.score}} of {{quiz.questions.length}}  questions correctly!
+
+      <div id="thankYou">
+        <mat-card-subtitle> Thank you for taking the quiz!</mat-card-subtitle>
+        You answered {{userScore.score}} of {{quiz.questions.length}} questions correctly!
         <br>
-        <a [routerLink]="[ '/quiz_guard' ]"><button class="btnMargin" mat-raised-button color="primary">Take another quiz!</button></a>
+        <a [routerLink]="[ '/quiz_guard' ]"><button class="btnMargin" mat-raised-button color="primary">Take another
+            quiz!</button></a>
       </div>
     </mat-card>
-
     <br>
-    <mat-card class="width30">
+    <!-- <mat-card class="width30">
       <div>
         <mat-card-subtitle class="questionText"> Your answers:</mat-card-subtitle>
 
@@ -47,6 +59,6 @@
         </ol>
 
       </div>
-    </mat-card>
+    </mat-card> -->
   </div>
 </form>

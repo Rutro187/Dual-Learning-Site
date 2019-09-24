@@ -1,10 +1,17 @@
-mat-card{
-  width: 70%;
-  margin: auto;
+.background {
+  background-image: linear-gradient(#0e2340,  #EE7623);
 }
 
-.spacing {
-  padding-bottom: 20px;
+.full-page {
+  height: 100vh;
+}
+
+mat-card{
+  min-width: 330px;
+  padding: 30px;
+  margin: 0 auto;
+  margin-top: 10%;
+  background-color: rgb(255,255,255,0.95);
 }
 
 .center {
@@ -12,16 +19,43 @@ mat-card{
   text-align: center;
 }
 
-  .form{
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
+.spacing {
+  padding-bottom: 50px;
+}
+
+.form {
+  max-width: 500px;
+  width: 100%;
+}
+
+.button {
+  margin: 1em;
+}
+
+.flex {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.left {
+  flex-basis: 50%;
+}
+
+.first-card {
+  background-color: rgba(0,0,0,0);
+  color: white;
+}
+
+.second-card {
+  height: 300px;
+}
+
+@media (max-width: 768px) {
+  .left {
+    flex-basis: 100%;
   }
 
-   
-  .full-width {
-    width: 400px;
+  .flex {
+    flex-flow: row wrap;
   }
-  .btnMargin {
-    margin: 1em;
-  }
+}

@@ -1,83 +1,85 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,600&display=swap');
 
-.mat-radio-button {
-    margin-left: 16px;
-  }
-  .mblue{
-    background-color: #0e2340;
-   
+.background {
+  background-image: linear-gradient(#0e2340,  #EE7623);
 }
-.morange{
-  background-color: #ee7623;
+
+.center{
+  text-align: center;
 }
+
 .questionContainer{
-  margin: auto;
+  margin: 0 auto;
   width: 60%;
 }
-.questionText{
-  font-weight: 600;
-  font-size: 18px;
-  font-size-adjust: inherit;
-}
+
+// .questionText{
+//   font-weight: 600;
+//   font-size: 18px;
+//   font-size-adjust: inherit;
+// }
 
 // .mat-card{
 //   margin:auto;
 //   width:70%;
 // }
 
-.center{
-  justify-content: center;
-}
-.quizTitle{
-    text-align: center;
-    margin: auto;
-    display: clear; 
+// .quizTitle{
+//     text-align: center;
+//     margin: auto;
+//     display: clear; 
   
-}
-#searchsubmit
-{    
+// }
+
+#searchsubmit {    
     visibility: hidden;
 }
-#thankYou
-{    
+
+#thankYou {    
     visibility: hidden;
 }
+
 #visible {
   visibility: visible;
 }
+
 #visible2 {
   visibility: visible;
 }
-
 
 #hidden {
   visibility: hidden;
 }
 
-.flex{
-  display: flex;
-  flex-flow: row nowrap;
-}
-.width30{
-  width: 40%;
-  margin-top: 5px;
-  margin-left: 5px;
-}
-.width70{
-  width: 60%;
-  margin-top: 5px;
-}
+// .flex{
+//   display: flex;
+//   flex-flow: row nowrap;
+// }
+// .width30{
+//   width: 40%;
+//   margin-top: 5px;
+//   margin-left: 5px;
+// }
+// .width70{
+//   width: 60%;
+//   margin-top: 5px;
+// }
 
-#previousB{
+#previousB {
   visibility: hidden;
 }
 
-.visible{
-  visibility: visible;
+#nextB {
+  visibility: visible; 
 }
-.correctAnswer{
-  visibility: hidden;
-}
+
+// .visible{
+//   visibility: visible;
+// }
+// .correctAnswer{
+//   visibility: hidden;
+// }
+
 #visible3 {
   visibility: visible;
 }
@@ -86,14 +88,10 @@
   visibility:  hidden;
 }
 
-.hiddenClass{
-  visibility:  hidden;
-}
+// .hiddenClass{
+//   visibility:  hidden;
+// }
 
-#nextBt{
-  visibility: visible; 
-}
-
-.btnMargin {
-  margin: 1.5em;
-}
+// .btnMargin {
+//   margin: 1.5em;
+// }
