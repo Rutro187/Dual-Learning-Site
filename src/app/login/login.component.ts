@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from '../../app/services/user-service.service';
 import { Router } from '@angular/router';
+import { NavbarService } from '../navbar.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
   password: String = "";
   userId;
   error;
-  constructor(private userServ: UserServiceService, private router: Router) { }
+  constructor(private userServ: UserServiceService, private router: Router, public navbar: NavbarService) { }
   login() {
     this.userServ.login({
       "email": this.email,
@@ -42,6 +43,7 @@ export class LoginComponent implements OnInit {
     })
 }
   ngOnInit() {
+    this.navbar.hide();
   }
 
 }

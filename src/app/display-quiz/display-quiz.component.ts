@@ -46,28 +46,28 @@ export class DisplayQuizComponent implements OnInit {
 
 
   // hard coded json for testing
-  // quizTestData: Quiz = {
-  //   title: 'HTML Quiz',
-  //   description: 'This is a quiz here',
-  //   questions: [
-  //     {
-  //       type: 'asfasf'
-  //       prompt: 'What does HTML Stand for?',
-  //       choices: ['Hyper Text Markup Language', 'Hyperlinks and Text Markup Language', 'Home Tool Markup Language', 'Make Text Made Language'],
-  //       correct: 'Hyper Text Markup Language'
-  //     },
-  //     {
-  //       prompt: 'Which character is used to indicate an end tag?',
-  //       choices: ['/', '^', '*', '<'],
-  //       correct: '/'
-  //     },
-  //     {
-  //       prompt: 'How can you make a numbered list?',
-  //       choices: ['<ul>', '<list>', '<nl>', '<ol>'],
-  //       correct: '<ol>'
-  //     }
-  //   ]
-  // };
+  quizTestData: Quiz = {
+    title: 'HTML Quiz',
+    description: 'This is a quiz here',
+    questions: [
+      {
+        type: 'asfasf',
+        prompt: 'What does HTML Stand for?',
+        choices: ['Hyper Text Markup Language', 'Hyperlinks and Text Markup Language', 'Home Tool Markup Language', 'Make Text Made Language'],
+        correct: 'Hyper Text Markup Language'
+      },
+      {
+        prompt: 'Which character is used to indicate an end tag?',
+        choices: ['/', '^', '*', '<'],
+        correct: '/'
+      },
+      {
+        prompt: 'How can you make a numbered list?',
+        choices: ['<ul>', '<list>', '<nl>', '<ol>'],
+        correct: '<ol>'
+      }
+    ]
+  };
 
 
   // isolating the page question

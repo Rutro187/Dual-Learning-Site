@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from '../../app/services/user-service.service';
 import { Router } from '@angular/router';
+import { NavbarService } from '../navbar.service';
 
 @Component({
   selector: 'app-register-form',
@@ -13,7 +14,7 @@ export class RegisterFormComponent implements OnInit {
   firstName: String = "";
   lastName: String = "";
   error;
-  constructor(private userServ: UserServiceService, private router: Router) { }
+  constructor(private userServ: UserServiceService, private router: Router, public navbar: NavbarService) { }
   signup() {
       this.userServ.signup({
         "email": this.email,
@@ -30,6 +31,8 @@ export class RegisterFormComponent implements OnInit {
       })
   }
   ngOnInit() {
+    this.navbar.hide();
+
   }
 
 }

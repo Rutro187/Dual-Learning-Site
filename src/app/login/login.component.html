@@ -1,23 +1,38 @@
-<app-nav-bar></app-nav-bar>
-<mat-card>
-  <mat-card-title class="center spacing">Login to Quiz Whip!</mat-card-title>
-  <mat-card-content>
-    <form class="center form">
-      <mat-form-field class="full-width">
-        <mat-label>Email</mat-label>
-        <input matInput placeholder="Email" name="email" [(ngModel)]="email">
-        <mat-hint>Please enter your email address</mat-hint>
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <mat-label>Password</mat-label>
-        <input matInput placeholder="Password" name="password" [(ngModel)]="password" type="password">
-        <mat-hint>Please enter your password</mat-hint>
-      </mat-form-field>
-    </form>
-  </mat-card-content>
-  <mat-card-actions align="center">
-    <button  mat-raised-button (click)="login()" color="primary">LOGIN</button>
-    <a class="navLink btnMargin" [routerLink]="[ '/register' ]" routerLinkActive="active"><button mat-raised-button  color="accent">REGISTER</button></a>
-  </mat-card-actions>
-</mat-card>
-<div *ngIf="error"><p>{{error}}</p></div>
+
+<div class="background full-page flex">
+
+  <mat-card class="left first-card">
+    <mat-card-title class="center spacing"><b>Welcome to Quiz Whip!</b></mat-card-title>
+    <mat-card-content>
+      <p><i>Create and manage quizes and tests</i></p>
+      <p><i>Easily share with students</i></p>
+      <p><i>Manage scores and track progress</i></p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="left second-card">
+      <mat-card-title class="center">Log In</mat-card-title>
+      <mat-card-content>
+        <form class="center form">
+          <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Email" name="email" [(ngModel)]="email">
+            <mat-hint>Please enter your email address</mat-hint>
+          </mat-form-field><br>
+          <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Password" name="password" [(ngModel)]="password" type="password">
+            <mat-hint>Please enter your password</mat-hint>
+          </mat-form-field>
+        </form>
+      </mat-card-content>
+      <mat-card-actions align="center">
+        <button class="button" mat-raised-button (click)="login()" color="primary">LOGIN</button>
+        <a class="button" [routerLink]="[ '/register' ]" routerLinkActive="active"><button mat-raised-button color="accent">REGISTER</button></a>
+      </mat-card-actions>
+    </mat-card>
+
+</div>
+<div *ngIf="error">
+  <p>{{error}}</p>
+</div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { QuizServiceService } from '../services/quiz-service.service';
 import { UserServiceService } from '../services/user-service.service';
+import { NavbarService } from '../navbar.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,13 +9,14 @@ import { UserServiceService } from '../services/user-service.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+
   creatorId: Number;
   quizzes: Object[] = [];
   quizResults: Object[] = [];
   results: Object[] = [];
   token;
   displayedColumns = ['score', 'email', 'datestamp', ];
-  constructor(private quizService: QuizServiceService, private userServ: UserServiceService) { }
+  constructor(private quizService: QuizServiceService, private userServ: UserServiceService, public navbar: NavbarService) { }
   getQuizzes(creatorId){
     this.quizService.getQuizByAdmin(creatorId).subscribe((res: Object[]) =>{
       this.quizResults = res;
