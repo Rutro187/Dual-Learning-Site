@@ -44,6 +44,7 @@ import { QuizResultsComponent } from './quiz-results/quiz-results.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterFormComponent } from './register-form/register-form.component';
+import { MyQuizzesComponent } from './my-quizzes/my-quizzes.component';
 
 
 
@@ -58,7 +59,8 @@ import { RegisterFormComponent } from './register-form/register-form.component';
     NavBarComponent,
     LoginComponent,
     RegisterFormComponent,
-    QuizGuardComponent
+    QuizGuardComponent,
+    MyQuizzesComponent
   ],
   imports: [
     FormsModule,

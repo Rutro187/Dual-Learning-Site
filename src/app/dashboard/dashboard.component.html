@@ -1,19 +1,8 @@
 <mat-card class="matCard">
   <mat-card-header class="center">
-    <mat-card-title class="fontSize">Please Select A Quiz</mat-card-title>
+    <mat-card-title class="fontSize">Test Scores</mat-card-title>
   </mat-card-header>
-  <mat-form-field>
-    <mat-label>Select Quiz</mat-label>
-    <mat-select>
-      <mat-option *ngFor="let quiz of quizzes" [value]="quiz.id">
-        <button (click)="getScores(quiz.id)"> {{quiz.title}}</button>
-      </mat-option>
-    </mat-select>
-    <a [routerLink]="['/quiz_form']"><button>Create Quiz</button></a>
-  </mat-form-field>
-  <div *ngIf="token">
-    <h3>{{token.token}}</h3>
-  </div>
+  
 
   <table mat-table [dataSource]="results">
 
@@ -33,5 +22,6 @@
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+  </table>  
 </mat-card>
+<app-my-quizzes></app-my-quizzes>
