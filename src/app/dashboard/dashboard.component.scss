@@ -1,3 +1,10 @@
+.background {
+  background-image: linear-gradient(#0e2340,  #EE7623);
+}
+
+.full-page {
+  height: 100vh;
+}
 
 table {
     width:100%;
@@ -31,5 +38,6 @@ table {
 .matCard{
   margin: auto;
   width: 60%;
+  padding-top: 10px
   margin-top: 10px
 }

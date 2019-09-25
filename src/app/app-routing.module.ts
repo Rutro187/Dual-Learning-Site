@@ -11,7 +11,6 @@ import { AdminGuard } from './guards/admin.guard';
 import { LoggedInGuard } from './guards/logged-in.guard';
 import { AdminComponent } from './admin/admin.component';
 
-
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent},
@@ -29,10 +28,7 @@ const routes: Routes = [
   // { path: 'quiz_guard', component: QuizGuardComponent, canActivate: [LoggedInGuard]},
   // { path: 'take_quiz',  component: DisplayQuizComponent, canActivate: [LoggedInGuard]}
   // { path: 'admin', component: AdminComponent }
-
 ];
-
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
