@@ -1,0 +1,11 @@
+<mat-toolbar class="header">
+        <img src="./assets/images/quizWhipSemiBold300.png" alt="Quiz Whip Logo" class="center">
+        <button *ngIf="navbar.visible" class="main" mat-button [matMenuTriggerFor]="menu">Menu</button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item routerLink="/dashboard">Dashboard</button>
+            <button mat-menu-item (click)="takeQuiz()">Take Quiz</button>
+            <button mat-menu-item routerLink="/quiz_form">Create Quiz</button>
+            <button mat-menu-item>Admin</button>
+        </mat-menu>
+    </mat-toolbar>
+    

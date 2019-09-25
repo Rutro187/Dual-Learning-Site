@@ -6,21 +6,19 @@
       <br>
       <div>
         <mat-card-subtitle>In your opinion, what would you say is the meaning of life?</mat-card-subtitle>
-        <mat-radio-group name="question" aria-label="Select an option">
+        <mat-radio-group name="question" aria-label="Select an option"
+          *ngFor="let currentChoice of currentChoices; let i = index">
           <ol class="answer">
             <mat-radio-button value="1" (change)="onSelectionChange(currentChoice, i)"></mat-radio-button>
-            Fuck him if he seems like he'd be
-              good at it, but he's a little too boring or poor for my taste
+            answer a
           </ol>
           <ol class="answer">
             <mat-radio-button value="2" (change)="onSelectionChange(currentChoice, i)"></mat-radio-button>
-            Marry him if he's rich, because
-              then I could buy all of the shit that I want and I won't have to work
+            answer b
           </ol>
           <ol class="answer">
             <mat-radio-button value="3" (change)="onSelectionChange(currentChoice, i)"></mat-radio-button>
-            Kill him if the time is right and
-              I get the chance and take all of the insurance money
+            answer c
           </ol>
           <ol class="answer">
             <mat-radio-button value="4" (change)="onSelectionChange(currentChoice, i)">

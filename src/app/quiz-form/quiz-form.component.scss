@@ -13,7 +13,9 @@
 .matCard{
   margin: auto;
   width: 60%;
+  box-shadow: none;
 }
+
 .white{
   background-color: white;
 }
@@ -95,10 +97,7 @@ table {
 .questionField{
   width: 75%;
 }
-.sticky{
-  position: sticky;
-  top: 0;
-}
+
 .paragraphSpacing{
   line-height: 32px;  
 }
