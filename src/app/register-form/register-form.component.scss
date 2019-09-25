@@ -58,6 +58,14 @@ mat-card {
 @media (max-width: 768px) {
   .left {
     flex-basis: 100%;
+}
+
+.second-card {
+  background-color: rgba(255,255,255,1)
+}
+
+  mat-card {
+    min-width: 100%;
   }
 
   .flex {
