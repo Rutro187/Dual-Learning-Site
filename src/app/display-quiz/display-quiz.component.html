@@ -6,10 +6,11 @@
       <br>
       <div>
         <mat-card-subtitle>In your opinion, what would you say is the meaning of life?</mat-card-subtitle>
-        <mat-radio-group name="question" aria-label="Select an option">
+        <mat-radio-group name="question" aria-label="Select an option"
+          *ngFor="let currentChoice of currentChoices; let i = index">
           <ol class="answer">
             <mat-radio-button value="1" (change)="onSelectionChange(currentChoice, i)"></mat-radio-button>
-            answeer a
+            answer a
           </ol>
           <ol class="answer">
             <mat-radio-button value="2" (change)="onSelectionChange(currentChoice, i)"></mat-radio-button>
