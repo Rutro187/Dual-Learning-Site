@@ -45,6 +45,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterFormComponent } from './register-form/register-form.component';
 import { AdminComponent } from './admin/admin.component';
+import { MyQuizzesComponent } from './my-quizzes/my-quizzes.component';
 
 
 
@@ -60,7 +61,8 @@ import { AdminComponent } from './admin/admin.component';
     LoginComponent,
     RegisterFormComponent,
     QuizGuardComponent,
-    AdminComponent
+    AdminComponent,
+    MyQuizzesComponent
   ],
   imports: [
     FormsModule,
