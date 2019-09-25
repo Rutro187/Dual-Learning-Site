@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { QuizGuardComponent } from '../quiz-guard/quiz-guard.component';
 import { NavbarService } from '../navbar.service';
+import { AdminComponent } from '../admin/admin.component';
 
 @Component({
   selector: 'app-nav-bar',
@@ -18,11 +19,16 @@ export class NavBarComponent implements OnInit {
     const dialogRef = this.dialog.open(QuizGuardComponent, {
       width: '60vw',
     });
-
-    dialogRef.afterClosed().subscribe(result => {})
-    //   this.allIncome = [...this.addService.allIncome];
-    // });
+    dialogRef.afterClosed()
   }
+
+  admin(): void {
+    const dialogRef = this.dialog.open(AdminComponent, {
+      width: '60vw',
+    });
+    dialogRef.afterClosed()
+  }
+
   ngOnInit() {
   }
 }
