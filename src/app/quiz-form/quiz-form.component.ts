@@ -14,58 +14,54 @@ import { UserServiceService } from '../services/user-service.service';
   styleUrls: ['./quiz-form.component.scss']
 })
 export class QuizFormComponent implements OnInit {
+  title: string; // Question itself
   answers: Array<string>; // Array of answers, entered by creator
   correct: number; // index of answers array with correct answer
   type: string; // type of question, multiChoice, trueFalse
   points: number; // number of points question is worth
   creator: string; // ID of who is making the quiz
-  title: string; // title of quiz
+  quizTitle: string; // title of quiz
   desc: string; // description of quiz
 
 
   constructor(private quizService: QuizServiceService, private router: Router, private userServ: UserServiceService) { }
 
-  questions: Array<Object> = [
-    {}
-  ]
+  questions: Array<Object> = [{
+    title: '',
+    answers: ['', ''],
+    correct: 0,
+    type: 'multiChoice',
+    points: 0,
+  }]; // array of all questions in quiz, defaults to one blank question with first answer listed as correct
 
-  types: string[] = ["multi"]
-
-  title = ""
-  description = ""
-  instructions = ""
-
-  trackByFn(index: any, item: any) {
-    return index;
-  }
   removeQuestion(idx) {
     this.questions.splice(idx, 1)
   }
 
   addQuestion() {
     this.questions.push({
-      type: "multi",
-      prompt: "",
-      choices: ["", ""],
-      correct: [true, false],
+      title: '',
+      answers: ['', ''],
+      correct: 0,
+      type: 'multiChoice',
+      points: 0,
     })
+    console.log(this.questions);
+
   }
+  // onChange(event) {
+  //   this.type = event.target.value;
+  // }
 
 
-  onChange(event) {
-    this.selectedType = event.target.value;
-  }
-
-
-  removeChoice(question, cidx) {
-    console.log(cidx);
-    question['choices'].splice(cidx, 1);
+  removeChoice(question, idx) {
+    console.log(idx);
+    question['answers'].splice(idx, 1);
     console.log(this.questions);
   }
 
   addChoice(val) {
-    // console.log(this.questions[val]);
-    this.questions[val]['choices'].push('');
+    this.questions[val]['answers'].push('');
 
   }
   hideCreateQuiz() {
@@ -89,8 +85,8 @@ export class QuizFormComponent implements OnInit {
     console.log(quiz);
     this.quizService.postQuiz(quiz).subscribe(res => {
       console.log(res);
-      this.quizToken = res;
-      this.currentQuizToken = res['token'];
+      // this.quizToken = res;
+      // this.currentQuizToken = res['token'];
     });
     this.hideCreateQuiz();
     this.showThankYou();
