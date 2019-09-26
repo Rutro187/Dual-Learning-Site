@@ -17,16 +17,10 @@
         <div class="center">
           <mat-form-field class="width">
             <mat-label>Description</mat-label>
-            <textarea matInput name="quizDescription" type="textarea" [(ngModel)]="quizDescription"> </textarea>
+            <textarea matInput name="desc" type="textarea" [(ngModel)]="desc"> </textarea>
           </mat-form-field>
         </div>
-        <!-- Quiz Instructions -->
-        <div class="center">
-          <mat-form-field class="width">
-            <mat-label>Instructions</mat-label>
-            <textarea matInput name="quizInstructions" type="textarea" [(ngModel)]="quizInstructions"></textarea>
-          </mat-form-field>
-        </div>
+        <!-- Button to submit quiz -->
         <mat-card-actions class="center">
           <button mat-raised-button color="accent" type="submit" (click)="quizFormSubmit()">Create
             Quiz</button>
@@ -59,31 +53,52 @@
           <div class="flexBox">
           <mat-form-field class="questionField" appearance="fill">
             <mat-label>Insert Question Here</mat-label>
-            <input matInput [(ngModel)]="question.prompt" [name]="'prompt'+qi">
+            <input matInput [(ngModel)]="question.title" [name]="'title'+qi">
           </mat-form-field>
           <button class="btnMargin" mat-raised-button color="primary" (click)=removeQuestion(qi)><mat-icon>delete</mat-icon></button>
         </div>
+
+        <mat-form-field>
+          <mat-label>Select the type of question</mat-label>
+          <select matNativeControl required [(ngModel)]="question.type" [name]="'type'+qi">
+            <option value="multiChoice">Multiple Choice</option>
+            <option value="trueFalse">True/False</option>
+          </select>
+        </mat-form-field>
   
-  
+
           <div class="padding"> Select the radio button next to the correct choice. </div>
-  
-          <ng-container *ngFor="let choice of questions[qi].choices; let ci = index; trackBy:trackByFn">
-  
-            <mat-radio-group class="flexBox" [name]="'correct' + qi" [(ngModel)]="question.correct">
-  
-              <mat-radio-button class="align" [value]="qi + ci"> </mat-radio-button>
-              <mat-form-field class="textInput" appearance="fill">
-  
-                <mat-label>Insert Multiple Choice</mat-label>
-                <input matInput  [(ngModel)]="questions[qi].choices[ci]" [name]="'choice'+qi+ci">
-              </mat-form-field>
-              <button class="btnMargin" mat-raised-button color="primary" (click)="removeChoice(question, ci)"><mat-icon>clear</mat-icon></button>
-  
-            </mat-radio-group>
-  
-          </ng-container>
+          <!-- multiple choice -->
+          <div *ngIf="question.type == 'multiChoice'">
+            <ng-container *ngFor="let answer of questions[qi].answers; let ai = index; trackBy:trackByFn">
+    
+              <mat-radio-group class="flexBox" [name]="'correct' + qi" [(ngModel)]="question.correct">
+    
+                <mat-radio-button class="align" [value]="ai"> </mat-radio-button>
+                <mat-form-field class="textInput" appearance="fill">
+    
+                  <mat-label>Insert Multiple Choice</mat-label>
+                  <input matInput placeholder="Insert Multiple Choice" [(ngModel)]="question.answers[ai]" [name]="'answer'+qi+ai">
+                </mat-form-field>
+                <button class="btnMargin" mat-raised-button color="primary" (click)="removeAnswer(question, ai)"><mat-icon>clear</mat-icon></button>
+    
+              </mat-radio-group>
+    
+            </ng-container>
+        </div>
+          <!-- true false -->
+        <div *ngIf="question.type == 'trueFalse'">
+          <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [name]="'correct' + qi" [(ngModel)]="question.correct">
+            <mat-radio-button class="align"  [value]="0">True</mat-radio-button>
+            <mat-radio-button class="align"  [value]="1">False</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+
         </form>
-        <button class="btnMargin" mat-raised-button color="primary" (click)=addChoice(qi)><mat-icon>add</mat-icon></button>
+        <button *ngIf="question.type !== 'trueFalse'" class="btnMargin" mat-raised-button color="primary" (click)=addAnswer(qi)><mat-icon>add</mat-icon></button>
+
+
       </div>
       <mat-card-actions class="btnMargin center">
         <button mat-raised-button color="primary" (click)=addQuestion() type="submit">Add New Question</button>
