@@ -12,8 +12,7 @@ const cors = require('cors')({origin: true});
 app.use(cors);
 // [END middleware]
 
-* Creates firebase admin and gets access to firestore defined in same firebase project.
-*/
+//* Creates firebase admin and gets access to firestore defined in same firebase project.
 const admin = require('firebase-admin');
 admin.initializeApp();
 const firestore = admin.firestore();
@@ -22,10 +21,10 @@ const firestore = admin.firestore();
 /**
 * Simple request that extracts data from firebase firestore (database)
 * --------------------------------------------------------------------------------------
-* Try: https://mock-apis-server.firebaseapp.com/userProfile/bob
+* Try: https://quizapp-2b262.firebaseapp.com/quiz
 */
-app.get('/userProfile/:userId', (req, res) => {
- var docRef = firestore.collection("userProfiles").doc(req.params.userId);
+app.get('/quiz', (req, res) => {
+    var docRef = firestore.collection("quiz");
 
  // See https://firebase.google.com/docs/firestore/query-data/get-data#get_a_document
  docRef.get().then((doc) => {
