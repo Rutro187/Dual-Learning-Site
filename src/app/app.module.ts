@@ -46,7 +46,11 @@ import { LoginComponent } from './login/login.component';
 import { RegisterFormComponent } from './register-form/register-form.component';
 import { AdminComponent } from './admin/admin.component';
 import { MyQuizzesComponent } from './my-quizzes/my-quizzes.component';
-
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from '../environments/environment';
+import { AuthGenericService } from './services/auth-generic.service';
 
 
 @NgModule({
@@ -66,6 +70,9 @@ import { MyQuizzesComponent } from './my-quizzes/my-quizzes.component';
   ],
   imports: [
     FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -104,7 +111,7 @@ import { MyQuizzesComponent } from './my-quizzes/my-quizzes.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [AuthGenericService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
