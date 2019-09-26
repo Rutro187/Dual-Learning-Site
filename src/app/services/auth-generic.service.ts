@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-// import { AngularFireAuth } from '@angular/fire/auth';
+// import { AngularFireAuth } from '@angular/fire/auth';?
 // import * as firebase from 'firebase/app';
+import { firebase } from 
 import { Router } from '@angular/router'
 
 @Injectable({
@@ -12,19 +13,19 @@ export class AuthGenericService {
 
   constructor(private router: Router) { }
 
-//   doLogin(value){
-//     return new Promise<any>((resolve, reject) => {
-//       firebase.auth().signInWithEmailAndPassword(value.email, value.password)
-//       .then(res => {
-//         resolve(res);
-//         if (res.user.emailVerified !== true) {
-//           this.SendVerificationMail();
-//           window.alert('Please validate your email address. Kindly check your inbox.');
-//           this.router.navigate(['/login']);
-//           }
-//       }, err => reject(err))
-//     })
-//   }
+  doLogin(value){
+    return new Promise<any>((resolve, reject) => {
+      firebase.auth().signInWithEmailAndPassword(value.email, value.password)
+      .then(res => {
+        resolve(res);
+        if (res.user.emailVerified !== true) {
+          this.SendVerificationMail();
+          window.alert('Please validate your email address. Kindly check your inbox.');
+          this.router.navigate(['/login']);
+          }
+      }, err => reject(err))
+    })
+  }
 
 //   SendVerificationMail() {
 //     return this.afAuth.auth.currentUser.sendEmailVerification()
