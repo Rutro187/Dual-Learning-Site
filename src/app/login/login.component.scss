@@ -6,6 +6,9 @@
   height: 100vh;
 }
 
+mat-form-field{
+  margin-bottom: 10px;
+}
 mat-card{
   min-width: 330px;
   padding: 30px;
@@ -25,7 +28,6 @@ mat-card{
 }
 
 .form {
-  max-width: 500px;
   width: 100%;
 }
 
@@ -51,6 +53,9 @@ mat-card{
   height: 300px;
 }
 
+.padding {
+  margin: 20px;
+}
 @media (max-width: 768px) {
   .left {
     flex-basis: 100%;
