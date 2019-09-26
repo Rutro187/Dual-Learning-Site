@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 // import { AngularFireAuth } from '@angular/fire/auth';?
 // import * as firebase from 'firebase/app';
 import { Router } from '@angular/router'
-import {AngularFireAuth } from '@angular/fire/auth'
+import { AngularFireAuth } from '@angular/fire/auth'
 import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
@@ -10,26 +10,28 @@ import { Observable } from 'rxjs';
 export class AuthGenericService {
   userData: Observable<firebase.User>;
 
-  // this.userData = angularFireAuth.authState; this was bello in the brackets 
-  constructor(private router: Router, private angularFireAuth: AngularFireAuth) {}
+  //  this was bello in the brackets 
+  constructor(private router: Router, private angularFireAuth: AngularFireAuth) {this.userData = angularFireAuth.authState}
 
-  // doLogin(value){
-  //   return new Promise<any>((resolve, reject) => {
-  //     firebase.auth().signInWithEmailAndPassword(value.email, value.password)
-  //     .then(res => {
-  //       resolve(res);
-  //       if (res.user.emailVerified !== true) {
-  //         this.SendVerificationMail();
-  //         window.alert('Please validate your email address. Kindly check your inbox.');
-  //         this.router.navigate(['/login']);
-  //         }
-  //     }, err => reject(err))
-  //   })
-  // }
+  doLogin(value){
+    return new Promise<any>((resolve, reject) => {
+      this.angularFireAuth
+      .auth
+      .signInWithEmailAndPassword(value.email, value.password)
+      .then(res => {
+        resolve(res);
+        if (res.user.emailVerified !== true) {
+          this.SendVerificationMail();
+          window.alert('Please validate your email address. Kindly check your inbox.');
+          this.router.navigate(['/login']);
+          }
+      }, err => reject(err))
+    })
+  }
 
-//   SendVerificationMail() {
-//     return this.afAuth.auth.currentUser.sendEmailVerification()
-//   }
+  SendVerificationMail() {
+    return this.angularFireAuth.auth.currentUser.sendEmailVerification()
+  }
 
 //   doGoogleLogin(){
 //     return new Promise<any>((resolve, reject) => {
@@ -56,5 +58,12 @@ signup(email: string, password: string) {
   .catch(error => {
     console.log('Something is wrong:', error.message);
   });
+
+/* Sign out */
+signOut() {
+  this.angularFireAuth
+    .auth
+    .signOut();
+}
 }
 }
