@@ -34,6 +34,10 @@ export class QuizFormComponent implements OnInit {
     points: 0,
   }]; // array of all questions in quiz, defaults to one blank question with first answer listed as correct
 
+  trackByFn(index: any, item: any) {
+    return index;
+ }
+
   removeQuestion(idx) {
     this.questions.splice(idx, 1)
   }
@@ -49,18 +53,14 @@ export class QuizFormComponent implements OnInit {
     console.log(this.questions);
 
   }
-  // onChange(event) {
-  //   this.type = event.target.value;
-  // }
-
-
-  removeChoice(question, idx) {
+  
+  removeAnswer(question, idx) {
     console.log(idx);
     question['answers'].splice(idx, 1);
     console.log(this.questions);
   }
 
-  addChoice(val) {
+  addAnswer(val) {
     this.questions[val]['answers'].push('');
 
   }
