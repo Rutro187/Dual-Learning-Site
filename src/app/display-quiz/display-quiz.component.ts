@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { QuizServiceService, Quiz, Results, Questions } from '../services/quiz-service.service';
+import { QuizServiceService, Quiz, Results, Questions } from '../services/quiz-service';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { FormControl, FormGroup, ControlValueAccessor } from '@angular/forms';
 import { MatRadioChange, MatButton } from '@angular/material';
 import { MatDialog } from '@angular/material/dialog';
@@ -118,4 +118,5 @@ export class DisplayQuizComponent implements OnInit {
   }
 
 }
+
 

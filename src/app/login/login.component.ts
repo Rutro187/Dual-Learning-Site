@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { UserServiceService } from '../../app/services/user-service.service';
+import { UserService } from '../../app/services/user-service';
 import { Router } from '@angular/router';
 import { NavbarService } from '../navbar.service';
+<<<<<<< HEAD
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../auth.service';
+=======
+import { AuthGenericService } from '../services/auth-generic.service';
+>>>>>>> master
 
 @Component({
   selector: 'app-login',
@@ -11,10 +15,11 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  email: String = "";
-  password: String = "";
+  email: string = "";
+  password: string = "";
   userId;
   error;
+<<<<<<< HEAD
   constructor(public dialog: MatDialog, public auth: AuthService) { }
   
 //   login() {
@@ -45,8 +50,24 @@ export class LoginComponent implements OnInit {
 //       }
 //     })
 // }
+=======
+  userMessage = "enter your password"
+  constructor(private authService: AuthGenericService, private router: Router, public navbar: NavbarService) { }
+
+  tryLogin(){
+    this.authService.doLogin(this.email, this.password)
+    .then(res => {
+      this.router.navigate(['/dashboard']);
+      console.log();
+    }, err => {
+      console.log(err);
+      this.userMessage = "incorrect username or password";
+      this.router.navigate(['/login']);
+    })
+  }
+
+>>>>>>> master
   ngOnInit() {
     // this.navbar.hide();
   }
-
 }

@@ -1,69 +1,114 @@
 import { Injectable } from '@angular/core';
-// import { AngularFireAuth } from '@angular/fire/auth';?
-// import * as firebase from 'firebase/app';
-import { Router } from '@angular/router'
-import { AngularFireAuth } from '@angular/fire/auth'
+import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import {User} from '../Interfaces/users';
+
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGenericService {
-  userData: Observable<firebase.User>;
+  // userData: Observable<firebase.User>;
+userCollection: AngularFirestoreCollection<User>;
+  
+  constructor(private router: Router, private angularFireAuth: AngularFireAuth, private angularFirestore: AngularFirestore) {
+    this.userCollection = this.angularFirestore.collection("Users", ref => ref.orderBy('displayname', 'desc'))
+  }
+  
 
-  //  this was bello in the brackets 
-  constructor(private router: Router, private angularFireAuth: AngularFireAuth) {this.userData = angularFireAuth.authState}
 
-  doLogin(value){
+
+  doLogin(email, password){
     return new Promise<any>((resolve, reject) => {
       this.angularFireAuth
       .auth
-      .signInWithEmailAndPassword(value.email, value.password)
+      .signInWithEmailAndPassword(email,  password)
       .then(res => {
-        resolve(res);
+        const token = this.getUserInfo();
+        localStorage.setItem('userInfo', JSON.stringify(token));
+        resolve(token);
         if (res.user.emailVerified !== true) {
           this.SendVerificationMail();
           window.alert('Please validate your email address. Kindly check your inbox.');
           this.router.navigate(['/login']);
           }
-      }, err => reject(err))
-    })
+      }, err => reject(err));
+    });
   }
-
+  // Verification Email //
   SendVerificationMail() {
-    return this.angularFireAuth.auth.currentUser.sendEmailVerification()
+    return this.angularFireAuth.auth.currentUser.sendEmailVerification();
   }
 
-//   doGoogleLogin(){
-//     return new Promise<any>((resolve, reject) => {
-//       let provider = new firebase.auth.GoogleAuthProvider();
-//       provider.addScope('profile');
-//       provider.addScope('email');
-//       this.afAuth.auth
-//       .signInWithPopup(provider)
-//       .then(res => {
-//         resolve(res);
-//       }, err => {
-//         console.log(err);
-//         reject(err);
-//       })
-//     })
-//   }
-signup(email: string, password: string) {
+
+signup(email: string, password: string, username: string) {
   this.angularFireAuth
   .auth
   .createUserWithEmailAndPassword(email, password)
   .then(res => {
-    console.log('Successfully signed up!', res);
+    var user = this.angularFireAuth.auth.currentUser;
+    user.updateProfile({
+      displayName: username,
+      photoURL: "user"
+    })
+  
+    this.addGeneralUserInfo(user);  
+    console.log('Successfully signed up!');
   })
   .catch(error => {
     console.log('Something is wrong:', error.message);
   });
+}
 
+<<<<<<< HEAD
 /* Sign out */
 // signOut() {
 //   this.angularFireAuth
 //     .auth
 //     .signOut();
 // }
+=======
+getUserInfo(){
+const user = this.angularFireAuth.auth.currentUser;
+var name, email, permission, uid;
+
+if (user != null) {
+  return (
+  {
+  name: user.displayName,
+  email: user.email,
+  permission: user.photoURL,
+  uid: user.uid,  // The user's ID, unique to the Firebase project. Do NOT use
+                   // this value to authenticate with your backend server, if
+                   // you have one. Use User.getToken() instead.
+  })
+}
+}
+
+  /* Sign out */
+  signout(){
+    this.angularFireAuth
+      .auth
+      .signOut();
+  }
+  // Retrieve User info (finds permission level)
+
+
+addGeneralUserInfo(user){
+  console.log("addgeneral")
+  const userCollection = this.angularFirestore.collection("Users");
+  userCollection.doc(user.uid).set({
+    displayname: user.displayName,
+    email: user.email,
+    permission: "user"
+  });
+}
+
+getAllUsers(){
+  return this.userCollection 
+>>>>>>> master
 }
 }

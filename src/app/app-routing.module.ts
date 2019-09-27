@@ -8,26 +8,31 @@ import { QuizGuardComponent } from './quiz-guard/quiz-guard.component';
 import { DisplayQuizComponent } from './display-quiz/display-quiz.component';
 import { UserGuard } from './guards/user.guard';
 import { AdminGuard } from './guards/admin.guard';
-import { LoggedInGuard } from './guards/logged-in.guard';
+
 import { AdminComponent } from './admin/admin.component';
+import { OwnerGuard } from './guards/owner.guard';
+import { MyQuizzesComponent } from './my-quizzes/my-quizzes.component';
+import { QuizResultsComponent } from './quiz-results/quiz-results.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent},
-  { path: 'register', component: RegisterFormComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'quiz_form', component: QuizFormComponent },
-  { path: 'quiz_guard', component: QuizGuardComponent},
-  { path: 'take_quiz/:id',  component: DisplayQuizComponent },
-  { path: 'admin', component: AdminComponent }
   // { path: '', redirectTo: '/login', pathMatch: 'full' },
-  // { path: 'login', component: LoginComponent, canActivate: [UserGuard]},
-  // { path: 'register', component: RegisterFormComponent, canActivate: [UserGuard] },
-  // { path: 'dashboard', component: DashboardComponent, canActivate: [AdminGuard] },
-  // { path: 'quiz_form', component: QuizFormComponent, canActivate: [AdminGuard] },
-  // { path: 'quiz_guard', component: QuizGuardComponent, canActivate: [LoggedInGuard]},
-  // { path: 'take_quiz',  component: DisplayQuizComponent, canActivate: [LoggedInGuard]}
+  // { path: 'login', component: LoginComponent},
+  // { path: 'register', component: RegisterFormComponent },
+  // { path: 'dashboard', component: DashboardComponent },
+  // { path: 'quiz-form', component: QuizFormComponent },
+  // { path: 'quiz-guard', component: QuizGuardComponent},
+  // { path: 'take-quiz',  component: DisplayQuizComponent },
   // { path: 'admin', component: AdminComponent }
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent},
+  { path: 'register', component: RegisterFormComponent},
+  { path: 'dashboard', component: DashboardComponent, canActivate: [UserGuard] },
+  { path: 'quiz-form', component: QuizFormComponent, canActivate: [AdminGuard] },
+  { path: 'quiz-guard', component: QuizGuardComponent, canActivate: [UserGuard]},
+  { path: 'take-quiz',  component: DisplayQuizComponent, canActivate: [UserGuard]},
+  { path: 'admin', component: AdminComponent, canActivate: [OwnerGuard]  },
+  { path: 'my-quizzes', component: MyQuizzesComponent, canActivate: [AdminGuard] },
+  { path: 'quiz-results', component: QuizResultsComponent, canActivate: [UserGuard] }
 ];
 
 @NgModule({

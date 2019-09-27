@@ -1,6 +1,7 @@
+import { AuthGenericService } from './../services/auth-generic.service';
 import { Component, OnInit } from '@angular/core';
-import { QuizServiceService } from '../services/quiz-service.service';
-import { UserServiceService } from '../services/user-service.service';
+import { QuizService } from '../services/quiz-service';
+import { UserService } from '../services/user-service';
 import { NavbarService } from '../navbar.service';
 
 @Component({
@@ -16,13 +17,22 @@ export class DashboardComponent implements OnInit {
   results: Object[] = [];
   token;
   displayedColumns = ['score', 'email', 'datestamp', ];
-  constructor(private quizService: QuizServiceService, private userServ: UserServiceService, public navbar: NavbarService) { }
+  constructor(
+    private quizService: QuizService,
+    private userServ: UserService,
+    public navbar: NavbarService,
+    private authService: AuthGenericService
+    ) { }
+  isAnAdmin(){
+    const status = this.authService.getUserInfo().permission;
+    if (status === 'owner' || status === 'admin') {
+      return true;
+    } else {
+      return false;
+    }
+  }
   getQuizzes(creatorId){
-    this.quizService.getQuizByAdmin(creatorId).subscribe((res: Object[]) =>{
-      this.quizResults = res;
-      this.quizResults.forEach(quizResult => {
-        this.quizzes.push(quizResult);
-      })
+
       console.log(this.quizzes);
     })
   }
@@ -35,11 +45,8 @@ export class DashboardComponent implements OnInit {
     // })
   }
   ngOnInit() {
-    this.userServ.logger.subscribe(res => {
-      this.creatorId = res;
-      console.log(this.creatorId);
-      this.getQuizzes(this.creatorId);
-    })
-  }
+
+    }
+  
 
 }

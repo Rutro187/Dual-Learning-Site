@@ -7,7 +7,7 @@ import { AuthGenericService } from './auth-generic.service';
 @Injectable({
   providedIn: 'root'
 })
-export class UserServiceService {
+export class UserService {
   isLoggedIn = new BehaviorSubject<boolean>(false);
   isAdmin = new BehaviorSubject<boolean>(false);
   isLoggedOut = new BehaviorSubject<boolean>(true);

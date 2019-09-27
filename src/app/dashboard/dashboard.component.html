@@ -26,5 +26,5 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>  
 </mat-card>
-<app-my-quizzes></app-my-quizzes>
+<app-my-quizzes *ngIf="isAnAdmin()"></app-my-quizzes>
 

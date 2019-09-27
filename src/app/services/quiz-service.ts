@@ -5,6 +5,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { map } from 'rxjs/operators';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -82,14 +83,13 @@ export class QuizServiceService {
       token: this.token,
       userId: "1",
     }
-    // return this.http.post('/quizzes/getScore', request);
-  }
-  getAllUserQuizScores() {
-    // return this.http.post("quizzes/getAllUserScoresByQuizId", Observable);
   }
 
+  getAllUserQuizScores() {
+  }
 
 }
+
 
 export interface Quiz {
   title?: string
