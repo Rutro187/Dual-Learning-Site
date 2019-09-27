@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {Router, ActivatedRoute} from '@angular/router';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 
 
@@ -10,18 +11,15 @@ import {Router, ActivatedRoute} from '@angular/router';
 })
 
 export class QuizService {
-//  token: {};
 
-  
-// getQuiz(){
-//   this.http.get();\
 
-constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) {}
-
+constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute, private angularFirestore: AngularFirestore) {}
+  quizCollection = this.angularFirestore.collection("quiz")
 
 
   postQuiz(quiz) {
- 
+    console.log("postquizservice", quiz)
+    this.quizCollection.doc(quiz.title).set(quiz);
 }
 getStudentsByQuizId(id){
  
@@ -36,9 +34,6 @@ token: string;
  
   }
 
-// getAllData(apiItem: String): any {
-//   return this.http.get(this.baseURL+apiItem, {responseType: 'json'}); 
-//   }
   getQuizResultsByQuizId() {
     return this.http.post("/quizzes/getQuizResultsByQuizId", Observable);
   }
@@ -51,12 +46,10 @@ getUserQuizScores(userAnswers) {
     token: this.token,
     userId: "1",
   }
-  return this.http.post('/quizzes/getScore', request);
 }
 getAllUserQuizScores(){
-  return this.http.post("quizzes/getAllUserScoresByQuizId", Observable);
-}
 
+}
 
 }
 export interface Quiz {

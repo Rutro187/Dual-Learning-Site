@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -33,11 +34,18 @@ export class AuthGenericService {
   }
 
 
-signup(email: string, password: string) {
+signup(email: string, password: string, username: string) {
   this.angularFireAuth
   .auth
   .createUserWithEmailAndPassword(email, password)
   .then(res => {
+    var user = this.angularFireAuth.auth.currentUser;
+    user.updateProfile({
+      displayName: username,
+      photoURL: "user"
+    })
+    
+
     console.log('Successfully signed up!', res);
   })
   .catch(error => {
@@ -50,5 +58,24 @@ signout(){
     .auth
     .signOut();
 }
+
+getUserInfo(){
+var user = this.angularFireAuth.auth.currentUser;
+var name, email, permission, uid;
+
+if (user != null) {
+  return (
+  {
+  name: user.displayName,
+  email: user.email,
+  permission: user.photoURL,
+  uid: user.uid,  // The user's ID, unique to the Firebase project. Do NOT use
+                   // this value to authenticate with your backend server, if
+                   // you have one. Use User.getToken() instead.
+  }
+  )
+}
+}
+
 }
 

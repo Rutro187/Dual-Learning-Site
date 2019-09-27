@@ -151,8 +151,7 @@ export class DisplayQuizComponent implements OnInit {
     questionArea.remove();
     document.getElementById('thankYou').id = 'visible';
     for (let z = 0; z < this.userAnswers.length; z++) {
-      const correctAnswer = document.getElementById('hidden2').id = 'visible';
-    
+      const correctAnswer = document.getElementById('hidden2').id = 'visible'; 
     }
   }
 
@@ -165,11 +164,7 @@ export class DisplayQuizComponent implements OnInit {
     }
   }
   getScore() {
-  this.questionService.getUserQuizScores(this.userAnswers).subscribe(res =>{
-    console.log(res);
-    this.userScore = res;
-});
+}
 }
 
-}
 

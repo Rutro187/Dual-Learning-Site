@@ -17,7 +17,7 @@ export class RegisterFormComponent implements OnInit {
   constructor(private authServ:AuthGenericService, private router: Router, public navbar: NavbarService) { }
   signup() {
       this.authServ.signup(
-      this.email , this.password)      
+      this.email , this.password, this.firstName)      
   }
   ngOnInit() {
     this.navbar.hide();

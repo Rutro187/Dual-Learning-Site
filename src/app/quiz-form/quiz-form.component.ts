@@ -4,6 +4,7 @@ import { QuizService, Quiz, Questions } from '../services/quiz-service';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user-service';
+import { AuthGenericService } from '../services/auth-generic.service';
 
 // export class RadioNgModelExample {
 
@@ -24,7 +25,7 @@ export class QuizFormComponent implements OnInit {
   desc: string; // description of quiz
 
 
-  constructor(private quizService: QuizService, private router: Router, private userServ: UserService) { }
+  constructor(private quizService: QuizService, private router: Router, private authService: AuthGenericService) { }
 
   questions: Array<Object> = [{
     title: '',
@@ -77,22 +78,19 @@ export class QuizFormComponent implements OnInit {
   }
   quizFormSubmit() {
     let quiz: any = {
-      title: this.title,
+      title: this.quizTitle,
       description: this.desc,
-      creator: this.creator, // need to pull this data from instance
-      questions: this.questions,
+      creator: this.authService.getUserInfo().uid,
+      questions: this.questions
     };
     console.log(quiz);
-    this.quizService.postQuiz(quiz).subscribe(res => {
-      console.log(res);
       // this.quizToken = res;
       // this.currentQuizToken = res['token'];
-    });
+    this.quizService.postQuiz(quiz);
     this.hideCreateQuiz();
     this.showThankYou();
   }
-
-
+  
   ngOnInit() {
 
   }
