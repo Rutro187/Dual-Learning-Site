@@ -72,8 +72,8 @@ export class QuizServiceService {
     }))  
   }
 
-  postUserAnswersByQuizId() {
-    // return this.http.post("/quizzes/postAnswersByQuizId", Observable);
+  postUserAnswers(data) {
+    this.resultsCollection.add(data);
   }
 
   getUserQuizScores(userAnswers) {

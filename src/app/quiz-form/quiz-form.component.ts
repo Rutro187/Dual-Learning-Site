@@ -89,11 +89,11 @@ sideBar.remove();
       creatorId: 20
     };
     console.log(quiz);
-    this.quizService.postQuiz(quiz).subscribe(res => {
-      console.log(res);
-      this.quizToken = res;
-      this.currentQuizToken = res['token'];
-    });
+    // this.quizService.postQuiz(quiz).subscribe(res => {
+    //   console.log(res);
+    //   this.quizToken = res;
+    //   this.currentQuizToken = res['token'];
+    // });
     this.hideCreateQuiz();
 this.showThankYou();
   }

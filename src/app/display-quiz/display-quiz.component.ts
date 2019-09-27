@@ -1,13 +1,10 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { QuizServiceService, Quiz, Results, Questions } from '../services/quiz-service.service';
 import { FormControl, FormGroup, ControlValueAccessor } from '@angular/forms';
 import { MatRadioChange, MatButton } from '@angular/material';
-import { Observable } from 'rxjs';
-import { Title } from '@angular/platform-browser';
-import { getMatScrollStrategyAlreadyAttachedError } from '@angular/cdk/overlay/typings/scroll/scroll-strategy';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BIG_ENDIAN } from 'bytebuffer';
-import { map } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
+import { QuizGuardComponent } from '../quiz-guard/quiz-guard.component';
 
 // Object Interface for data
 
@@ -22,24 +19,24 @@ import { map } from 'rxjs/operators';
 
 export class DisplayQuizComponent implements OnInit {
 
-  quizId: string;
+  quizId: string = this.route.snapshot.paramMap.get('id');
   creator: string;
   description: string;
   questions: Object[];
   title: string;
   correct: number;
 
-  currentQuestion;
-  currentChoices;
-  correctAnswer;
-
   formControl = new FormControl('');
   x = 0;
   matButton: MatButton;
 
   selectedRadio: string;
-  userAnswers: any[] = [];
-  userAnswerText: any[] = [];
+
+  userAnswers: number[] = [];
+  correctAnswers: number[] = [];
+  numberCorrect: number = 0;
+  percent;
+  completed = false;
 
   token;
   quiz: Quiz;
@@ -51,106 +48,73 @@ export class DisplayQuizComponent implements OnInit {
   nextButton: Boolean = false;
 
 
-  constructor(private quizService: QuizServiceService, private questionService: QuizServiceService, private route: ActivatedRoute, private router: Router) { 
+  constructor(private quizService: QuizServiceService, private route: ActivatedRoute, public dialog: MatDialog) { 
   }
 
   ngOnInit() {
-    this.getQuiz()
-    this.currentQuestion = this.quiz.questions[this.x].title;
-    this.currentChoices = this.quiz.questions[this.x].answers;
-    this.quizId = this.route.snapshot.paramMap.get('id');
-    this.correctAnswer = this.quiz.questions[this.x].answers[this.currentChoices.correct];
-    // console.log(this.quiz);
-    // });
+    this.getQuiz();
   }
 
   getQuiz() {
     const id = this.route.snapshot.paramMap.get('id');
-    return this.quizService.getQuizByToken(id).subscribe(data => 
-      this.quiz = data);
+    return this.quizService.getQuizByToken(id).subscribe(data => {
+      this.quiz = data;
+      this.userAnswers.length = this.quiz.questions.length;
+      this.getCorrectAnswers();
+    });
+    
   }
 
-  // identifying which radio button is selected
-  onSelectionChange(currentChoice, i) {
-    this.selectedRadio = i;
-    this.selectedAnswer = currentChoice;
-    console.log(this.selectedRadio);
-  }
-
-  unhideSubmitButton() {
-    document.getElementById('searchsubmit').id = 'visible';
-  }
-
-  unhidePreviousButton() {
-    document.getElementById('previousB').id = 'visible2';
-  }
-
-  hidePreviousButton() {
-    document.getElementById('previousB').id = 'hidden2';
-  }
-
-  hideNextButton() {
-    document.getElementById('nextBt').id = 'hidden';
-  }
-
-  // function that activates on click of "next button." Changes the question.
-  nextQuestion() {
-    this.userAnswers.push(this.selectedRadio);
-    this.userAnswerText.push(this.selectedAnswer);
-    this.x = this.x + 1;
-    if (this.x < this.quiz.questions.length) {
-      this.currentQuestion = this.quiz.questions[this.x].title;
-      this.currentChoices = this.quiz.questions[this.x].answers;
-      this.correctAnswer = this.quiz.questions[this.x].answers[this.currentChoices.correct];
-    }
-    console.log({length: this.quiz.questions.length});
-    console.log({x: this.x})
-    if (this.x === 1) {
-      this.unhidePreviousButton();
-    }
-    if (this.x === this.quiz.questions.length) {
-      this.unhideSubmitButton();
-      this.nextButton = true;
-      console.log(this.nextButton);
-    }
-  }
-
-  // previous button
-  previousQuestion() {
-    this.nextButton = false;
-    this.userAnswers.pop();
-    this.userAnswerText.pop();
+  onSelectionChange(j, i) {
+    this.userAnswers[j] = i;
     console.log(this.userAnswers);
-    this.x = this.userAnswers.length;
-    this.currentQuestion = this.quiz.questions[this.x].title;
-    this.currentChoices = this.quiz.questions[this.x].answers;
-    // this.correctAnswer = this.quiz[`questions`][this.x].correct;
+  }
+
+  getCorrectAnswers() {
+    for (let i = 0; i < this.quiz.questions.length; i++) {
+      let x = this.quiz.questions[i].correct;
+      this.correctAnswers.push(x);
+      console.log(this.correctAnswers);
+    }
   }
 
   submitButton() {
+    this.getCorrectAnswers();
+    this.compare(this.userAnswers, this.correctAnswers);
     this.getScore();
-    const questionArea = document.getElementsByClassName('questionContainer')[0];
-    questionArea.remove();
+    this.completed = true;
     document.getElementById('thankYou').id = 'visible';
-    for (let z = 0; z < this.userAnswers.length; z++) {
-      const correctAnswer = document.getElementById('hidden2').id = 'visible';
-    
+    document.getElementById('submitButton').id = 'hidden';
+
+    let data = {
+      date: new Date(),
+      quizId: this.quizId,
+      score: this.percent,
+      // userId: this.auth.currentUserId,
+      // userName: this.auth.authState.email
     }
+    this.quizService.postUserAnswers(data);
   }
 
-  onButtonChange() {
-    if (this.currentQuestion[this.x] === (this.currentQuestion.length - 1 )) {
-      this.hideNextButton();
-    }
-    if (this.currentQuestion.length === 0 ) {
-      this.hidePreviousButton();
-    }
+  compare(userAnswers, correctAnswers) {
+    for (let i = 0; i < correctAnswers.length; i++) {
+      if (userAnswers[i] === correctAnswers[i]) {
+        this.numberCorrect++;
+      }
+    } 
+    console.log(this.numberCorrect);
   }
+
   getScore() {
-    this.questionService.getUserQuizScores(this.userAnswers).subscribe(res =>{
-      console.log(res);
-      this.userScore = res;
+    this.percent = ((this.numberCorrect / this.quiz.questions.length) * 100).toFixed(2);
+    console.log(this.percent);
+  }
+
+  takeQuiz(): void {
+    const dialogRef = this.dialog.open(QuizGuardComponent, {
+      width: '60vw',
     });
+    dialogRef.afterClosed()
   }
 
 }

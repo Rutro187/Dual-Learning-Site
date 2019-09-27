@@ -1,49 +1,29 @@
-<form #questionForm="ngForm">
-  <div class="flex background">
+<form #questionForm="ngForm" class="background full-page">
+  <div class="flex">
 
-    <mat-card class="questionContainer">
-      <mat-card-title class="center">{{quiz.title}}</mat-card-title>
-      <br>
-      <div>
-        <mat-card-subtitle>{{currentQuestion}}</mat-card-subtitle>
-        <mat-radio-group name="question" aria-label="Select an option"
-          *ngFor="let currentChoice of currentChoices; let i = index">
-          <ol class="answer">
-            <mat-radio-button value="1" (change)="onSelectionChange(currentChoice, i)"></mat-radio-button>
-            {{currentChoice}}
+      <h2 class="center">{{quiz?.title}}</h2>
+  
+    <div class="questionContainer" *ngFor="let question of quiz?.questions; let j = index">
+      <mat-card *ngIf="!completed">
+        <mat-card-subtitle>{{question.title}}</mat-card-subtitle>
+        <mat-radio-group aria-label="Select an option">
+          <ol class="answer" *ngFor="let answer of question.answers; let i = index">
+            <mat-radio-button value="i" (change)="onSelectionChange(j, i)"></mat-radio-button>
+            {{answer}}
           </ol>
         </mat-radio-group>
-        <br>
-        <mat-card-actions>
-          <button color="primary" mat-raised-button id="previousB" (click)="previousQuestion()" mat-button> Previous Question</button>
-          <button color="primary" mat-raised-button id="nextB" (click)="nextQuestion()" [disabled]="nextButton" mat-button> Next Question</button>
-          <button mat-raised-button color="accent" (click)="submitButton()" id="searchsubmit" mat-button>Submit</button>
-        </mat-card-actions>
-      </div>
+      </mat-card>
+    </div>
 
-      <div id="thankYou">
-        <mat-card-subtitle> Thank you for taking the quiz!</mat-card-subtitle>
-        You answered {{userScore.score}} of {{quiz.questions.length}} questions correctly!
-        <br>
-        <a [routerLink]="[ '/quiz_guard' ]"><button class="btnMargin" mat-raised-button color="primary">Take another
-            quiz!</button></a>
-      </div>
-    </mat-card>
-    <br>
-    <!-- <mat-card class="width30">
-      <div>
-        <mat-card-subtitle class="questionText"> Your answers:</mat-card-subtitle>
+    <button mat-raised-button color="accent" (click)="submitButton()" id="submitButton" mat-button>Submit</button>
 
-        <ol>
-          <mat-card-subtitle *ngFor="let n = index; let userAnswer of userAnswers">
-            <li><strong>Question:</strong> {{quiz?.questions[n].prompt}}
-             <strong> <br>You chose:</strong> {{userAnswerText[n]}}
-            <span id="hidden2">  <strong> <br> Correct answer:</strong> {{quiz?.questions[n].choices[quiz.questions[n].correct]}}</span>
-            </li>
-          </mat-card-subtitle>
-        </ol>
+    <div id="thankYou" class="resultContainer">
+      <mat-card-subtitle> Thank you for taking the quiz!</mat-card-subtitle>
+      You answered {{numberCorrect}} of {{quiz?.questions.length}} questions correctly for a score of {{percent}}%!
+      <br>
+      <button (click)="takeQuiz()" class="btnMargin" mat-raised-button color="primary">Take another
+          quiz!</button>
+    </div>
 
-      </div>
-    </mat-card> -->
   </div>
 </form>
