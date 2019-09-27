@@ -3,25 +3,23 @@
     <mat-card-header class="center">
       <mat-card-title class="fontSize">Users</mat-card-title>
     </mat-card-header>
-    
-  
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
     <table mat-table [dataSource]="users">
-  
       <ng-container matColumnDef="displayname">
-        <th mat-header-cell *matHeaderCellDef> Score </th>
-        <td mat-cell *matCellDef="let result"> {{users.name}} </td>
+        <th mat-header-cell *matHeaderCellDef> Display Name </th>
+        <td mat-cell *matCellDef="let users"> {{users.displayname}} </td>
       </ng-container>
-  
       <ng-container matColumnDef="email">
         <th mat-header-cell *matHeaderCellDef> Email </th>
-        <td mat-cell *matCellDef="let result"> {{users.email}} </td>
+        <td mat-cell *matCellDef="let users"> {{users.email}} </td>
       </ng-container>
-  
       <ng-container matColumnDef="permission">
-        <th mat-header-cell *matHeaderCellDef> Date </th>
-        <td mat-cell *matCellDef="let result"> {{users.permission}} </td>
+        <th mat-header-cell *matHeaderCellDef> Permission </th>
+        <td mat-cell *matCellDef="let users"> {{users.permission}} </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>  
+    </table>
   </mat-card>
