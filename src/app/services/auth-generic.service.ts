@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Observable } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 
 @Injectable({
@@ -11,7 +11,7 @@ export class AuthGenericService {
   // userData: Observable<firebase.User>;
 
   //  this was bello in the brackets 
-  constructor(private router: Router, private angularFireAuth: AngularFireAuth) {}
+  constructor(private router: Router, private angularFireAuth: AngularFireAuth, private angularFirestore: AngularFirestore) {}
 
   doLogin(email, password){
     return new Promise<any>((resolve, reject) => {
@@ -44,9 +44,9 @@ signup(email: string, password: string, username: string) {
       displayName: username,
       photoURL: "user"
     })
-    
-
-    console.log('Successfully signed up!', res);
+  
+    this.addGeneralUserInfo(user)  
+    console.log('Successfully signed up!');
   })
   .catch(error => {
     console.log('Something is wrong:', error.message);
@@ -60,7 +60,7 @@ signout(){
 }
 
 getUserInfo(){
-var user = this.angularFireAuth.auth.currentUser;
+const user = this.angularFireAuth.auth.currentUser;
 var name, email, permission, uid;
 
 if (user != null) {
@@ -74,10 +74,20 @@ if (user != null) {
                    // you have one. Use User.getToken() instead.
   }
   )
-}admin.auth().listUsers
 }
+}
+
+addGeneralUserInfo(user){
+  console.log("addgeneral")
+  const userCollection = this.angularFirestore.collection("Users")
+  userCollection.doc(user.uid).set({
+    displayname: user.displayName,
+    email: user.email,
+    permission: "user"
+  });
+}
+
 getAllUsers(nextPageToken){
-  this.angularFireAuth.listAllUsers();
 // // List batch of users, 100 at a time.
 // admin.auth().listUsers(100, nextPageToken)
 // .then(function(listUsersResult) {
