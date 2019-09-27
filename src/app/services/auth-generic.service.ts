@@ -6,6 +6,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import {User} from '../Interfaces/users';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,6 +18,8 @@ userCollection: AngularFirestoreCollection<User>;
     this.userCollection = this.angularFirestore.collection("Users", ref => ref.orderBy('displayname', 'desc'))
   }
   
+
+
 
   doLogin(email, password){
     return new Promise<any>((resolve, reject) => {
@@ -49,9 +52,9 @@ signup(email: string, password: string, username: string) {
       displayName: username,
       photoURL: "user"
     })
-    
-
-    console.log('Successfully signed up!', res);
+  
+    this.addGeneralUserInfo(user)  
+    console.log('Successfully signed up!');
   })
   .catch(error => {
     console.log('Something is wrong:', error.message);
@@ -65,7 +68,7 @@ signout(){
 }
 
 getUserInfo(){
-var user = this.angularFireAuth.auth.currentUser;
+const user = this.angularFireAuth.auth.currentUser;
 var name, email, permission, uid;
 
 if (user != null) {
@@ -80,6 +83,33 @@ if (user != null) {
   }
   )
 }
+}
+
+addGeneralUserInfo(user){
+  console.log("addgeneral")
+  const userCollection = this.angularFirestore.collection("Users")
+  userCollection.doc(user.uid).set({
+    displayname: user.displayName,
+    email: user.email,
+    permission: "user"
+  });
+}
+
+getAllUsers(nextPageToken){
+// // List batch of users, 100 at a time.
+// admin.auth().listUsers(100, nextPageToken)
+// .then(function(listUsersResult) {
+//   listUsersResult.users.forEach(function(userRecord) {
+//     console.log('user', userRecord.toJSON());
+//   });
+//   if (listUsersResult.pageToken) {
+//     // List next batch of users.
+//     listAllUsers(listUsersResult.pageToken);
+//   }
+// })
+// .catch(function(error) {
+//   console.log('Error listing users:', error);
+// });
 }
 
 getAllUsers(){

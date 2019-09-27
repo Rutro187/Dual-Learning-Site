@@ -23,3 +23,4 @@ export class RegisterFormComponent implements OnInit {
     this.navbar.hide();
   }
 }
+
