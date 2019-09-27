@@ -19,7 +19,7 @@ export class QuizFormComponent implements OnInit {
   answers: Array<string>; // Array of answers, entered by creator
   correct: number; // index of answers array with correct answer
   type: string; // type of question, multiChoice, trueFalse
-  points: number; // number of points question is worth
+  // points: number; // number of points question is worth
   creator: string; // ID of who is making the quiz
   quizTitle: string; // title of quiz
   desc: string; // description of quiz
@@ -32,7 +32,7 @@ export class QuizFormComponent implements OnInit {
     answers: ['', ''],
     correct: 0,
     type: 'multiChoice',
-    points: 0,
+    // points: 0,
   }]; // array of all questions in quiz, defaults to one blank question with first answer listed as correct
 
   trackByFn(index: any, item: any) {
@@ -49,7 +49,7 @@ export class QuizFormComponent implements OnInit {
       answers: ['', ''],
       correct: 0,
       type: 'multiChoice',
-      points: 0,
+      // points: 0,
     });
     console.log(this.questions);
 

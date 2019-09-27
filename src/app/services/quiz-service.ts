@@ -18,7 +18,6 @@ constructor(private http: HttpClient, private router: Router, private route: Act
 
 
   postQuiz(quiz) {
-    console.log("postquizservice", quiz);
     this.quizCollection.doc(quiz.title).set(quiz);
 }
 getStudentsByQuizId(id) {
