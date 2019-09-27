@@ -95,22 +95,7 @@ addGeneralUserInfo(user){
   });
 }
 
-getAllUsers(nextPageToken){
-// // List batch of users, 100 at a time.
-// admin.auth().listUsers(100, nextPageToken)
-// .then(function(listUsersResult) {
-//   listUsersResult.users.forEach(function(userRecord) {
-//     console.log('user', userRecord.toJSON());
-//   });
-//   if (listUsersResult.pageToken) {
-//     // List next batch of users.
-//     listAllUsers(listUsersResult.pageToken);
-//   }
-// })
-// .catch(function(error) {
-//   console.log('Error listing users:', error);
-// });
-}
+
 
 getAllUsers(){
   return this.userCollection 
