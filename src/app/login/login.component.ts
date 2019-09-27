@@ -10,8 +10,8 @@ import { AuthGenericService } from '../services/auth-generic.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  email: String = "";
-  password: String = "";
+  email: string = "";
+  password: string = "";
   userId;
   error;
   userMessage = "enter your password"

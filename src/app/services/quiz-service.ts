@@ -14,14 +14,14 @@ export class QuizService {
 
 
 constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute, private angularFirestore: AngularFirestore) {}
-  quizCollection = this.angularFirestore.collection("quiz")
+  quizCollection = this.angularFirestore.collection('quiz');
 
 
   postQuiz(quiz) {
-    console.log("postquizservice", quiz)
+    console.log("postquizservice", quiz);
     this.quizCollection.doc(quiz.title).set(quiz);
 }
-getStudentsByQuizId(id){
+getStudentsByQuizId(id) {
  
 }
 getQuizByAdmin(creatorId){
@@ -45,7 +45,7 @@ getUserQuizScores(userAnswers) {
     answers: userAnswers,
     token: this.token,
     userId: "1",
-  }
+  };
 }
 getAllUserQuizScores(){
 
