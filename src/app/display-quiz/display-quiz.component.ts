@@ -36,12 +36,14 @@ export class DisplayQuizComponent implements OnInit {
   formControl = new FormControl('');
   x = 0;
   matButton: MatButton;
+
   selectedRadio: string;
   userAnswers: any[] = [];
+  userAnswerText: any[] = [];
+
   token;
   quiz: Quiz;
   selectedAnswer;
-  userAnswerText: any[] = [];
   userScore: any = {
     score: ''
   };
@@ -57,12 +59,9 @@ export class DisplayQuizComponent implements OnInit {
     this.currentQuestion = this.quiz.questions[this.x].title;
     this.currentChoices = this.quiz.questions[this.x].answers;
     this.quizId = this.route.snapshot.paramMap.get('id');
-    this.correctAnswer = this.quiz.questions[this.x].answers[this.correct];
+    this.correctAnswer = this.quiz.questions[this.x].answers[this.currentChoices.correct];
     // console.log(this.quiz);
     // });
-  }
-
-  getQuestions() {
   }
 
   getQuiz() {
@@ -98,20 +97,18 @@ export class DisplayQuizComponent implements OnInit {
   nextQuestion() {
     this.userAnswers.push(this.selectedRadio);
     this.userAnswerText.push(this.selectedAnswer);
-    console.log(this.userAnswers);
     this.x = this.x + 1;
-    if (this.x < this.quiz[`questions`].length) {
-      console.log('back');
-      this.currentQuestion = this.quiz[`questions`][this.x].title;
-      this.currentChoices = this.quiz[`questions`][this.x].answers;
-      // this.correctAnswer = this.quiz[`questions`][this.x].correct;
+    if (this.x < this.quiz.questions.length) {
+      this.currentQuestion = this.quiz.questions[this.x].title;
+      this.currentChoices = this.quiz.questions[this.x].answers;
+      this.correctAnswer = this.quiz.questions[this.x].answers[this.currentChoices.correct];
     }
-    console.log({length: this.quiz['questions'].length});
+    console.log({length: this.quiz.questions.length});
     console.log({x: this.x})
     if (this.x === 1) {
       this.unhidePreviousButton();
     }
-    if (this.x === this.quiz[`questions`].length) {
+    if (this.x === this.quiz.questions.length) {
       this.unhideSubmitButton();
       this.nextButton = true;
       console.log(this.nextButton);
@@ -125,8 +122,8 @@ export class DisplayQuizComponent implements OnInit {
     this.userAnswerText.pop();
     console.log(this.userAnswers);
     this.x = this.userAnswers.length;
-    this.currentQuestion = this.quiz[`questions`][this.x].title;
-    this.currentChoices = this.quiz[`questions`][this.x].answers;
+    this.currentQuestion = this.quiz.questions[this.x].title;
+    this.currentChoices = this.quiz.questions[this.x].answers;
     // this.correctAnswer = this.quiz[`questions`][this.x].correct;
   }
 
@@ -142,7 +139,7 @@ export class DisplayQuizComponent implements OnInit {
   }
 
   onButtonChange() {
-    if (this.currentQuestion.length === this.currentQuestion.length ) {
+    if (this.currentQuestion[this.x] === (this.currentQuestion.length - 1 )) {
       this.hideNextButton();
     }
     if (this.currentQuestion.length === 0 ) {
@@ -150,10 +147,10 @@ export class DisplayQuizComponent implements OnInit {
     }
   }
   getScore() {
-    // this.questionService.getUserQuizScores(this.userAnswers).subscribe(res =>{
-    //   console.log(res);
-    //   this.userScore = res;
-    // });
+    this.questionService.getUserQuizScores(this.userAnswers).subscribe(res =>{
+      console.log(res);
+      this.userScore = res;
+    });
   }
 
 }

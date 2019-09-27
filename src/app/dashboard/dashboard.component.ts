@@ -28,11 +28,11 @@ export class DashboardComponent implements OnInit {
   }
   getScores(quizId){
     console.log(quizId);
-    this.quizService.getStudentsByQuizId(quizId).subscribe((res: Object[]) => {
-      this.results = res['scores'];
-      this.token = res['token'];
-      console.log(this.results);
-    })
+    // this.quizService.getStudentsByQuizId(quizId).subscribe((res: Object[]) => {
+    //   this.results = res['scores'];
+    //   this.token = res['token'];
+    //   console.log(this.results);
+    // })
   }
   ngOnInit() {
     this.userServ.logger.subscribe(res => {
