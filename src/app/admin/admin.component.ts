@@ -7,10 +7,10 @@ import { AuthGenericService } from '../services/auth-generic.service';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
-
-  constructor() { }
+  displayedColumns = ['displayname', 'email', 'permission', ]
+  constructor() { 
   
-   
+  
 
   ngOnInit() {
   }

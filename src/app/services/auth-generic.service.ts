@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import {User} from '../Interfaces/users';
 
 
 @Injectable({
@@ -9,9 +11,12 @@ import { Observable } from 'rxjs';
 })
 export class AuthGenericService {
   // userData: Observable<firebase.User>;
-
-  //  this was bello in the brackets 
-  constructor(private router: Router, private angularFireAuth: AngularFireAuth) {}
+userCollection: AngularFirestoreCollection<User>;
+  
+  constructor(private router: Router, private angularFireAuth: AngularFireAuth, private angularFirestore: AngularFirestore) {
+    this.userCollection = this.angularFirestore.collection("Users", ref => ref.orderBy('displayname', 'desc'))
+  }
+  
 
   doLogin(email, password){
     return new Promise<any>((resolve, reject) => {
@@ -74,23 +79,13 @@ if (user != null) {
                    // you have one. Use User.getToken() instead.
   }
   )
-}admin.auth().listUsers
 }
-getAllUsers(nextPageToken){
-  this.angularFireAuth.listAllUsers();
-// // List batch of users, 100 at a time.
-// admin.auth().listUsers(100, nextPageToken)
-// .then(function(listUsersResult) {
-//   listUsersResult.users.forEach(function(userRecord) {
-//     console.log('user', userRecord.toJSON());
-//   });
-//   if (listUsersResult.pageToken) {
-//     // List next batch of users.
-//     listAllUsers(listUsersResult.pageToken);
-//   }
-// })
-// .catch(function(error) {
-//   console.log('Error listing users:', error);
-// });
+}
+
+getAllUsers(){
+  return this.userCollection 
+
+
+
 }
 }
