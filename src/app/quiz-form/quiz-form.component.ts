@@ -84,17 +84,7 @@ export class QuizFormComponent implements OnInit {
       questions: this.questions
     };
     console.log(quiz);
-<<<<<<< HEAD
-    // this.quizService.postQuiz(quiz).subscribe(res => {
-    //   console.log(res);
-    //   this.quizToken = res;
-    //   this.currentQuizToken = res['token'];
-    // });
-=======
-      // this.quizToken = res;
-      // this.currentQuizToken = res['token'];
     this.quizService.postQuiz(quiz);
->>>>>>> master
     this.hideCreateQuiz();
     this.showThankYou();
   }

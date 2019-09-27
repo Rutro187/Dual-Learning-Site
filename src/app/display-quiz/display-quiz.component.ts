@@ -1,4 +1,4 @@
-import { QuizServiceService, Quiz, Results, Questions } from '../services/quiz-service';
+import { QuizService, Quiz, Results, Questions } from '../services/quiz-service';
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { FormControl, FormGroup, ControlValueAccessor } from '@angular/forms';
 import { MatRadioChange, MatButton } from '@angular/material';
@@ -48,7 +48,7 @@ export class DisplayQuizComponent implements OnInit {
   nextButton: Boolean = false;
 
 
-  constructor(private quizService: QuizServiceService, private route: ActivatedRoute, public dialog: MatDialog) { 
+  constructor(private quizService: QuizService, private route: ActivatedRoute, public dialog: MatDialog) { 
   }
 
   ngOnInit() {

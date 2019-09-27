@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 
-export class QuizServiceService {
+export class QuizService {
   quizCollection: AngularFirestoreCollection<Quiz>;
   quizDoc: AngularFirestoreDocument<Quiz>;
   resultsCollection: AngularFirestoreCollection<Results>

@@ -1,6 +1,5 @@
 import { AuthGenericService } from './../services/auth-generic.service';
 import { Component, OnInit } from '@angular/core';
-import { QuizService } from '../services/quiz-service';
 import { UserService } from '../services/user-service';
 import { NavbarService } from '../navbar.service';
 
@@ -18,7 +17,7 @@ export class DashboardComponent implements OnInit {
   token;
   displayedColumns = ['score', 'email', 'datestamp', ];
   constructor(
-    private quizService: QuizService,
+
     private userServ: UserService,
     public navbar: NavbarService,
     private authService: AuthGenericService
@@ -32,17 +31,12 @@ export class DashboardComponent implements OnInit {
     }
   }
   getQuizzes(creatorId){
-
       console.log(this.quizzes);
-    })
-  }
+    }
+  
   getScores(quizId){
     console.log(quizId);
-    // this.quizService.getStudentsByQuizId(quizId).subscribe((res: Object[]) => {
-    //   this.results = res['scores'];
-    //   this.token = res['token'];
-    //   console.log(this.results);
-    // })
+
   }
   ngOnInit() {
 

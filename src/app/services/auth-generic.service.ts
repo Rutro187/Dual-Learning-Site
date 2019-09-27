@@ -63,14 +63,6 @@ signup(email: string, password: string, username: string) {
   });
 }
 
-<<<<<<< HEAD
-/* Sign out */
-// signOut() {
-//   this.angularFireAuth
-//     .auth
-//     .signOut();
-// }
-=======
 getUserInfo(){
 const user = this.angularFireAuth.auth.currentUser;
 var name, email, permission, uid;
@@ -109,6 +101,5 @@ addGeneralUserInfo(user){
 
 getAllUsers(){
   return this.userCollection 
->>>>>>> master
 }
 }
