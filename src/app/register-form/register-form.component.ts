@@ -9,15 +9,14 @@ import { AuthGenericService } from '../services/auth-generic.service';
   styleUrls: ['./register-form.component.scss']
 })
 export class RegisterFormComponent implements OnInit {
-  email: string = "";
-  password: string = "";
-  firstName: string = "";
-  lastName: string = "";
+  email = '';
+  password = '';
+  firstName = '';
+  lastName = '';
   error;
-  constructor(private authServ:AuthGenericService, private router: Router, public navbar: NavbarService) { }
+  constructor(private authServ: AuthGenericService, private router: Router, public navbar: NavbarService) { }
   signup() {
-      this.authServ.signup(
-      this.email , this.password, this.firstName)      
+      this.authServ.signup(this.email , this.password, this.firstName);
   }
   ngOnInit() {
     this.navbar.hide();

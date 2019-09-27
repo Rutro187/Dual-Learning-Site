@@ -1,3 +1,4 @@
+import { AuthGenericService } from './../services/auth-generic.service';
 import { Component, OnInit } from '@angular/core';
 import { QuizService } from '../services/quiz-service';
 import { UserService } from '../services/user-service';
@@ -16,7 +17,20 @@ export class DashboardComponent implements OnInit {
   results: Object[] = [];
   token;
   displayedColumns = ['score', 'email', 'datestamp', ];
-  constructor(private quizService: QuizService, private userServ: UserService, public navbar: NavbarService) { }
+  constructor(
+    private quizService: QuizService,
+    private userServ: UserService,
+    public navbar: NavbarService,
+    private authService: AuthGenericService
+    ) { }
+  isAnAdmin(){
+    const status = this.authService.getUserInfo().permission;
+    if (status === 'owner' || status === 'admin') {
+      return true;
+    } else {
+      return false;
+    }
+  }
   getQuizzes(creatorId){
 
       console.log(this.quizzes);

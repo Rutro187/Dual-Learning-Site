@@ -40,7 +40,7 @@ export class QuizFormComponent implements OnInit {
  }
 
   removeQuestion(idx) {
-    this.questions.splice(idx, 1)
+    this.questions.splice(idx, 1);
   }
 
   addQuestion() {
@@ -50,7 +50,7 @@ export class QuizFormComponent implements OnInit {
       correct: 0,
       type: 'multiChoice',
       // points: 0,
-    })
+    });
     console.log(this.questions);
 
   }
