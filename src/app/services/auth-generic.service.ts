@@ -57,6 +57,7 @@ signout(){
   this.angularFireAuth
     .auth
     .signOut();
+  this.router.navigate(['/login']);
 }
 
 getUserInfo(){
