@@ -19,7 +19,10 @@ constructor(private http: HttpClient, private router: Router, private route: Act
 
   postQuiz(quiz) {
     console.log("postquizservice", quiz)
-    this.quizCollection.doc(quiz.title).set(quiz);
+    this.quizCollection.add(quiz)
+    .then(ref => {
+      console.log('Added document with ID: ', ref.id);
+    });
 }
 getStudentsByQuizId(id){
  
