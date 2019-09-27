@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
+import { AuthGenericService } from './auth-generic.service';
 
 
 @Injectable({
@@ -12,7 +13,9 @@ export class UserServiceService {
   isLoggedOut = new BehaviorSubject<boolean>(true);
   private loggedInId = new BehaviorSubject<Number>(0);
   logger = this.loggedInId.asObservable();
-  constructor(private http: HttpClient) { }
+
+
+  constructor(private http: HttpClient, private auth: AuthGenericService) { }
   signup(loginData) {
     return this.http.post('/users/create', loginData)
   }
@@ -37,4 +40,6 @@ export class UserServiceService {
   userId(id){
     this.loggedInId.next(id);
   }
+  
+
 }

@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'quiz_form', component: QuizFormComponent },
   { path: 'quiz_guard', component: QuizGuardComponent},
-  { path: 'take_quiz',  component: DisplayQuizComponent },
+  { path: 'take_quiz/:id',  component: DisplayQuizComponent },
   { path: 'admin', component: AdminComponent }
   // { path: '', redirectTo: '/login', pathMatch: 'full' },
   // { path: 'login', component: LoginComponent, canActivate: [UserGuard]},

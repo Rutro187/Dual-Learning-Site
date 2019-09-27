@@ -10,23 +10,17 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./quiz-guard.component.scss']
 })
 export class QuizGuardComponent implements OnInit {
-
-  token: string;
-
-  submit() {
-    this.quizService.getQuizByToken(this.token);
-    // Need to pass error back somehow
-  };
-
-  constructor(private quizService: QuizServiceService, private router: Router, public dialogRef: MatDialogRef<QuizGuardComponent>,
-
-    @Inject(MAT_DIALOG_DATA) public data: any
-    ) 
+  quiz: any;
+  constructor(private quizService: QuizServiceService, private router: Router, public dialogRef: MatDialogRef<QuizGuardComponent>,@Inject(MAT_DIALOG_DATA) public data: any) 
     { }
-  
-    onNoClick(): void {
+
+   accessQuiz(token: string) {
+      this.quizService.getQuizByToken(token).subscribe(data => 
+          console.log(data)
+      )
+      this.router.navigate([`/take_quiz/${token}`]);
       this.dialogRef.close();
-    }
+  };
 
   ngOnInit() { 
   }

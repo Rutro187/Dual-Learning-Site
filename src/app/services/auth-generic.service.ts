@@ -60,10 +60,10 @@ signup(email: string, password: string) {
   });
 
 /* Sign out */
-signOut() {
-  this.angularFireAuth
-    .auth
-    .signOut();
-}
+// signOut() {
+//   this.angularFireAuth
+//     .auth
+//     .signOut();
+// }
 }
 }
