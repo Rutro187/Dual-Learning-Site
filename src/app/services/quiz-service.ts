@@ -9,7 +9,7 @@ import {Router, ActivatedRoute} from '@angular/router';
   providedIn: 'root'
 })
 
-export class QuizServiceService {
+export class QuizService {
 //  token: {};
 
   
@@ -21,20 +21,20 @@ constructor(private http: HttpClient, private router: Router, private route: Act
 
 
   postQuiz(quiz) {
-  return this.http.post("/quizzes/postQuiz", quiz)
+ 
 }
 getStudentsByQuizId(id){
-  return this.http.get(`/quizzes/getScoresAdmin/${id}`)
+ 
 }
 getQuizByAdmin(creatorId){
-  return this.http.get(`/quizzes/getQuizzesByAdmin/${creatorId}`)
+ 
 }
 quiz: Quiz;
   errorMsg: string;
 token: string;
   getQuizByToken(token){
     this.token = token;
-    this.http.get(`quizzes/getQuizById/${token}`)
+
     .subscribe(res=>{
       if (res['error']) {
       return console.log(res['error']);

@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, Validators, FormControl, FormGroup, NgForm } from '@angular/forms';
-import { QuizServiceService, Quiz, Questions } from '../services/quiz-service.service';
+import { QuizService, Quiz, Questions } from '../services/quiz-service';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { UserServiceService } from '../services/user-service.service';
+import { UserService } from '../services/user-service';
 
 // export class RadioNgModelExample {
 
@@ -24,7 +24,7 @@ export class QuizFormComponent implements OnInit {
   desc: string; // description of quiz
 
 
-  constructor(private quizService: QuizServiceService, private router: Router, private userServ: UserServiceService) { }
+  constructor(private quizService: QuizService, private router: Router, private userServ: UserService) { }
 
   questions: Array<Object> = [{
     title: '',

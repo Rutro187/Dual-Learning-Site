@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { QuizServiceService } from '../services/quiz-service.service';
-import { UserServiceService } from '../services/user-service.service';
+import { QuizService } from '../services/quiz-service';
+import { UserService } from '../services/user-service';
 import { NavbarService } from '../navbar.service';
 
 @Component({
@@ -16,30 +16,19 @@ export class DashboardComponent implements OnInit {
   results: Object[] = [];
   token;
   displayedColumns = ['score', 'email', 'datestamp', ];
-  constructor(private quizService: QuizServiceService, private userServ: UserServiceService, public navbar: NavbarService) { }
+  constructor(private quizService: QuizService, private userServ: UserService, public navbar: NavbarService) { }
   getQuizzes(creatorId){
-    this.quizService.getQuizByAdmin(creatorId).subscribe((res: Object[]) =>{
-      this.quizResults = res;
-      this.quizResults.forEach(quizResult => {
-        this.quizzes.push(quizResult);
-      })
+
       console.log(this.quizzes);
-    })
-  }
-  getScores(quizId){
-    console.log(quizId);
-    this.quizService.getStudentsByQuizId(quizId).subscribe((res: Object[]) => {
-      this.results = res['scores'];
-      this.token = res['token'];
-      console.log(this.results);
-    })
-  }
+    }
+  
+  getScores(){
+
+    }
+  
   ngOnInit() {
-    this.userServ.logger.subscribe(res => {
-      this.creatorId = res;
-      console.log(this.creatorId);
-      this.getQuizzes(this.creatorId);
-    })
-  }
+
+    }
+  
 
 }

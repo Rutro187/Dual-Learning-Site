@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { QuizServiceService } from '../services/quiz-service.service';
+import { QuizService } from '../services/quiz-service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -18,7 +18,7 @@ export class QuizGuardComponent implements OnInit {
     // Need to pass error back somehow
   };
 
-  constructor(private quizService: QuizServiceService, private router: Router, public dialogRef: MatDialogRef<QuizGuardComponent>,
+  constructor(private quizService: QuizService, private router: Router, public dialogRef: MatDialogRef<QuizGuardComponent>,
 
     @Inject(MAT_DIALOG_DATA) public data: any
     ) 

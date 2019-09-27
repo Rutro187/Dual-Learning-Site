@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { QuizServiceService, Quiz } from '../services/quiz-service.service';
+import { QuizService, Quiz } from '../services/quiz-service';
 import { FormControl, FormGroup, ControlValueAccessor } from '@angular/forms';
 import { MatRadioChange, MatButton } from '@angular/material';
 import { Observable } from 'rxjs';
@@ -41,7 +41,7 @@ export class DisplayQuizComponent implements OnInit {
   nextButton: Boolean = false;
 
 
-  constructor(private questionService: QuizServiceService) { }
+  constructor(private questionService: QuizService) { }
 
 
 
