@@ -8,11 +8,8 @@ import { AuthGenericService } from '../services/auth-generic.service';
 })
 export class AdminComponent implements OnInit {
   displayedColumns = ['displayname', 'email', 'permission', ]
-  constructor() { 
-  
+  constructor() {}
   
 
-  ngOnInit() {
+  ngOnInit() {}
   }
-
-}
