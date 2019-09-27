@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AuthGenericService } from '../services/auth-generic.service';
 
 @Component({
   selector: 'app-admin',
@@ -7,14 +7,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
-
-  constructor(public dialogRef: MatDialogRef<AdminComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
+  displayedColumns = ['displayname', 'email', 'permission', ]
+  constructor() {}
   
-    onNoClick(): void {
-      this.dialogRef.close();
-    }
 
-  ngOnInit() {
+  ngOnInit() {}
   }
-
-}

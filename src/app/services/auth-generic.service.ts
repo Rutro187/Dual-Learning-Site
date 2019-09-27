@@ -2,15 +2,26 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import {User} from '../Interfaces/users';
+
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGenericService {
-  constructor(private router: Router, private angularFireAuth: AngularFireAuth) {}
-  // Login Functionality //
-  doLogin(email: string, password: string) {
+  // userData: Observable<firebase.User>;
+userCollection: AngularFirestoreCollection<User>;
+  
+  constructor(private router: Router, private angularFireAuth: AngularFireAuth, private angularFirestore: AngularFirestore) {
+    this.userCollection = this.angularFirestore.collection("Users", ref => ref.orderBy('displayname', 'desc'))
+  }
+  
+
+
+
+  doLogin(email, password){
     return new Promise<any>((resolve, reject) => {
       this.angularFireAuth
       .auth
@@ -31,47 +42,64 @@ export class AuthGenericService {
   SendVerificationMail() {
     return this.angularFireAuth.auth.currentUser.sendEmailVerification();
   }
-  // Sign Up //
-  signup(email: string, password: string, username: string) {
-    this.angularFireAuth
-    .auth
-    .createUserWithEmailAndPassword(email, password)
-    .then(res => {
-      const user = this.angularFireAuth.auth.currentUser;
-      user.updateProfile({
-        displayName: username,
-        photoURL: 'user'
-      });
-      console.log('Successfully signed up!', res);
+
+
+signup(email: string, password: string, username: string) {
+  this.angularFireAuth
+  .auth
+  .createUserWithEmailAndPassword(email, password)
+  .then(res => {
+    var user = this.angularFireAuth.auth.currentUser;
+    user.updateProfile({
+      displayName: username,
+      photoURL: "user"
     })
-    .catch(error => {
-      console.log('Something is wrong:', error.message);
-    });
-  }
+  
+    this.addGeneralUserInfo(user);  
+    console.log('Successfully signed up!');
+  })
+  .catch(error => {
+    console.log('Something is wrong:', error.message);
+  });
+}
+
+getUserInfo(){
+const user = this.angularFireAuth.auth.currentUser;
+var name, email, permission, uid;
+
+if (user != null) {
+  return (
+  {
+  name: user.displayName,
+  email: user.email,
+  permission: user.photoURL,
+  uid: user.uid,  // The user's ID, unique to the Firebase project. Do NOT use
+                   // this value to authenticate with your backend server, if
+                   // you have one. Use User.getToken() instead.
+  })
+}
+}
+
   /* Sign out */
-  signout() {
+  signout(){
     this.angularFireAuth
       .auth
       .signOut();
   }
   // Retrieve User info (finds permission level)
-  getUserInfo() {
-    const user = this.angularFireAuth.auth.currentUser;
-    let name, email, permission, uid = '';
 
-    if (user != null) {
-      return (
-        {
-          name: user.displayName,
-          email: user.email,
-          permission: user.photoURL,
-          uid: user.uid
-          // The user's ID, unique to the Firebase project. Do NOT use
-          // this value to authenticate with your backend server, if
-          // you have one. Use User.getToken() instead.
-        }
-      );
-    }
-  }
+
+addGeneralUserInfo(user){
+  console.log("addgeneral")
+  const userCollection = this.angularFirestore.collection("Users");
+  userCollection.doc(user.uid).set({
+    displayname: user.displayName,
+    email: user.email,
+    permission: "user"
+  });
 }
 
+getAllUsers(){
+  return this.userCollection 
+}
+}
