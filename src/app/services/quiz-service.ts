@@ -33,18 +33,7 @@ quiz: Quiz;
   errorMsg: string;
 token: string;
   getQuizByToken(token){
-    this.token = token;
-
-    .subscribe(res=>{
-      if (res['error']) {
-      return console.log(res['error']);
-      }
-      else {
-        console.log(res);
-        this.quiz = res as Quiz;
-        this.router.navigate(['../take_quiz'], {relativeTo: this.route});
-        return;
-    }});
+ 
   }
 
 // getAllData(apiItem: String): any {
