@@ -25,7 +25,7 @@ const routes: Routes = [
   // { path: 'admin', component: AdminComponent }
 
   { path: 'login', component: LoginComponent},
-  { path: 'register', component: RegisterFormComponent},
+  { path: 'register', component: RegisterFormComponent}
   { path: 'dashboard', component: DashboardComponent, canActivate: [UserGuard] },
   { path: 'quiz-form', component: QuizFormComponent, canActivate: [TeacherGuard] },
   { path: 'quiz-guard', component: QuizGuardComponent, canActivate: [UserGuard]},

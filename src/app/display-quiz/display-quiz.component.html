@@ -1,7 +1,7 @@
 <form #questionForm="ngForm" class="background full-page">
   <div class="flex">
 
-      <h2 class="center">{{quiz?.title}}</h2>
+      <h1 class="center">{{quiz?.title}}</h1>
   
     <div class="questionContainer" *ngFor="let question of quiz?.questions; let j = index">
       <mat-card *ngIf="!completed">

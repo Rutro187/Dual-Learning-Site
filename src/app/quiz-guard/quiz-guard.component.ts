@@ -10,9 +10,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./quiz-guard.component.scss']
 })
 export class QuizGuardComponent implements OnInit {
+  
   quiz: any;
- 
-
   token: string;
 
   submit() {
@@ -30,7 +29,7 @@ export class QuizGuardComponent implements OnInit {
       this.quizService.getQuizByToken(token).subscribe(data => 
           console.log(data)
       )
-      this.router.navigate([`/take_quiz/${token}`]);
+      this.router.navigate([`/take-quiz/${token}`]);
       this.dialogRef.close();
   };
 

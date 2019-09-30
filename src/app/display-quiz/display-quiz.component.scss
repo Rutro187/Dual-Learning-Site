@@ -8,6 +8,13 @@
 .center{
   text-align: center;
   color: white;
+  margin-top: 0;
+}
+
+#submitButton {
+  background-color: #0e2340;
+  margin-top: 10px;
+  margin-left: 70%;
 }
 
 .questionContainer, .resultContainer{
@@ -46,4 +53,11 @@
 
 #hidden2{
   visibility:  hidden;
+}
+
+
+@media (max-width: 768px) {
+  .questionContainer, .resultContainer {
+    width: 90%;
+  }
 }
