@@ -26,13 +26,13 @@ const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterFormComponent},
-  { path: 'dashboard', component: DashboardComponent, canActivate: [UserGuard] },
-  { path: 'quiz-form', component: QuizFormComponent, canActivate: [AdminGuard] },
-  { path: 'quiz-guard', component: QuizGuardComponent, canActivate: [UserGuard]},
-  { path: 'take-quiz',  component: DisplayQuizComponent, canActivate: [UserGuard]},
-  { path: 'admin', component: AdminComponent, canActivate: [OwnerGuard]  },
-  { path: 'my-quizzes', component: MyQuizzesComponent, canActivate: [AdminGuard] },
-  { path: 'quiz-results', component: QuizResultsComponent, canActivate: [UserGuard] }
+  { path: 'dashboard', component: DashboardComponent},
+  { path: 'quiz-form', component: QuizFormComponent },
+  { path: 'quiz-guard', component: QuizGuardComponent},
+  { path: 'take-quiz/:id',  component: DisplayQuizComponent},
+  { path: 'admin', component: AdminComponent},
+  { path: 'my-quizzes', component: MyQuizzesComponent},
+  { path: 'quiz-results', component: QuizResultsComponent }
 ];
 
 @NgModule({
