@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Observable } from 'rxjs';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import {User} from '../Interfaces/users';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { tap, map } from 'rxjs/operators';
+
+
 
 
 
@@ -12,30 +13,38 @@ import {User} from '../Interfaces/users';
 })
 export class AuthGenericService {
   // userData: Observable<firebase.User>;
-userCollection: AngularFirestoreCollection<User>;
+  userCollection: AngularFirestoreCollection<Users>;
+  userDoc: AngularFirestoreDocument<Users>
+  userAuth;
   
-  constructor(private router: Router, private angularFireAuth: AngularFireAuth, private angularFirestore: AngularFirestore) {
-    this.userCollection = this.angularFirestore.collection("Users", ref => ref.orderBy('displayname', 'desc'))
+
+  constructor(private router: Router,
+    private angularFireAuth: AngularFireAuth,
+    private afs: AngularFirestore,
+    ) {
+     this.userCollection = this.afs.collection("Users");
+     
+    // this.userCollection = this.angularFirestore.collection("Users", ref => ref.orderBy('displayname', 'desc'))
   }
-  
 
 
 
-  doLogin(email, password){
+
+  doLogin(email, password) {
     return new Promise<any>((resolve, reject) => {
       this.angularFireAuth
-      .auth
-      .signInWithEmailAndPassword(email,  password)
-      .then(res => {
-        const token = this.getUserInfo();
-        localStorage.setItem('userInfo', JSON.stringify(token));
-        resolve(token);
-        if (res.user.emailVerified !== true) {
-          this.SendVerificationMail();
-          window.alert('Please validate your email address. Kindly check your inbox.');
-          this.router.navigate(['/login']);
+        .auth
+        .signInWithEmailAndPassword(email, password)
+        .then(res => {
+          const token = this.getUserInfo();
+          localStorage.setItem('userInfo', JSON.stringify(token));
+          resolve(token);
+          if (res.user.emailVerified !== true) {
+            this.SendVerificationMail();
+            window.alert('Please validate your email address. Kindly check your inbox.');
+            this.router.navigate(['/login']);
           }
-      }, err => reject(err));
+        }, err => reject(err));
     });
   }
   // Verification Email //
@@ -44,44 +53,63 @@ userCollection: AngularFirestoreCollection<User>;
   }
 
 
-signup(email: string, password: string, username: string) {
-  this.angularFireAuth
-  .auth
-  .createUserWithEmailAndPassword(email, password)
-  .then(res => {
-    var user = this.angularFireAuth.auth.currentUser;
-    user.updateProfile({
-      displayName: username,
-      photoURL: "user"
-    })
+  signup(email: string, password: string, username: string) {
+    this.angularFireAuth
+      .auth
+      .createUserWithEmailAndPassword(email, password)
+      .then(res => {
+        var user = this.angularFireAuth.auth.currentUser;
+        // user.updateProfile({
+        //   displayName: username,
+        //   photoURL: "user"
+        // })
+
+        this.addGeneralUserInfo(user, username);
+        console.log('Successfully signed up!');
+      })
+      .catch(error => {
+        console.log('Something is wrong:', error.message);
+      });
+  }
+
+  addGeneralUserInfo(user, username) {
+    const userCollection = this.afs.collection("Users");
+    userCollection.add({
+      uid: user.uid,
+      displayname: username,
+      email: user.email,
+      permission: "user"
+    });
+  }
+
+  getUserbyID(){
+    return this.afs.collection('Users', ref => ref.where('uid', '==', this.getUserInfo().uid))
+    .snapshotChanges().pipe(map(actions => {
+      return actions.map(x => {
+        const data = x.payload.doc.data() as any;
+        const id = x.payload.doc.id;
+        return {id, ...data}
+      })
+    }))   
+  }
+
+
+  getUserInfo() {
+    this.userAuth = this.angularFireAuth.auth.currentUser
+   
+
+      return (
+        {
+          name: this.userAuth.displayname,
+          email: this.userAuth.email,
+          uid: this.userAuth.uid
+        })
+    }
   
-    this.addGeneralUserInfo(user);  
-    console.log('Successfully signed up!');
-  })
-  .catch(error => {
-    console.log('Something is wrong:', error.message);
-  });
-}
-
-getUserInfo(){
-const user = this.angularFireAuth.auth.currentUser;
-var name, email, permission, uid;
-
-if (user != null) {
-  return (
-  {
-  name: user.displayName,
-  email: user.email,
-  permission: user.photoURL,
-  uid: user.uid,  // The user's ID, unique to the Firebase project. Do NOT use
-                   // this value to authenticate with your backend server, if
-                   // you have one. Use User.getToken() instead.
-  })
-}
-}
+  
 
   /* Sign out */
-  signout(){
+  signout() {
     this.angularFireAuth
       .auth
       .signOut();
@@ -89,17 +117,17 @@ if (user != null) {
   // Retrieve User info (finds permission level)
 
 
-addGeneralUserInfo(user){
-  console.log("addgeneral")
-  const userCollection = this.angularFirestore.collection("Users");
-  userCollection.doc(user.uid).set({
-    displayname: user.displayName,
-    email: user.email,
-    permission: "user"
-  });
+  
+
+  getAllUsers() {
+    return this.userCollection
+  }
+
 }
 
-getAllUsers(){
-  return this.userCollection 
-}
+export interface Users {
+  uid?
+  displayname?
+  email?
+  permission?
 }

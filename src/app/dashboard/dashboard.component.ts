@@ -15,32 +15,29 @@ export class DashboardComponent implements OnInit {
   quizResults: Object[] = [];
   results: Object[] = [];
   token;
-  displayedColumns = ['score', 'email', 'datestamp', ];
+  displayedColumns = ['score', 'email', 'datestamp',];
+  canSeeMyQuizes = false;
+
   constructor(
 
     private userServ: UserService,
     public navbar: NavbarService,
     private authService: AuthGenericService
-    ) { }
-  isAnAdmin(){
-    const status = this.authService.getUserInfo().permission;
-    if (status === 'owner' || status === 'admin') {
-      return true;
-    } else {
-      return false;
-    }
+  ) { }
+
+  getQuizzes(creatorId) {
+    console.log(this.quizzes);
   }
-  getQuizzes(creatorId){
-      console.log(this.quizzes);
-    }
-  
-  getScores(quizId){
+
+  getScores(quizId) {
     console.log(quizId);
 
   }
   ngOnInit() {
+    console.log('ngOnInit in the dashboard component');
+    
+    this.authService.getUserInfo();
+  }
 
-    }
-  
 
 }

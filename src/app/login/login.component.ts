@@ -20,10 +20,11 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthGenericService, private router: Router, public navbar: NavbarService) { }
 
   tryLogin(){
+    console.log('try login');
     this.authService.doLogin(this.email, this.password)
     .then(res => {
+      console.log('login sucessful, navigate to dashboard');
       this.router.navigate(['/dashboard']);
-      console.log();
     }, err => {
       console.log(err);
       this.userMessage = "incorrect username or password";
