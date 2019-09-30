@@ -4,6 +4,7 @@ import { QuizGuardComponent } from '../quiz-guard/quiz-guard.component';
 import { AdminComponent } from '../admin/admin.component';
 import { AuthGenericService } from '../services/auth-generic.service'
 
+
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
