@@ -58,12 +58,7 @@ export class AuthGenericService {
       .auth
       .createUserWithEmailAndPassword(email, password)
       .then(res => {
-        var user = this.angularFireAuth.auth.currentUser;
-        // user.updateProfile({
-        //   displayName: username,
-        //   photoURL: "user"
-        // })
-
+        const user = this.angularFireAuth.auth.currentUser;
         this.addGeneralUserInfo(user, username);
         console.log('Successfully signed up!');
       })
@@ -71,14 +66,14 @@ export class AuthGenericService {
         console.log('Something is wrong:', error.message);
       });
   }
-
+  // Creates a new user //
   addGeneralUserInfo(user, username) {
-    const userCollection = this.afs.collection("Users");
+    const userCollection = this.afs.collection('Users');
     userCollection.add({
       uid: user.uid,
       displayname: username,
       email: user.email,
-      permission: "user"
+      permission: 'user'
     });
   }
 
@@ -88,26 +83,21 @@ export class AuthGenericService {
       return actions.map(x => {
         const data = x.payload.doc.data() as any;
         const id = x.payload.doc.id;
-        return {id, ...data}
-      })
-    }))   
+        return {id, ...data};
+      });
+    }));
   }
 
 
   getUserInfo() {
-    this.userAuth = this.angularFireAuth.auth.currentUser
-   
-
-      return (
-        {
-          name: this.userAuth.displayname,
-          email: this.userAuth.email,
-          uid: this.userAuth.uid
-        })
-    }
-  
-  
-
+    this.userAuth = this.angularFireAuth.auth.currentUser;
+    return ({
+      name: this.userAuth.displayname,
+      email: this.userAuth.email,
+      uid: this.userAuth.uid,
+      permission: this.userAuth.permission,
+    });
+  }
   /* Sign out */
   signout() {
     this.angularFireAuth
