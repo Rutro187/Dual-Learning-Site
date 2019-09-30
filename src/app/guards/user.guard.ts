@@ -15,18 +15,14 @@ export class UserGuard implements CanActivate {
     state: RouterStateSnapshot):
     Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       
-      return this.authService.getUserInfo().pipe(map( user => {
-          console.log(user);
+      return this.authService.getUserbyID().pipe(map( user => {
+        console.log(user[0].permission);
+        if (user[0].permission === 'owner' || 'admin' || 'user') {
           return true;
-      }
-       
+          }
+          this.router.navigate(['/login']);
+          return false;
+        }
       ))
-
-
-      // if (this.authService.getUserInfo().permission === 'owner' || 'admin' || 'user') {
-      // return true;
-      // }
-      // this.router.navigate(['/login']);
-      // return false;
+      }
     }
-}

@@ -23,7 +23,7 @@ export class AuthGenericService {
     private afs: AngularFirestore,
     ) {
      this.userCollection = this.afs.collection("Users");
-     this.userAuth = this.angularFireAuth.auth.currentUser
+     
     // this.userCollection = this.angularFirestore.collection("Users", ref => ref.orderBy('displayname', 'desc'))
   }
 
@@ -59,10 +59,10 @@ export class AuthGenericService {
       .createUserWithEmailAndPassword(email, password)
       .then(res => {
         var user = this.angularFireAuth.auth.currentUser;
-        user.updateProfile({
-          displayName: username,
-          photoURL: "user"
-        })
+        // user.updateProfile({
+        //   displayName: username,
+        //   photoURL: "user"
+        // })
 
         this.addGeneralUserInfo(user, username);
         console.log('Successfully signed up!');
@@ -82,30 +82,28 @@ export class AuthGenericService {
     });
   }
 
+  getUserbyID(){
+    return this.afs.collection('Users', ref => ref.where('uid', '==', this.getUserInfo().uid))
+    .snapshotChanges().pipe(map(actions => {
+      return actions.map(x => {
+        const data = x.payload.doc.data() as any;
+        const id = x.payload.doc.id;
+        return {id, ...data}
+      })
+    }))   
+  }
+
+
   getUserInfo() {
+    this.userAuth = this.angularFireAuth.auth.currentUser
+   
 
-    let name, email, permission, uid;
-
-    // let userGeneral = 
-    return this.afs.collection('Users', ref => ref.where('uid', '==', "hyAAOT4dIXWRRQk0wkqu8mypj232")).snapshotChanges().pipe(map(actions => {
-        return actions.map(x => {
-          const data = x.payload.doc.data() as any;
-          const id = x.payload.doc.id;
-          return {id, ...data}  
+      return (
+        {
+          name: this.userAuth.displayname,
+          email: this.userAuth.email,
+          uid: this.userAuth.uid
         })
-      })) 
-
-      // console.log("generalUser: ", generalUser)
-  
-      // return (
-      //   {
-      //     name: this.userAuth.displayName,
-      //     email: this.userAuth.email,
-      //     permission: "blank",
-      //     uid: this.userAuth.uid  // The user's ID, unique to the Firebase project. Do NOT use
-      //     // this value to authenticate with your backend server, if
-      //     // you have one. Use User.getToken() instead.
-      //   })
     }
   
   
