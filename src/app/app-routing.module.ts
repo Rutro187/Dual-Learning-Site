@@ -33,7 +33,7 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent, canActivate: [AdminGuard]  },
   { path: 'my-quizzes', component: MyQuizzesComponent, canActivate: [TeacherGuard] },
   { path: 'quiz-results', component: QuizResultsComponent, canActivate: [UserGuard] },
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 
 @NgModule({
