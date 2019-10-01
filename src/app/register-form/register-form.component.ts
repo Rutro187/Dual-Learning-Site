@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { NavbarService } from '../navbar.service';
 import { AuthGenericService } from '../services/auth-generic.service';
 
@@ -8,18 +7,23 @@ import { AuthGenericService } from '../services/auth-generic.service';
   templateUrl: './register-form.component.html',
   styleUrls: ['./register-form.component.scss']
 })
+
 export class RegisterFormComponent implements OnInit {
   email = '';
   password = '';
   firstName = '';
   lastName = '';
-  error;
-  constructor(private authServ: AuthGenericService, private router: Router, public navbar: NavbarService) { }
+
+  constructor(private auth: AuthGenericService, public navbar: NavbarService) { }
+
   signup() {
-      this.authServ.signup(this.email , this.password, this.firstName);
+    let userName = this.firstName + " " + this.lastName;
+    this.auth.signup(this.email , this.password, userName);
   }
+
   ngOnInit() {
     this.navbar.hide();
   }
+
 }
 
