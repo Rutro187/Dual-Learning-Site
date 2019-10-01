@@ -25,6 +25,8 @@ export class QuizFormComponent implements OnInit {
 
   quizID: string; //ID of quiz returned when posted to db
 
+  visible: boolean = true;
+
 
   constructor(private quizService: QuizService, private router: Router, private authService: AuthGenericService) { }
 
@@ -91,9 +93,9 @@ export class QuizFormComponent implements OnInit {
       .then(res => { 
         this.quizID = res;
       });
-
       this.hideCreateQuiz();
       this.showThankYou();
+      this.visible = false;
     })
   }
   

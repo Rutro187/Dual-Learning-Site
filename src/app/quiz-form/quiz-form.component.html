@@ -27,20 +27,15 @@
   
       <div class="tokenMessage" id="thankYou">
         <mat-card-subtitle>Your quiz has been submitted!</mat-card-subtitle>
-        <mat-card-content>The token below can be shared to access the quiz. </mat-card-content>
+        <mat-card-content>The token below can be shared to access the quiz: </mat-card-content>
         <mat-card-content class="quizID">{{quizID}}</mat-card-content>
-        <mat-card-content>*Only those who are logged-in can take the quiz.*</mat-card-content>
-  
-        <mat-card-actions class="center">
-          <button mat-raised-button color="primary" (click)="dashboardButton() ">Admin Dashboard</button>
-        </mat-card-actions>
       </div>
     </mat-card>
   
   
   
     <!-- Create and Add Questions -->
-    <mat-card class="matCard see-through create">
+    <mat-card class="matCard see-through create" *ngIf="visible == true">
       <div class="mat-elevation-z8 white" *ngFor="let question of questions; let qi = index">
         <form class="padding">
           <mat-card-title class="padding">Question #{{qi+1}}</mat-card-title>

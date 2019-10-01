@@ -24,8 +24,8 @@
     </table>
   </div>
 
-  <h2>Admin Panel</h2>
-  <div class="main-table table-responsive" *ngIf="authService.userAuth.permission == admin">
+  <h2 *ngIf="this.permission == 'admin'">Admin Panel</h2>
+  <div class="main-table table-responsive" *ngIf="this.permission == 'admin'">
       <table class="table table-dark">
         <thead>
           <tr>
