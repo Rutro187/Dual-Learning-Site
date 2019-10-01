@@ -19,12 +19,7 @@ export class AuthGenericService {
               private afs: AngularFirestore) {
               this.userCollection = this.afs.collection("Users");
                this.angularFireAuth.authState.subscribe(data => this.userAuth = data);
-=======
-  constructor(private router: Router,
-    private angularFireAuth: AngularFireAuth,
-    private afs: AngularFirestore,
-    ) {
-     this.userCollection = this.afs.collection("Users");
+              }
 
   doLogin(email, password) {
     return new Promise<any>((resolve, reject) => {

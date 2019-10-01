@@ -1,7 +1,7 @@
 <div class="flex background">
 
     <mat-card class="matCard createQuiz">
-  
+      <div class="create">
       <mat-card-header class="center">
         <mat-card-title class="titleFont">Whip Up a Quiz</mat-card-title>
       </mat-card-header>
@@ -20,8 +20,9 @@
             <input matInput name="desc" type="text" [(ngModel)]="desc">
           </mat-form-field>
         </div>
-  
       </mat-card-content>
+    </div>
+
       <!-- thank you message hidden until submit -->
   
       <div class="tokenMessage" id="thankYou">
@@ -39,7 +40,7 @@
   
   
     <!-- Create and Add Questions -->
-    <mat-card class="matCard see-through">
+    <mat-card class="matCard see-through create">
       <div class="mat-elevation-z8 white" *ngFor="let question of questions; let qi = index">
         <form class="padding">
           <mat-card-title class="padding">Question #{{qi+1}}</mat-card-title>
