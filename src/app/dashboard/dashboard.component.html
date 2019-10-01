@@ -14,7 +14,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let quiz of userQuizes">
-          <td scope="row">{{quiz.score}}</td>
+          <td scope="row">{{quiz.score}}%</td>
           <td>{{quiz.creator}}</td>
           <td>{{quiz.title}}</td>
           <td>{{quiz.id}}</td>
@@ -38,8 +38,8 @@
         </thead>
         <tbody>
           <tr *ngFor="let quiz of adminScores">
-            <td scope="row">{{quiz.score}}</td>
-            <td>{{quiz.creator}}</td>
+            <td scope="row">{{quiz.score}}%</td>
+            <td>{{quiz.username}}</td>
             <td>{{quiz.title}}</td>
             <td>{{quiz.id}}</td>
             <td>{{quiz.date | formatDate}}</td>

@@ -64,7 +64,6 @@ export class AuthGenericService {
       .snapshotChanges().pipe(map(actions => {
         return actions.map(x => {
           const data = x.payload.doc.data() as any;
-          console.log(data);
           const id = x.payload.doc.id;
           return { id, ...data }
         })
