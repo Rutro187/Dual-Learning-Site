@@ -3,23 +3,45 @@
     <mat-card-header class="center">
       <mat-card-title class="fontSize">Users</mat-card-title>
     </mat-card-header>
-    <mat-form-field>
+    
+    <!-- <mat-form-field>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-    </mat-form-field>
-    <table mat-table [dataSource]="users">
+    </mat-form-field> -->
+    
+    <table class = "mat-elevation-z8" mat-table [dataSource]="allUsers">
+      
+      <ng-container matColumnDef="editperm">
+        
+        <th mat-header-cell *matHeaderCellDef > Edit Permission </th>
+        <td mat-cell *matCellDef="let row" > 
+            
+          <select (change)="changePermission (row,$event.target.value)">
+            <option *ngFor="let permission of permissions" >
+              {{permission.viewValue}}
+            </option>
+          </select>
+       
+        </td> 
+      
+      </ng-container> 
+     
       <ng-container matColumnDef="displayname">
         <th mat-header-cell *matHeaderCellDef> Display Name </th>
-        <td mat-cell *matCellDef="let users"> {{users.displayname}} </td>
+        <td mat-cell *matCellDef="let user"> {{user.displayname }}</td>
       </ng-container>
+     
       <ng-container matColumnDef="email">
         <th mat-header-cell *matHeaderCellDef> Email </th>
-        <td mat-cell *matCellDef="let users"> {{users.email}} </td>
+        <td mat-cell *matCellDef="let user"> {{user.email}} </td>
       </ng-container>
+     
       <ng-container matColumnDef="permission">
-        <th mat-header-cell *matHeaderCellDef> Permission </th>
-        <td mat-cell *matCellDef="let users"> {{users.permission}} </td>
+        <th mat-header-cell *matHeaderCellDef> Current Permission </th>
+        <td mat-cell *matCellDef="let user"> {{user.permission}} </td>
       </ng-container>
+     
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+    
   </mat-card>
