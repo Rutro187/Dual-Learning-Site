@@ -23,6 +23,10 @@ export class QuizFormComponent implements OnInit {
   quizTitle: string; // title of quiz
   desc: string; // description of quiz
 
+  quizID: string; //ID of quiz returned when posted to db
+
+  visible: boolean = true;
+
 
   constructor(private quizService: QuizService, private router: Router, private authService: AuthGenericService) { }
 
@@ -85,9 +89,13 @@ export class QuizFormComponent implements OnInit {
         creator: this.creator,
         questions: this.questions
       }
-      this.quizService.postQuiz(quiz);
+      this.quizService.postQuiz(quiz)
+      .then(res => { 
+        this.quizID = res;
+      });
       this.hideCreateQuiz();
       this.showThankYou();
+      this.visible = false;
     })
   }
   

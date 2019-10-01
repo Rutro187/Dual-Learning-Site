@@ -45,6 +45,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.permission = this.authService.userAuth.permission;
+    console.log(this.permission);
     this.getScores();
     this.getAdminScores();
   }
