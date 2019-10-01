@@ -20,7 +20,7 @@
       </ng-container> 
       <ng-container matColumnDef="displayname">
         <th mat-header-cell *matHeaderCellDef> Display Name </th>
-        <td mat-cell *matCellDef="let row"> {{user.payload.doc.data().displayname }}</td>
+        <td mat-cell *matCellDef="let user"> {{user.payload.doc.data().displayname }}</td>
       </ng-container>
       <ng-container matColumnDef="email">
         <th mat-header-cell *matHeaderCellDef> Email </th>
@@ -28,7 +28,7 @@
       </ng-container>
       <ng-container matColumnDef="permission">
         <th mat-header-cell *matHeaderCellDef> Permission </th>
-        <td mat-cell *matCellDef="let row"> {{user.payload.doc.data().permission}} </td>
+        <td mat-cell *matCellDef="let user"> {{user.payload.doc.data().permission}} </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
