@@ -14,16 +14,16 @@ import { tap, map } from 'rxjs/operators';
 export class AuthGenericService {
   // userData: Observable<firebase.User>;
   userCollection: AngularFirestoreCollection<Users>;
-  userDoc: AngularFirestoreDocument<Users>
+  userDoc: AngularFirestoreDocument<Users>;
   userAuth;
-  
+
 
   constructor(private router: Router,
     private angularFireAuth: AngularFireAuth,
     private afs: AngularFirestore,
     ) {
-     this.userCollection = this.afs.collection("Users");
-     
+     this.userCollection = this.afs.collection('Users');
+
     // this.userCollection = this.angularFirestore.collection("Users", ref => ref.orderBy('displayname', 'desc'))
   }
 
@@ -78,24 +78,22 @@ export class AuthGenericService {
   }
 
   getUserbyID() {
-    return this.afs.collection('Users', ref => ref.where('uid', '==', this.getUserInfo().uid))
+    return this.afs.collection('Users', ref => ref.where('uid', '==', this.getUserInfo().uid ))
     .snapshotChanges().pipe(map(actions => {
-      return actions.map(x => {
-        const data = x.payload.doc.data() as any;
-        const id = x.payload.doc.id;
-        return {id, ...data};
-      });
+    return actions.map(x => {
+      const data = x.payload.doc.data() as any;
+      const id = x.payload.doc.id;
+      return {id, ...data};
+    });
     }));
   }
-
-
   getUserInfo() {
     this.userAuth = this.angularFireAuth.auth.currentUser;
-    return ({
+    return this.userAuth ? ({
       name: this.userAuth.displayname,
       email: this.userAuth.email,
       uid: this.userAuth.uid,
-    });
+    }) : {uid: null};
   }
   /* Sign out */
   signout() {
@@ -106,17 +104,17 @@ export class AuthGenericService {
   // Retrieve User info (finds permission level)
 
 
-  
+
 
   getAllUsers() {
-    return this.userCollection
+    return this.userCollection;
   }
-
 }
 
+
 export interface Users {
-  uid?
-  displayname?
-  email?
-  permission?
+  uid?;
+  displayname?;
+  email?;
+  permission?;
 }

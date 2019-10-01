@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     console.log('try login');
     this.authService.doLogin(this.email, this.password)
     .then(res => {
-      console.log('login sucessful, navigate to dashboard');
+      console.log(res);
       this.router.navigate(['/dashboard']);
     }, err => {
       console.log(err);
