@@ -30,7 +30,7 @@ const routes: Routes = [
   { path: 'quiz-form', component: QuizFormComponent, canActivate: [TeacherGuard] },
   { path: 'quiz-guard', component: QuizGuardComponent, canActivate: [UserGuard]},
   { path: 'take-quiz/:id',  component: DisplayQuizComponent, canActivate: [UserGuard]},
-  { path: 'admin', component: AdminComponent}, // canActivate: [AdminGuard]  },
+  { path: 'admin', component: AdminComponent}, canActivate: [AdminGuard]  },
   { path: 'my-quizzes', component: MyQuizzesComponent, canActivate: [TeacherGuard] },
   { path: 'quiz-results', component: QuizResultsComponent, canActivate: [UserGuard] },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
