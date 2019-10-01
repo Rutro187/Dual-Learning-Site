@@ -51,6 +51,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { AuthGenericService } from './services/auth-generic.service';
+import { FormatDatePipe } from './format-date.pipe';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { AuthGenericService } from './services/auth-generic.service';
     RegisterFormComponent,
     QuizGuardComponent,
     AdminComponent,
-    MyQuizzesComponent
+    MyQuizzesComponent,
+    FormatDatePipe
   ],
   imports: [
     FormsModule,

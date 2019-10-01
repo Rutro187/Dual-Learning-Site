@@ -1,30 +1,51 @@
-
 <div class="background full-page">
-<mat-card class="matCard">
-  <mat-card-header class="center">
-    <mat-card-title class="fontSize">Test Scores</mat-card-title>
-  </mat-card-header>
-  
 
-  <table mat-table [dataSource]="results">
+  <h2>User Panel</h2>
+  <div class="main-table table-responsive">
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th scope="col">Score</th>
+          <th scope="col">Instructor</th>
+          <th scope="col">Test</th>
+          <th scope="col">Test ID</th>
+          <th scope="col">Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let quiz of userQuizes">
+          <td scope="row">{{quiz.score}}</td>
+          <td>{{quiz.creator}}</td>
+          <td>{{quiz.title}}</td>
+          <td>{{quiz.id}}</td>
+          <td>{{quiz.date | formatDate}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-    <ng-container matColumnDef="score">
-      <th mat-header-cell *matHeaderCellDef> Score </th>
-      <td mat-cell *matCellDef="let result"> {{result.score}} </td>
-    </ng-container>
+  <h2>Admin Panel</h2>
+  <div class="main-table table-responsive" *ngIf="authService.userAuth.permission == admin">
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Score</th>
+            <th scope="col">Student</th>
+            <th scope="col">Test</th>
+            <th scope="col">Test ID</th>
+            <th scope="col">Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let quiz of adminScores">
+            <td scope="row">{{quiz.score}}</td>
+            <td>{{quiz.creator}}</td>
+            <td>{{quiz.title}}</td>
+            <td>{{quiz.id}}</td>
+            <td>{{quiz.date | formatDate}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef> Email </th>
-      <td mat-cell *matCellDef="let result"> {{result.email}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="datestamp">
-      <th mat-header-cell *matHeaderCellDef> Date </th>
-      <td mat-cell *matCellDef="let result"> {{result.datestamp | date}} </td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>  
-</mat-card>
-<app-my-quizzes *ngIf="canSeeMyQuizes"></app-my-quizzes>
-
+</div>

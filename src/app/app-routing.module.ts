@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [UserGuard] },
   { path: 'quiz-form', component: QuizFormComponent, canActivate: [TeacherGuard] },
   { path: 'quiz-guard', component: QuizGuardComponent, canActivate: [UserGuard]},
-  { path: 'take-quiz',  component: DisplayQuizComponent, canActivate: [UserGuard]},
+  { path: 'take-quiz/:id',  component: DisplayQuizComponent, canActivate: [UserGuard]},
   { path: 'admin', component: AdminComponent, canActivate: [AdminGuard]  },
   { path: 'my-quizzes', component: MyQuizzesComponent, canActivate: [TeacherGuard] },
   { path: 'quiz-results', component: QuizResultsComponent, canActivate: [UserGuard] },

@@ -19,7 +19,6 @@ export class QuizFormComponent implements OnInit {
   answers: Array<string>; // Array of answers, entered by creator
   correct: number; // index of answers array with correct answer
   type: string; // type of question, multiChoice, trueFalse
-  // points: number; // number of points question is worth
   creator: string; // ID of who is making the quiz
   quizTitle: string; // title of quiz
   desc: string; // description of quiz
@@ -52,7 +51,6 @@ export class QuizFormComponent implements OnInit {
       // points: 0,
     });
     console.log(this.questions);
-
   }
   
   removeAnswer(question, idx) {
@@ -63,8 +61,8 @@ export class QuizFormComponent implements OnInit {
 
   addAnswer(val) {
     this.questions[val]['answers'].push('');
-
   }
+
   hideCreateQuiz() {
     let sideBar = document.getElementById('sideBarContent');
     sideBar.remove();
@@ -73,9 +71,11 @@ export class QuizFormComponent implements OnInit {
   showThankYou() {
     document.getElementById('thankYou').id = 'visible';
   }
+
   dashboardButton() {
     this.router.navigate(['/dashboard']);
   }
+
   quizFormSubmit() {
     let quiz: any = {
       title: this.quizTitle,
@@ -90,6 +90,5 @@ export class QuizFormComponent implements OnInit {
   }
   
   ngOnInit() {
-
   }
 }
