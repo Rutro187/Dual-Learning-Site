@@ -4,25 +4,24 @@ import { Observable,  } from 'rxjs';
 import { AuthGenericService } from '../services/auth-generic.service';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
+import { UserStoreService } from '../user-store.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeacherGuard implements CanActivate {
-  constructor(private authService: AuthGenericService, private router: Router) {}
+  constructor(private userStore: UserStoreService, private router: Router) {}
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot):
     Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      
-      return this.authService.getUserbyID().pipe(map( user => {
-        console.log(user[0].permission);
-        if (user[0].permission === 'owner' || 'admin') {
+      return this.userStore.user$.pipe(map( user => {
+        if (user && (user.permission === 'owner' || user.permission === 'admin')) {
           return true;
           }
-          this.router.navigate(['/login']);
-          return false;
+        this.router.navigate(['/login']);
+        return false;
         }
-      ))
+      ));
       }
     }

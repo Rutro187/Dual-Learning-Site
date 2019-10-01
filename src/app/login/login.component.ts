@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
     this.authService.doLogin(this.email, this.password)
     .then(res => {
       console.log(res);
-      this.router.navigate(['/dashboard']);
+    
     }, err => {
       console.log(err);
       this.userMessage = "incorrect username or password";

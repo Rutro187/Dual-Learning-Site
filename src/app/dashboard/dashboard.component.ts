@@ -33,11 +33,9 @@ export class DashboardComponent implements OnInit {
     console.log(quizId);
 
   }
+
   ngOnInit() {
     console.log('ngOnInit in the dashboard component');
-    
     this.authService.getUserInfo();
   }
-
-
 }

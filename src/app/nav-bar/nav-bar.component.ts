@@ -19,7 +19,7 @@ export class NavBarComponent implements OnInit {
   userCollection: AngularFirestoreCollection<Users>;
   userDoc: AngularFirestoreDocument<Users>;
   userAuth;
-  userPerm;
+  user$;
   constructor(public dialog: MatDialog,
               private authGenericService: AuthGenericService,
               private angularFireAuth: AngularFireAuth,
@@ -44,15 +44,7 @@ export class NavBarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userStore.user$.subscribe(
-    this.userPerm = this.authGenericService.getUserbyID().pipe(map( user => {
-      console.log("now")
-      if (user[0] ) {
-        return user[0].permission;
-      } else {
-        return '';
-      }
-    })));
+    this.user$ = this.userStore.user$;
   }
 }
 

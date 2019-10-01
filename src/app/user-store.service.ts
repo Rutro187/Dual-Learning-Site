@@ -8,24 +8,16 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class UserStoreService {
 
-  private readonly _user = new BehaviorSubject<User[]>([]);
+  private readonly _user = new BehaviorSubject<User>({});
   readonly user$ = this._user.asObservable();
   constructor() { }
-  readonly newUser$ = this.user$.pipe(
-    map(users => this.users.filter(user =>
-      user.isCompleted
-    ))
-  );
-  get users(): User[] {
+  private get user(): User {
     return this._user.getValue();
   }
-  private set users(val: User[]) {
+  private set user(val: User) {
     this._user.next(val);
   }
-  addUser(title: string) {
-    this.user = [
-      ...this.user,
-      {}
-    ];
+  updateUser(user: User) {
+    this.user = {...user};
   }
 }

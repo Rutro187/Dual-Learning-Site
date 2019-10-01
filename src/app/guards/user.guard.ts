@@ -1,3 +1,4 @@
+import { UserStoreService } from './../user-store.service';
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable,  } from 'rxjs';
@@ -9,18 +10,17 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UserGuard implements CanActivate {
-  constructor(private authService: AuthGenericService, private router: Router) {}
+  constructor(private userStore: UserStoreService, private router: Router) {}
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot):
   Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.authService.getUserbyID().pipe(map( user => {
-        console.log(user[0].permission);
-        if (user[0].permission === 'owner' || user[0].permission === 'admin' || user[0].permission === 'user') {
-          return true;
-        }
-        this.router.navigate(['/login']);
-        return false;
+    return this.userStore.user$.pipe(map( user => {
+      if (user && (user.permission === 'owner' || user.permission === 'admin' || user.permission === 'user')) {
+        return true;
+      }
+      this.router.navigate(['/login']);
+      return false;
     }));
   }
 }

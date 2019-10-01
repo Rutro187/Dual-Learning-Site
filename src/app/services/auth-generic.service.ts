@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { tap, map } from 'rxjs/operators';
+import { UserStoreService } from '../user-store.service';
 
 
 
@@ -19,8 +20,9 @@ export class AuthGenericService {
 
 
   constructor(private router: Router,
-    private angularFireAuth: AngularFireAuth,
-    private afs: AngularFirestore,
+              private userStore: UserStoreService,
+              private angularFireAuth: AngularFireAuth,
+              private afs: AngularFirestore,
     ) {
      this.userCollection = this.afs.collection('Users');
 
@@ -37,7 +39,10 @@ export class AuthGenericService {
         .signInWithEmailAndPassword(email, password)
         .then(res => {
           const token = this.getUserInfo();
-          localStorage.setItem('userInfo', JSON.stringify(token));
+          this.getUserbyID().subscribe(u =>{
+            this.userStore.updateUser(u[0]);
+            this.router.navigate(['/dashboard']);
+          });
           resolve(token);
           if (res.user.emailVerified !== true) {
             this.SendVerificationMail();
@@ -93,6 +98,7 @@ export class AuthGenericService {
       name: this.userAuth.displayname,
       email: this.userAuth.email,
       uid: this.userAuth.uid,
+      permission: this.userAuth.permission
     }) : {uid: null};
   }
   /* Sign out */
