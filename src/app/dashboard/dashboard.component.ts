@@ -15,15 +15,15 @@ export class DashboardComponent implements OnInit {
   quizResults: Object[] = [];
   results: Object[] = [];
   token;
-  displayedColumns = ['score', 'email', 'datestamp',];
+  displayedColumns = ['score', 'email', 'datestamp', ];
   canSeeMyQuizes = false;
 
   userQuizes: Object[] = [];
   adminScores: Object[] = [];
-  permission: string = "";
+  permission: string = '';
 
 
-  constructor (public navbar: NavbarService, private authService: AuthGenericService, private quizService: QuizService) { }
+  constructor(public navbar: NavbarService, private authService: AuthGenericService, private quizService: QuizService) { }
 
   getQuizzes(creatorId) {
     console.log(this.quizzes);
@@ -40,7 +40,7 @@ export class DashboardComponent implements OnInit {
     let creatorId = this.authService.getUserInfo().uid;
     return this.quizService.getResultsByAdmin(creatorId).subscribe(data => {
       this.adminScores = data;
-    })
+    });
   }
 
   ngOnInit() {
@@ -49,5 +49,4 @@ export class DashboardComponent implements OnInit {
     this.getScores();
     this.getAdminScores();
   }
-
 }

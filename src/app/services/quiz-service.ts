@@ -60,9 +60,9 @@ export class QuizService {
       return actions.map(x => {
         const data = x.payload.doc.data() as Results;
         const id = x.payload.doc.id;
-        return { id, ...data}  
-      })
-    }))  
+        return { id, ...data};
+      });
+    }));
   }
 
   getQuizResultsByUserId(id) {

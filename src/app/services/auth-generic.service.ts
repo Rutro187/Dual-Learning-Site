@@ -1,8 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore'
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { map } from 'rxjs/operators';
+import { UserStoreService } from '../user-store.service';
+
+
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +15,18 @@ import { map } from 'rxjs/operators';
 export class AuthGenericService {
   // userData: Observable<firebase.User>;
   userCollection: AngularFirestoreCollection<Users>;
-  userDoc: AngularFirestoreDocument<Users>
-  userAuth: any;
-  constructor(private router: Router, 
-              private angularFireAuth: AngularFireAuth, 
-              private afs: AngularFirestore) {
-              this.userCollection = this.afs.collection("Users");
-               this.angularFireAuth.authState.subscribe(data => this.userAuth = data);
-              }
+  userDoc: AngularFirestoreDocument<Users>;
+  userAuth;
+  constructor(private router: Router,
+              private userStore: UserStoreService,
+              private angularFireAuth: AngularFireAuth,
+              private afs: AngularFirestore, ) 
+  {
+     this.userCollection = this.afs.collection('Users');
+  }
+
+
+
 
   doLogin(email, password) {
     return new Promise<any>((resolve, reject) => {
@@ -25,7 +34,12 @@ export class AuthGenericService {
         .auth
         .signInWithEmailAndPassword(email, password)
         .then(res => {
-          resolve(res);
+          const token = this.getUserInfo();
+          this.getUserbyID().subscribe(u =>{
+            this.userStore.updateUser(u[0]);
+            this.router.navigate(['/dashboard']);
+          });
+          resolve(token);
           if (res.user.emailVerified !== true) {
             this.sendVerificationMail();
             window.alert('Please validate your email address. Kindly check your inbox.');
@@ -45,7 +59,6 @@ export class AuthGenericService {
       .auth
       .createUserWithEmailAndPassword(email, password)
       .then(res => {
-
         const user = this.angularFireAuth.auth.currentUser;
         this.addGeneralUserInfo(user, username);
         console.log('Successfully signed up!');
@@ -57,7 +70,7 @@ export class AuthGenericService {
         window.alert(error.message);
       });
   }
-
+  // Creates a new user //
   addGeneralUserInfo(user, username) {
     const userCollection = this.afs.collection('Users');
     userCollection.add({
@@ -69,28 +82,23 @@ export class AuthGenericService {
   }
 
   getUserbyID() {
-    return this.afs.collection('Users', ref => ref.where('uid', '==', this.getUserInfo().uid))
-      .snapshotChanges().pipe(map(actions => {
-        return actions.map(x => {
-          const data = x.payload.doc.data() as any;
-          const id = x.payload.doc.id;
-          return { id, ...data }
-        })
-      }))
+    return this.afs.collection('Users', ref => ref.where('uid', '==', this.getUserInfo().uid ))
+    .snapshotChanges().pipe(map(actions => {
+    return actions.map(x => {
+      const data = x.payload.doc.data() as any;
+      const id = x.payload.doc.id;
+      return {id, ...data};
+    });
+    }));
   }
-
   getUserInfo() {
-    this.userAuth = this.angularFireAuth.auth.currentUser
-    if(this.userAuth != null){
-      return (
-        {
-          name: this.userAuth.displayname,
-          email: this.userAuth.email,
-          uid: this.userAuth.uid
-        });
-    }
-      this.signout();
-    }
+    this.userAuth = this.angularFireAuth.auth.currentUser;
+    return this.userAuth ? ({
+      name: this.userAuth.displayname,
+      email: this.userAuth.email,
+      uid: this.userAuth.uid,
+    }) : {uid: null};
+  }
   /* Sign out */
   signout() {
     this.angularFireAuth
@@ -104,7 +112,7 @@ export class AuthGenericService {
     .set({permission: permission}, {merge: true });
   }
 
-  //Get All users and pipe data changes so Material Design tables display correctly
+  // Get All users and pipe data changes so Material Design tables display correctly //
   getAllUsers() {
     return this.afs.collection('Users').snapshotChanges().pipe(map(actions => {
       return actions.map(x => {
@@ -116,6 +124,7 @@ export class AuthGenericService {
   }))}
 
       }
+
 
 export interface Users {
   uid?;

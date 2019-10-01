@@ -1,11 +1,12 @@
 <mat-toolbar class="header">
-        <img src="./assets/images/quizWhipSemiBold300.png" alt="Quiz Whip Logo" class="center">
-        <button class="main" mat-button [matMenuTriggerFor]="menu">Menu</button>
-        <mat-menu #menu="matMenu">
-            <button mat-menu-item routerLink="/dashboard">Dashboard</button>
-            <button mat-menu-item (click)="takeQuiz()">Take Quiz</button>
-            <button mat-menu-item routerLink="/quiz-form">Create Quiz</button>
-            <button mat-menu-item routerLink="/admin">Admin</button>
-            <button mat-menu-item (click)="signOut()">Sign Out</button>
-        </mat-menu>
-    </mat-toolbar>
+    <img src="./assets/images/quizWhipSemiBold300.png" alt="Quiz Whip Logo" class="center">
+    <button *ngIf="(user$ | async).permission" class="main" mat-button [matMenuTriggerFor]="menu" >Menu</button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/dashboard">Dashboard</button>
+        <button mat-menu-item (click)="takeQuiz()">Take Quiz</button>
+        <button mat-menu-item routerLink="/quiz-form" *ngIf="(user$ | async).permission === 'admin' || (user$ | async) === 'owner'">Create Quiz</button>
+        <button mat-menu-item routerLink="/admin" *ngIf="(user$ | async).permission === 'owner'">Admin</button>
+        <button mat-menu-item (click)="signOut()">Sign Out</button>
+    </mat-menu>
+</mat-toolbar>
+    
