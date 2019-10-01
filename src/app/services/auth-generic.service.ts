@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { tap, map } from 'rxjs/operators';
+import { tap, map, onErrorResumeNext } from 'rxjs/operators';
 
 
 
@@ -23,8 +23,6 @@ export class AuthGenericService {
     private afs: AngularFirestore,
     ) {
      this.userCollection = this.afs.collection("Users");
-     
-    // this.userCollection = this.angularFirestore.collection("Users", ref => ref.orderBy('displayname', 'desc'))
   }
 
 
@@ -36,9 +34,7 @@ export class AuthGenericService {
         .auth
         .signInWithEmailAndPassword(email, password)
         .then(res => {
-          const token = this.getUserInfo();
-          localStorage.setItem('userInfo', JSON.stringify(token));
-          resolve(token);
+          resolve(res);
           if (res.user.emailVerified !== true) {
             this.SendVerificationMail();
             window.alert('Please validate your email address. Kindly check your inbox.');
@@ -59,11 +55,6 @@ export class AuthGenericService {
       .createUserWithEmailAndPassword(email, password)
       .then(res => {
         var user = this.angularFireAuth.auth.currentUser;
-        // user.updateProfile({
-        //   displayName: username,
-        //   photoURL: "user"
-        // })
-
         this.addGeneralUserInfo(user, username);
         console.log('Successfully signed up!');
       })
@@ -97,13 +88,16 @@ export class AuthGenericService {
   getUserInfo() {
     this.userAuth = this.angularFireAuth.auth.currentUser
    
-
+if(this.userAuth != null){
       return (
         {
           name: this.userAuth.displayname,
           email: this.userAuth.email,
           uid: this.userAuth.uid
         })
+      }
+      this.signout();
+      
     }
   
   
@@ -113,8 +107,9 @@ export class AuthGenericService {
     this.angularFireAuth
       .auth
       .signOut();
+      this.router.navigate(['/login'])
+
   }
-  // Retrieve User info (finds permission level)
 
 
   
