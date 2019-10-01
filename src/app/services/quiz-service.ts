@@ -22,7 +22,7 @@ export class QuizService {
   }
 
   postQuiz(quiz) {
-    this.quizCollection.add(quiz);
+    return this.quizCollection.add(quiz).then(ref => ref.id);
   }
 
   getResultsByAdmin(id) {
