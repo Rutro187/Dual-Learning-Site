@@ -7,7 +7,6 @@ import { tap, map } from 'rxjs/operators';
 
 
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -17,7 +16,6 @@ export class AuthGenericService {
   userDoc: AngularFirestoreDocument<Users>
   userAuth;
   
-
   constructor(private router: Router,
     private angularFireAuth: AngularFireAuth,
     private afs: AngularFirestore,
@@ -52,7 +50,6 @@ export class AuthGenericService {
     return this.angularFireAuth.auth.currentUser.sendEmailVerification();
   }
 
-
   signup(email: string, password: string, username: string) {
     this.angularFireAuth
       .auth
@@ -66,9 +63,12 @@ export class AuthGenericService {
 
         this.addGeneralUserInfo(user, username);
         console.log('Successfully signed up!');
+        window.alert('Successfully signed up! Please validate your email address. Kindly check your inbox.');
+        this.router.navigate(['/login']);
       })
       .catch(error => {
         console.log('Something is wrong:', error.message);
+        window.alert(error.message);
       });
   }
 
