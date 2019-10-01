@@ -12,19 +12,12 @@ export class AuthGenericService {
   userCollection: AngularFirestoreCollection<Users>;
   userDoc: AngularFirestoreDocument<Users>
   userAuth: any;
-
-
   constructor(private router: Router, 
               private angularFireAuth: AngularFireAuth, 
               private afs: AngularFirestore) {
               this.userCollection = this.afs.collection("Users");
-               this.angularFireAuth.authState.subscribe(data => this.userAuth = data);
-=======
-  constructor(private router: Router,
-    private angularFireAuth: AngularFireAuth,
-    private afs: AngularFirestore,
-    ) {
-     this.userCollection = this.afs.collection("Users");
+              this.angularFireAuth.authState.subscribe(data => this.userAuth = data);
+              this.userCollection = this.afs.collection("Users");
 
   doLogin(email, password) {
     return new Promise<any>((resolve, reject) => {
@@ -52,7 +45,8 @@ export class AuthGenericService {
       .auth
       .createUserWithEmailAndPassword(email, password)
       .then(res => {
-        var user = this.angularFireAuth.auth.currentUser;
+
+        const user = this.angularFireAuth.auth.currentUser;
         this.addGeneralUserInfo(user, username);
         console.log('Successfully signed up!');
       })
@@ -62,12 +56,12 @@ export class AuthGenericService {
   }
 
   addGeneralUserInfo(user, username) {
-    const userCollection = this.afs.collection("Users");
+    const userCollection = this.afs.collection('Users');
     userCollection.add({
       uid: user.uid,
       displayname: username,
       email: user.email,
-      permission: "user"
+      permission: 'user'
     });
   }
 
@@ -84,14 +78,15 @@ export class AuthGenericService {
 
   getUserInfo() {
     this.userAuth = this.angularFireAuth.auth.currentUser
-if(this.userAuth != null){
+    if(this.userAuth != null){
       return (
         {
           name: this.userAuth.displayname,
           email: this.userAuth.email,
           uid: this.userAuth.uid
+        });
+    }
         })
-      }
       this.signout();
       
     }
@@ -100,18 +95,30 @@ if(this.userAuth != null){
     this.angularFireAuth
       .auth
       .signOut();
-      this.router.navigate(['/login'])
-
+  }
+  // Update a users permissions level in the firestore User Collection
+  updateUserPerm(data, permission) {
+    return this.afs.collection("Users")
+    .doc(data.id)
+    .set({permission: permission}, {merge: true });
   }
 
+  //Get All users and pipe data changes so Material Design tables display correctly
   getAllUsers() {
-    return this.userCollection
-  }
-}
+    return this.afs.collection('Users').snapshotChanges().pipe(map(actions => {
+      return actions.map(x => {
+        const data = x.payload.doc.data() as any;
+        const id = x.payload.doc.id;
+        return {id, ...data};
+      });
+
+  }))}
+
+      }
 
 export interface Users {
-  uid?
-  displayname?
-  email?
-  permission?
+  uid?;
+  displayname?;
+  email?;
+  permission?;
 }

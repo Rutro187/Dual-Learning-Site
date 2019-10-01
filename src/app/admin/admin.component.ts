@@ -1,25 +1,66 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { AuthGenericService } from '../services/auth-generic.service';
-import {User} from '../Interfaces/users';
 import {MatTableDataSource} from '@angular/material/table';
+import {Users} from '../services/auth-generic.service';
+
+
+
+
+export interface Permission {
+    viewValue: string;
+}
+
+
 @Component({
  selector: 'app-admin',
  templateUrl: './admin.component.html',
  styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
- displayedColumns = ['displayname', 'email', 'permission', ]
- constructor() {
+
+ constructor( private authGenServ: AuthGenericService) {
+
 }
-users: User[] = [
- {displayname: 'Kile Dude', email: 'kile@kile.com', permission: 'Admin'},
- {displayname: 'Ben Guy', email: 'Ben@kile.com', permission: 'User'},
- {displayname: 'Carlos Man', email: 'Carlos@kile.com', permission: 'Teacher'},
-];
-dataSource = new MatTableDataSource(this.users);
+ displayedColumns: string[]= ['displayname', 'email', 'permission', 'editperm' ];
+//  userCollection: AngularFirestoreCollection<Users>;
+
+
+
+permissions: Permission[] = [
+    {viewValue: 'user'},
+    {viewValue: 'teacher'},
+    {viewValue: 'admin'}
+  ];
+
+  
+allUsers;
+dataSource = new MatTableDataSource
+
+
+
+
+//pulling the data from  the row attribute from material table
+changePermission(data, permission){
+  console.log(data,permission)
+  this.authGenServ.updateUserPerm(data, permission)
+}
+
+
+
 applyFilter(filterValue: string) {
  this.dataSource.filter = filterValue.trim().toLowerCase();
 }
-ngOnInit() {
+
+getAllUsers = () =>
+this.authGenServ
+.getAllUsers()
+.subscribe(res => {(this.allUsers = res); console.log(res)})
+
+
+
+ngOnInit() {this.getAllUsers()}
+
+
+
 }
-}
+
