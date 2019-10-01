@@ -58,7 +58,7 @@ export class AuthGenericService {
       .auth
       .createUserWithEmailAndPassword(email, password)
       .then(res => {
-        let user = this.angularFireAuth.auth.currentUser;
+        const user = this.angularFireAuth.auth.currentUser;
         // user.updateProfile({
         //   displayName: username,
         //   photoURL: "user"
@@ -116,12 +116,14 @@ export class AuthGenericService {
   }
   // Retrieve User info (finds permission level)
 
-
-
-
   getAllUsers() {
-    return this.userCollection;
-  }
+    const userCollection = this.afs.collection('Users');
+    return userCollection.snapshotChanges();
+    
+    // console.log(userCollection.snapshotChanges());
+      }
+
+
 
 }
 

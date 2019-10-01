@@ -7,6 +7,17 @@
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
     </mat-form-field>
     <table mat-table [dataSource]="users">
+      <ng-container matColumnDef="editperm">
+        <th mat-header-cell *matHeaderCellDef > Edit Permission </th>
+        <td mat-cell *matCellDef="let row" > 
+          <mat-select (onselect)="changePermission()">
+            <mat-option *ngFor="let permission of permissions" >
+              {{permission.viewValue}}
+            </mat-option>
+          </mat-select>
+        </td> 
+        
+      </ng-container> 
       <ng-container matColumnDef="displayname">
         <th mat-header-cell *matHeaderCellDef> Display Name </th>
         <td mat-cell *matCellDef="let users"> {{users.displayname}} </td>
@@ -22,4 +33,5 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+    <button mat-button (click)="getAllUsers()" >Click me!</button>
   </mat-card>
