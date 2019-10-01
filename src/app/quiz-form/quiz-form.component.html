@@ -1,5 +1,5 @@
 <div class="flex background">
-
+<div class="full-page">
     <mat-card class="matCard createQuiz">
       <div class="create">
       <mat-card-header class="center">
@@ -10,14 +10,14 @@
         <div class="center">
           <mat-form-field class="width">
             <mat-label>Title</mat-label>
-            <input matInput name="quizTitle" type="text" [(ngModel)]="quizTitle">
+            <input class="width" matInput name="quizTitle" type="text" [(ngModel)]="quizTitle">
           </mat-form-field>
         </div>
         <!-- Quiz Description -->
         <div class="center">
           <mat-form-field class="width">
             <mat-label>Description</mat-label>
-            <input matInput name="desc" type="text" [(ngModel)]="desc">
+            <input class="width" matInput name="desc" type="text" [(ngModel)]="desc">
           </mat-form-field>
         </div>
       </mat-card-content>
@@ -94,4 +94,5 @@
         <button mat-raised-button color="accent" type="submit" (click)="quizFormSubmit()" class="createButton">Create Quiz</button>
       </mat-card-actions>
     </mat-card>
+    </div>
   </div>
