@@ -60,6 +60,10 @@ export class DisplayQuizComponent implements OnInit {
     });  
   }
 
+  trackByFn(index: any, item: any) {
+    return index;
+ }
+
   onSelectionChange(j, i) {
     this.userAnswers[j] = i;
     console.log(this.userAnswers);

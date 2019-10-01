@@ -3,12 +3,12 @@
 
       <h1 class="center">{{quiz?.title}}</h1>
   
-    <div class="questionContainer" *ngFor="let question of quiz?.questions; let j = index">
+    <div class="questionContainer" *ngFor="let question of quiz?.questions; let j = index; trackBy:trackByFn">
       <mat-card *ngIf="!completed">
         <mat-card-subtitle>{{question.title}}</mat-card-subtitle>
         <mat-radio-group aria-label="Select an option">
-          <ol class="answer" *ngFor="let answer of question.answers; let i = index">
-            <mat-radio-button value="i" (change)="onSelectionChange(j, i)"></mat-radio-button>
+          <ol class="answer" *ngFor="let answer of question.answers; let i = index; trackBy:trackByFn">
+            <mat-radio-button [value]="i" (change)="onSelectionChange(j, i)"> </mat-radio-button>
             {{answer}}
           </ol>
         </mat-radio-group>

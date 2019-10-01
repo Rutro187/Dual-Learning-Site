@@ -49,9 +49,12 @@ export class AuthGenericService {
         const user = this.angularFireAuth.auth.currentUser;
         this.addGeneralUserInfo(user, username);
         console.log('Successfully signed up!');
+        window.alert('Successfully signed up! Please validate your email address. Kindly check your inbox.');
+        this.router.navigate(['/login']);
       })
       .catch(error => {
         console.log('Something is wrong:', error.message);
+        window.alert(error.message);
       });
   }
 
