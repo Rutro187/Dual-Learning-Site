@@ -16,28 +16,24 @@ export class QuizService {
   resultsCollection: AngularFirestoreCollection<Results>
   resultsDoc: AngularFirestoreDocument<Results>
 
-  constructor(private afs: AngularFirestore, private router: Router, private route: ActivatedRoute) { 
+  constructor(private afs: AngularFirestore) { 
     this.quizCollection = this.afs.collection('quiz');
     this.resultsCollection = this.afs.collection('results');
   }
 
   postQuiz(quiz) {
-    this.quizCollection.add(quiz);
+    return this.quizCollection.add(quiz).then(ref => ref.id);
   }
 
-  getStudentsByQuizId(id) {
-    // return this.http.get(`/quizzes/getScoresAdmin/${id}`)
-  }
-
-  getQuizByAdmin(creatorId) {
-    return this.afs.collection('quiz', ref => ref.where('creatorId', '==', creatorId)).snapshotChanges().pipe(map(actions => {
+  getResultsByAdmin(id) {
+    return this.afs.collection('results', ref => ref.where('creator', '==', id)).snapshotChanges().pipe(map(actions => {
       return actions.map(x => {
         const data = x.payload.doc.data() as Quiz;
         const id = x.payload.doc.id;
         return { id, ...data}  
       })
     }))
-  }
+  } 
 
   quiz: Quiz;
   errorMsg: string;
@@ -59,10 +55,6 @@ export class QuizService {
     return this.quizDoc.valueChanges();
   }
 
-  getAllData(apiItem: String): any {
-    // return this.http.get(this.baseURL+apiItem, {responseType: 'json'}); 
-  }
-
   getQuizResultsByQuizId(id) {
     return this.afs.collection('results', ref => ref.where('quizId', '==', id)).snapshotChanges().pipe(map(actions => {
       return actions.map(x => {
@@ -73,19 +65,18 @@ export class QuizService {
     }))  
   }
 
+  getQuizResultsByUserId(id) {
+    return this.afs.collection('results', ref => ref.where('userId', '==', id)).snapshotChanges().pipe(map(actions => {
+      return actions.map(x => {
+        const data = x.payload.doc.data() as Results;
+        const id = x.payload.doc.id;
+        return { id, ...data}
+      })
+    }))
+  }
+
   postUserAnswers(data) {
     this.resultsCollection.add(data);
-  }
-
-  getUserQuizScores(userAnswers) {
-    let request = {
-      answers: userAnswers,
-      token: this.token,
-      userId: "1",
-    }
-  }
-
-  getAllUserQuizScores() {
   }
 
 }
@@ -112,4 +103,11 @@ export interface Results {
   userId: string
   userName: string
   date: string
+}
+
+export interface User {
+  displayname: string
+  email: string
+  permission: string
+  uid: string
 }

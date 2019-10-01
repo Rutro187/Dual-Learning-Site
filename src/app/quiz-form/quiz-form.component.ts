@@ -19,10 +19,13 @@ export class QuizFormComponent implements OnInit {
   answers: Array<string>; // Array of answers, entered by creator
   correct: number; // index of answers array with correct answer
   type: string; // type of question, multiChoice, trueFalse
-  // points: number; // number of points question is worth
   creator: string; // ID of who is making the quiz
   quizTitle: string; // title of quiz
   desc: string; // description of quiz
+
+  quizID: string; //ID of quiz returned when posted to db
+
+  visible: boolean = true;
 
 
   constructor(private quizService: QuizService, private router: Router, private authService: AuthGenericService) { }
@@ -52,7 +55,6 @@ export class QuizFormComponent implements OnInit {
       // points: 0,
     });
     console.log(this.questions);
-
   }
   
   removeAnswer(question, idx) {
@@ -63,8 +65,8 @@ export class QuizFormComponent implements OnInit {
 
   addAnswer(val) {
     this.questions[val]['answers'].push('');
-
   }
+
   hideCreateQuiz() {
     let sideBar = document.getElementById('sideBarContent');
     sideBar.remove();
@@ -73,23 +75,30 @@ export class QuizFormComponent implements OnInit {
   showThankYou() {
     document.getElementById('thankYou').id = 'visible';
   }
+
   dashboardButton() {
     this.router.navigate(['/dashboard']);
   }
+
   quizFormSubmit() {
-    let quiz: any = {
-      title: this.quizTitle,
-      description: this.desc,
-      creator: this.authService.getUserInfo().uid,
-      questions: this.questions
-    };
-    console.log(quiz);
-    this.quizService.postQuiz(quiz);
-    this.hideCreateQuiz();
-    this.showThankYou();
+    this.authService.getUserbyID().subscribe(user => {
+      this.creator = user[0].displayname;
+      let quiz = {
+        title: this.quizTitle,
+        description: this.desc,
+        creator: this.creator,
+        questions: this.questions
+      }
+      this.quizService.postQuiz(quiz)
+      .then(res => { 
+        this.quizID = res;
+      });
+      this.hideCreateQuiz();
+      this.showThankYou();
+      this.visible = false;
+    })
   }
   
   ngOnInit() {
-
   }
 }
