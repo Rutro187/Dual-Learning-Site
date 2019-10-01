@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { QuizGuardComponent } from '../quiz-guard/quiz-guard.component';
 import { AuthGenericService } from '../services/auth-generic.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-display-quiz',
@@ -21,6 +22,7 @@ export class DisplayQuizComponent implements OnInit {
   questions: Object[];
   title: string;
   correct: number;
+  username: string;
 
   formControl = new FormControl('');
   x = 0;
@@ -80,17 +82,20 @@ export class DisplayQuizComponent implements OnInit {
     document.getElementById('thankYou').id = 'visible';
     document.getElementById('submitButton').id = 'hidden';
 
-    let data = {
-      date: new Date(),
-      quizId: this.quizId,
-      score: this.percent,
-      userId: this.auth.userAuth.uid,
-      email: this.auth.userAuth.email,
-      userName: this.auth.userAuth.displayName,
-      title: this.quiz.title,
-      creator: this.quiz.creator
-    }
-    this.quizService.postUserAnswers(data);
+    this.auth.getUserbyID().subscribe(user => {
+        this.username = user[0].displayname;
+        let data = {
+          date: new Date(),
+          quizId: this.quizId,
+          score: this.percent,
+          userId: this.auth.userAuth.uid,
+          email: this.auth.userAuth.email,
+          username: this.username,
+          title: this.quiz.title,
+          creator: this.quiz.creator
+        }
+      this.quizService.postUserAnswers(data);
+    })
   }
 
   compare(userAnswers, correctAnswers) {

@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthGenericService, private router: Router, public navbar: NavbarService) { }
 
   tryLogin(){
-    console.log('try login');
     this.authService.doLogin(this.email, this.password)
     .then(res => {
       console.log('login sucessful, navigate to dashboard');
@@ -33,6 +32,5 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.navbar.hide();
   }
 }

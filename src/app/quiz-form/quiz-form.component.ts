@@ -77,16 +77,18 @@ export class QuizFormComponent implements OnInit {
   }
 
   quizFormSubmit() {
-    let quiz: any = {
-      title: this.quizTitle,
-      description: this.desc,
-      creator: this.authService.getUserInfo().uid,
-      questions: this.questions
-    };
-    console.log(quiz);
-    this.quizService.postQuiz(quiz);
-    this.hideCreateQuiz();
-    this.showThankYou();
+    this.authService.getUserbyID().subscribe(user => {
+      this.creator = user[0].displayname;
+      let quiz = {
+        title: this.quizTitle,
+        description: this.desc,
+        creator: this.creator,
+        questions: this.questions
+      }
+      this.quizService.postQuiz(quiz);
+      this.hideCreateQuiz();
+      this.showThankYou();
+    })
   }
   
   ngOnInit() {

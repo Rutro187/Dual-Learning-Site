@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore'
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -11,19 +11,28 @@ export class AuthGenericService {
   // userData: Observable<firebase.User>;
   userCollection: AngularFirestoreCollection<Users>;
   userDoc: AngularFirestoreDocument<Users>
-  userAuth: any = null;
+  userAuth: any;
 
-  constructor(private router: Router, private angularFireAuth: AngularFireAuth, private afs: AngularFirestore) {
-    this.userCollection = this.afs.collection("Users");
-    this.angularFireAuth.authState.subscribe(data => this.userAuth = data);
-  }
+
+  constructor(private router: Router, 
+              private angularFireAuth: AngularFireAuth, 
+              private afs: AngularFirestore) {
+              this.userCollection = this.afs.collection("Users");
+               this.angularFireAuth.authState.subscribe(data => this.userAuth = data);
+=======
+  constructor(private router: Router,
+    private angularFireAuth: AngularFireAuth,
+    private afs: AngularFirestore,
+    ) {
+     this.userCollection = this.afs.collection("Users");
 
   doLogin(email, password) {
     return new Promise<any>((resolve, reject) => {
-      this.angularFireAuth.auth.signInWithEmailAndPassword(email, password).then(res => {
-          const token = this.getUserInfo();
-          localStorage.setItem('userInfo', JSON.stringify(token));
-          resolve(token);
+      this.angularFireAuth
+        .auth
+        .signInWithEmailAndPassword(email, password)
+        .then(res => {
+          resolve(res);
           if (res.user.emailVerified !== true) {
             this.sendVerificationMail();
             window.alert('Please validate your email address. Kindly check your inbox.');
@@ -39,14 +48,17 @@ export class AuthGenericService {
   }
 
   signup(email: string, password: string, username: string) {
-    this.angularFireAuth.auth.createUserWithEmailAndPassword(email, password).then(res => {
-      var user = this.angularFireAuth.auth.currentUser;
-      this.addGeneralUserInfo(user, username);
-      console.log('Successfully signed up!');
-    })
-    .catch(error => {
-      console.log('Something is wrong:', error.message);
-    });
+    this.angularFireAuth
+      .auth
+      .createUserWithEmailAndPassword(email, password)
+      .then(res => {
+        var user = this.angularFireAuth.auth.currentUser;
+        this.addGeneralUserInfo(user, username);
+        console.log('Successfully signed up!');
+      })
+      .catch(error => {
+        console.log('Something is wrong:', error.message);
+      });
   }
 
   addGeneralUserInfo(user, username) {
@@ -64,7 +76,6 @@ export class AuthGenericService {
       .snapshotChanges().pipe(map(actions => {
         return actions.map(x => {
           const data = x.payload.doc.data() as any;
-          console.log(data);
           const id = x.payload.doc.id;
           return { id, ...data }
         })
@@ -72,22 +83,26 @@ export class AuthGenericService {
   }
 
   getUserInfo() {
-    return (
-      {
-        name: this.userAuth.displayname,
-        email: this.userAuth.email,
-        uid: this.userAuth.uid,
-        permission: this.userAuth.permission
-      })
-  }
-
+    this.userAuth = this.angularFireAuth.auth.currentUser
+if(this.userAuth != null){
+      return (
+        {
+          name: this.userAuth.displayname,
+          email: this.userAuth.email,
+          uid: this.userAuth.uid
+        })
+      }
+      this.signout();
+      
+    }
   /* Sign out */
   signout() {
     this.angularFireAuth
       .auth
       .signOut();
+      this.router.navigate(['/login'])
+
   }
-  // Retrieve User info (finds permission level)
 
   getAllUsers() {
     return this.userCollection
