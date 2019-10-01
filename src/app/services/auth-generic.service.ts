@@ -117,15 +117,20 @@ export class AuthGenericService {
   // Retrieve User info (finds permission level)
 
   getAllUsers() {
-    const userCollection = this.afs.collection('Users');
-    return userCollection.snapshotChanges();
-    
-    // console.log(userCollection.snapshotChanges());
+    return this.afs.collection('Users').snapshotChanges();
+
+  }
+
       }
 
+//  updateUserPerm(data) {
+//    return this.afs
+//    .collection("Users")
+//     .doc(data.payload.doc.id)
+//     .set{{permission: test  }, {merge: true }};
+//  }
 
 
-}
 
 export interface Users {
   uid?;
