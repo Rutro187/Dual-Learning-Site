@@ -16,7 +16,7 @@ export class UserGuard implements CanActivate {
   Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.authService.getUserbyID().pipe(map( user => {
         console.log(user[0].permission);
-        if (user[0].permission === 'owner' || 'admin' || 'user') {
+        if (user[0].permission === 'owner' || user[0].permission === 'admin' || user[0].permission === 'user') {
           return true;
         }
         this.router.navigate(['/login']);

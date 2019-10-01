@@ -18,20 +18,13 @@ export class NavBarComponent implements OnInit {
   title = 'quizApp';
   constructor(public dialog: MatDialog, private authGenericService: AuthGenericService) {}
   userValidated() {
-    const userInfo = this.authGenericService.getUserbyID().pipe(map( user => {
+    return this.authGenericService.getUserbyID().pipe(map( user => {
       if (user[0] !== null) {
         return true;
       } else {
         return false;
       }
     }));
-    userInfo.subscribe({
-      next(user) {
-        console.log(user);
-      }, error(err) {
-        console.log(err);
-      }
-    });
   }
   takeQuiz(): void {
     const dialogRef = this.dialog.open(QuizGuardComponent, {
