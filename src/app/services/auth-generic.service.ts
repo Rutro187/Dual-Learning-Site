@@ -14,10 +14,10 @@ export class AuthGenericService {
   userAuth: any;
   constructor(private router: Router, 
               private angularFireAuth: AngularFireAuth, 
-              private afs: AngularFirestore) {
-              this.userCollection = this.afs.collection("Users");
-              this.angularFireAuth.authState.subscribe(data => this.userAuth = data);
-              this.userCollection = this.afs.collection("Users");
+              private afs: AngularFirestore){
+              this.userCollection = this.afs.collection("Users"),
+              this.angularFireAuth.authState.subscribe(data => this.userAuth = data)
+              }
 
   doLogin(email, password) {
     return new Promise<any>((resolve, reject) => {
@@ -86,9 +86,7 @@ export class AuthGenericService {
           uid: this.userAuth.uid
         });
     }
-        })
       this.signout();
-      
     }
   /* Sign out */
   signout() {
