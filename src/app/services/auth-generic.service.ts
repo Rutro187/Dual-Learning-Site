@@ -97,7 +97,6 @@ export class AuthGenericService {
       name: this.userAuth.displayname,
       email: this.userAuth.email,
       uid: this.userAuth.uid,
-      permission: this.userAuth.permission
     }) : {uid: null};
   }
   /* Sign out */
