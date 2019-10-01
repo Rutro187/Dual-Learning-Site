@@ -1,8 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { AuthGenericService } from '../services/auth-generic.service';
-// import {User} from '../Interfaces/users';
 import {MatTableDataSource} from '@angular/material/table';
-// import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 import {Users} from '../services/auth-generic.service';
 
 
@@ -23,7 +21,7 @@ export class AdminComponent implements OnInit {
  constructor( private authGenServ: AuthGenericService) {
 
 }
- displayedColumns = ['displayname', 'email', 'permission', 'editperm' ];
+ displayedColumns: string[]= ['displayname', 'email', 'permission', 'editperm' ];
 //  userCollection: AngularFirestoreCollection<Users>;
 
 
@@ -34,27 +32,33 @@ permissions: Permission[] = [
     {viewValue: 'admin'}
   ];
 
-dataSource = new MatTableDataSource<Users>();
+  
 allUsers;
-
-
-// changePermission = data =>
-//   this.authGenserv.updateUserPerm(data)
+dataSource = new MatTableDataSource
 
 
 
-// applyFilter(filterValue: string) {
-//  this.dataSource.filter = filterValue.trim().toLowerCase();
-// }
+
+//pulling the data from  the row attribute from material table
+changePermission(data, permission){
+  console.log(data,permission)
+  this.authGenServ.updateUserPerm(data, permission)
+}
+
+
+
+applyFilter(filterValue: string) {
+ this.dataSource.filter = filterValue.trim().toLowerCase();
+}
 
 getAllUsers = () =>
 this.authGenServ
 .getAllUsers()
-.subscribe(res => (this.allUsers = res))
+.subscribe(res => {(this.allUsers = res); console.log(res)})
 
 
 
-ngOnInit() {this.getAllUsers(); }
+ngOnInit() {this.getAllUsers()}
 
 
 

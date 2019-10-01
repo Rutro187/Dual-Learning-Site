@@ -114,21 +114,27 @@ export class AuthGenericService {
       .auth
       .signOut();
   }
-  // Retrieve User info (finds permission level)
-
-  getAllUsers() {
-    return this.afs.collection('Users').snapshotChanges();
-
+  // Update a users permissions level in the firestore User Collection
+  updateUserPerm(data, permission) {
+    return this.afs.collection("Users")
+    .doc(data.id)
+    .set({permission: permission}, {merge: true });
   }
+
+  //Get All users and pipe data changes so Material Design tables display correctly
+  getAllUsers() {
+    return this.afs.collection('Users').snapshotChanges().pipe(map(actions => {
+      return actions.map(x => {
+        const data = x.payload.doc.data() as any;
+        const id = x.payload.doc.id;
+        return {id, ...data};
+      });
+
+  }))}
 
       }
 
-//  updateUserPerm(data) {
-//    return this.afs
-//    .collection("Users")
-//     .doc(data.payload.doc.id)
-//     .set{{permission: test  }, {merge: true }};
-//  }
+ 
 
 
 
