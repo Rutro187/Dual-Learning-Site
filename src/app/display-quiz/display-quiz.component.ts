@@ -1,21 +1,18 @@
-import { QuizService, Quiz, Results, Questions } from '../services/quiz-service';
+import { QuizService, Quiz, Results, Questions, User } from '../services/quiz-service';
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { FormControl, FormGroup, ControlValueAccessor } from '@angular/forms';
 import { MatRadioChange, MatButton } from '@angular/material';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { QuizGuardComponent } from '../quiz-guard/quiz-guard.component';
-
-// Object Interface for data
-
-
+import { AuthGenericService } from '../services/auth-generic.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-display-quiz',
   templateUrl: './display-quiz.component.html',
   styleUrls: ['./display-quiz.component.scss']
 })
-
 
 export class DisplayQuizComponent implements OnInit {
 
@@ -25,11 +22,12 @@ export class DisplayQuizComponent implements OnInit {
   questions: Object[];
   title: string;
   correct: number;
+  username: string;
 
   formControl = new FormControl('');
   x = 0;
-  matButton: MatButton;
-
+  matButton: MatButton; 
+  currentUser: User;
   selectedRadio: string;
 
   userAnswers: number[] = [];
@@ -47,9 +45,7 @@ export class DisplayQuizComponent implements OnInit {
   correctAnswerText;
   nextButton: Boolean = false;
 
-
-  constructor(private quizService: QuizService, private route: ActivatedRoute, public dialog: MatDialog) { 
-  }
+  constructor(public auth: AuthGenericService, private quizService: QuizService, private route: ActivatedRoute, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.getQuiz();
@@ -61,8 +57,7 @@ export class DisplayQuizComponent implements OnInit {
       this.quiz = data;
       this.userAnswers.length = this.quiz.questions.length;
       this.getCorrectAnswers();
-    });
-    
+    });  
   }
 
   onSelectionChange(j, i) {
@@ -83,17 +78,24 @@ export class DisplayQuizComponent implements OnInit {
     this.compare(this.userAnswers, this.correctAnswers);
     this.getScore();
     this.completed = true;
+
     document.getElementById('thankYou').id = 'visible';
     document.getElementById('submitButton').id = 'hidden';
 
-    let data = {
-      date: new Date(),
-      quizId: this.quizId,
-      score: this.percent,
-      // userId: this.auth.currentUserId,
-      // userName: this.auth.authState.email
-    }
-    this.quizService.postUserAnswers(data);
+    this.auth.getUserbyID().subscribe(user => {
+        this.username = user[0].displayname;
+        let data = {
+          date: new Date(),
+          quizId: this.quizId,
+          score: this.percent,
+          userId: this.auth.userAuth.uid,
+          email: this.auth.userAuth.email,
+          username: this.username,
+          title: this.quiz.title,
+          creator: this.quiz.creator
+        }
+      this.quizService.postUserAnswers(data);
+    })
   }
 
   compare(userAnswers, correctAnswers) {
@@ -102,12 +104,10 @@ export class DisplayQuizComponent implements OnInit {
         this.numberCorrect++;
       }
     } 
-    console.log(this.numberCorrect);
   }
 
   getScore() {
     this.percent = ((this.numberCorrect / this.quiz.questions.length) * 100).toFixed(2);
-    console.log(this.percent);
   }
 
   takeQuiz(): void {
