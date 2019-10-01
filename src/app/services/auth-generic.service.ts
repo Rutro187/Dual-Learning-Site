@@ -77,7 +77,7 @@ export class AuthGenericService {
     });
   }
 
-  getUserbyID(){
+  getUserbyID() {
     return this.afs.collection('Users', ref => ref.where('uid', '==', this.getUserInfo().uid))
     .snapshotChanges().pipe(map(actions => {
       return actions.map(x => {
@@ -95,7 +95,6 @@ export class AuthGenericService {
       name: this.userAuth.displayname,
       email: this.userAuth.email,
       uid: this.userAuth.uid,
-      permission: this.userAuth.permission,
     });
   }
   /* Sign out */
