@@ -13,10 +13,8 @@ import { QuizResultsComponent } from './quiz-results/quiz-results.component'
 import { UserGuard } from '../shared/guards/user.guard';
 import { TeacherGuard } from '../shared/guards/teacher.guard';
 import { AdminGuard } from '../shared/guards/admin.guard';
-import { QuizAppComponent } from './quiz-app.component';
 
 const routes: Routes = [
-
   { path: 'quiz-app', children: [
   { path: 'dashboard', component: DashboardComponent, canActivate: [UserGuard] },
   { path: 'quiz-form', component: QuizFormComponent, canActivate: [TeacherGuard] },
