@@ -77,9 +77,19 @@ export class QuizFormComponent implements OnInit {
     this.router.navigate(['/dashboard']);
   }
 
+  trueFalse(){
+    this.questions.forEach(question => {
+      if (question["type"] === "trueFalse"){
+        question["answers"][0] = "true";
+        question["asnwers"][1] = "false";
+      }
+    });
+  }
+  
   quizFormSubmit() {
     this.authService.getUserbyID().subscribe(user => {
       this.creator = user[0].displayname;
+      this.trueFalse();
       let quiz = {
         title: this.quizTitle,
         description: this.desc,
