@@ -4,7 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { map } from 'rxjs/operators';
 import { UserStoreService } from './user-store.service';
-import { User } from '../../interfaces/users';
+import { User } from '../interfaces/users';
 
 
 

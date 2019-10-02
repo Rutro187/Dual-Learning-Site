@@ -5,8 +5,8 @@ import { MatButton } from '@angular/material';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { QuizGuardComponent } from '../quiz-guard/quiz-guard.component';
-import { AuthGenericService } from '../shared/services/auth-generic.service';
-import { User } from '../interfaces/users';
+import { AuthGenericService } from '../../shared/services/auth-generic.service';
+import { User } from '../../shared/interfaces/users';
 
 @Component({
   selector: 'app-display-quiz',

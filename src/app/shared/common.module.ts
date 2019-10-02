@@ -10,6 +10,9 @@ import { FormatDatePipe } from './pipes/format-date.pipe';
 
 
 @NgModule({
+  declarations: [
+    FormatDatePipe
+  ],
   imports: [
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
@@ -25,7 +28,8 @@ import { FormatDatePipe } from './pipes/format-date.pipe';
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormatDatePipe
   ]
 })
 export class CommonModule { }

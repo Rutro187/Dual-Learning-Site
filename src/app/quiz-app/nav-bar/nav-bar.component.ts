@@ -1,18 +1,17 @@
-import { UserStoreService } from '../shared/services/user-store.service';
+import { UserStoreService } from '../../shared/services/user-store.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { QuizGuardComponent } from '../quiz-guard/quiz-guard.component';
-import { AdminComponent } from '../admin/admin.component';
-import { AuthGenericService} from '../shared/services/auth-generic.service';
+import { AuthGenericService} from '../../shared/services/auth-generic.service';
 import { map } from 'rxjs/operators';
 import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { User } from '../Interfaces/users';
+import { User } from '../../shared/interfaces/users';
 
 
 
 @Component({
-  selector: 'app-nav-bar',
+  selector: 'quiz-app-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.scss']
 })
@@ -28,13 +27,6 @@ export class NavBarComponent implements OnInit {
               public userStore: UserStoreService ) {}
   takeQuiz(): void {
     const dialogRef = this.dialog.open(QuizGuardComponent, {
-      width: '60vw',
-    });
-    dialogRef.afterClosed();
-  }
-
-  admin(): void {
-    const dialogRef = this.dialog.open(AdminComponent, {
       width: '60vw',
     });
     dialogRef.afterClosed();

@@ -2,10 +2,10 @@
     <img src="./assets/images/quizWhipSemiBold300.png" alt="Quiz Whip Logo" class="center">
     <button *ngIf="(user$ | async).permission" class="main" mat-button [matMenuTriggerFor]="menu" >Menu</button>
     <mat-menu #menu="matMenu">
-        <button mat-menu-item routerLink="/dashboard">Dashboard</button>
+        <button mat-menu-item routerLink="/quiz-app/dashboard">Dashboard</button>
         <button mat-menu-item (click)="takeQuiz()">Take Quiz</button>
-        <button mat-menu-item routerLink="/quiz-form" *ngIf="(user$ | async).permission === 'admin' || (user$ | async) === 'teacher'">Create Quiz</button>
-        <button mat-menu-item routerLink="/admin" *ngIf="(user$ | async).permission === 'admin'">Admin</button>
+        <button mat-menu-item routerLink="/quiz-app/quiz-form" *ngIf="(user$ | async).permission === 'admin' || (user$ | async) === 'teacher'">Create Quiz</button>
+        <button mat-menu-item routerLink="/quiz-app/admin" *ngIf="(user$ | async).permission === 'admin'">Admin</button>
         <button mat-menu-item (click)="signOut()">Sign Out</button>
     </mat-menu>
 </mat-toolbar>

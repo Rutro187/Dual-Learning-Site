@@ -1,9 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, Validators, FormControl, FormGroup, NgForm } from '@angular/forms';
 import { QuizService, Quiz, Questions } from '../services/quiz-service';
-import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { AuthGenericService } from '../shared/services/auth-generic.service';
+import { AuthGenericService } from '../../shared/services/auth-generic.service';
 
 // export class RadioNgModelExample {
 

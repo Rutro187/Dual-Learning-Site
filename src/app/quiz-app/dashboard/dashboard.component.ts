@@ -1,4 +1,4 @@
-import { AuthGenericService } from '../shared/services/auth-generic.service';
+import { AuthGenericService } from '../../shared/services/auth-generic.service';
 import { Component, OnInit } from '@angular/core';
 import { QuizService } from '../services/quiz-service';
 
