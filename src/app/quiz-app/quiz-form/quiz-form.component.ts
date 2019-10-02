@@ -53,7 +53,6 @@ export class QuizFormComponent implements OnInit {
     });
     console.log(this.questions);
   }
-  
   removeAnswer(question, idx) {
     console.log(idx);
     question['answers'].splice(idx, 1);
