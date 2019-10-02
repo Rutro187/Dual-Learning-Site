@@ -1,12 +1,16 @@
-<mat-toolbar class="header">
-    <img src="./assets/images/quizWhipSemiBold300.png" alt="Quiz Whip Logo" class="center">
-    <button *ngIf="(user$ | async).permission" class="main" mat-button [matMenuTriggerFor]="menu" >Menu</button>
-    <mat-menu #menu="matMenu">
-        <button mat-menu-item routerLink="/quiz-app/dashboard">Dashboard</button>
-        <button mat-menu-item (click)="takeQuiz()">Take Quiz</button>
-        <button mat-menu-item routerLink="/quiz-app/quiz-form" *ngIf="(user$ | async).permission === 'admin' || (user$ | async) === 'teacher'">Create Quiz</button>
-        <button mat-menu-item routerLink="/quiz-app/admin" *ngIf="(user$ | async).permission === 'admin'">Admin</button>
-        <button mat-menu-item (click)="signOut()">Sign Out</button>
-    </mat-menu>
-</mat-toolbar>
-    
+<div class="header">
+    <img class="headerLogo" src="./assets/images/quizWhipSemiBold300.png" alt="">
+    <div class="content" *ngIf="(user$ | async).permission">
+            <a class="navLink" [routerLink]="[ '/dashboard' ]" routerLinkActive="active">Dashboard</a>
+            <a class="navLink underline" (click)="takeQuiz()">Take Quiz</a>
+            <a class="navLink" [routerLink]="[ '/quiz-form' ]" routerLinkActive="active"
+                    *ngIf="(user$ | async).permission === 'admin' || (user$ | async) === 'owner'">Create Quiz</a>
+            <a class="navLink" [routerLink]="[ '/admin' ]" routerLinkActive="active"
+                    *ngIf="(user$ | async).permission === 'owner'">Admin</a>
+            <a class="navLink underline" (click)="signOut()">Sign Out</a>
+            
+
+
+    </div>
+
+</div>
