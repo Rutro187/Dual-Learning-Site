@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
-// import { Title } from '@angular/platform-browser';
 import {  UploaderService } from '../services/uploader.service'
 import { Router } from '@angular/router';
 

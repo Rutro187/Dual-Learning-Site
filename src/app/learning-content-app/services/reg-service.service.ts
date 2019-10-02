@@ -5,7 +5,7 @@ import { registerInterface } from './userInterface';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 import { Router } from '@angular/router';
-import { componentRefresh } from '@angular/core/src/render3/instructions';
+// import { componentRefresh } from '@angular/core/src/render3/instructions';
 
 @Injectable({
   providedIn: 'root'

@@ -1,8 +1,7 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireStorageModule } from '@angular/fire/storage';
-import { RouterLinkDelayModule } from '@bcodes/ngx-routerlink-delay';
+// import { RouterLinkDelayModule } from '@bcodes/ngx-routerlink-delay';
 import { HomepageComponent } from './homepage/homepage.component';
 import { LearningHeaderComponent } from './header/header.component';
 import { PublicContentComponent } from './public-content/public-content.component';
@@ -21,14 +20,16 @@ import { ViewContentComponent } from './view-content/view-content.component';
 import { TestimonialServiceService } from './services/testimonial.service';
 
 import { PdfViewerModule } from 'ng2-pdf-viewer';
-import { LearningAppComponent } from './learning-app.component';
 import { LearningAppRoutingModule } from './learning-app-routing.module';
 import { MaterialModule } from '../shared/material.module';
-import { CommonModule } from '../shared/common.module';
+import { SharedModule } from '../shared/shared.module';
+import { LearningComponent } from './learning-app.component';
+import { SharedServicesModule } from '../shared/shared-service.module';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
-    LearningAppComponent,
+    LearningComponent,
     HomepageComponent,
     LearningHeaderComponent,
     PublicContentComponent,
@@ -43,18 +44,18 @@ import { CommonModule } from '../shared/common.module';
     TestimonialsComponent
   ],
   imports: [
-    BrowserModule,
+    SharedModule,
     LearningAppRoutingModule,
     StarRatingModule.forRoot(),
-    RouterLinkDelayModule,
     AngularFireDatabaseModule,
     AngularFireStorageModule,
+    SharedServicesModule,
     PdfViewerModule,
     MaterialModule,
     CommonModule
   ],
   exports:[
-    LearningAppComponent,
+    LearningComponent,
     HomepageComponent,
     LearningHeaderComponent,
     PublicContentComponent,
@@ -67,10 +68,8 @@ import { CommonModule } from '../shared/common.module';
     UploaderComponent,
     TestimonialComponent,
     TestimonialsComponent
-  ],
-  providers: [RegServiceService, TestimonialServiceService],
+  ]
   
-
 })
 
-export class LearningAppModule { }
+export class LearningContentAppModule { }

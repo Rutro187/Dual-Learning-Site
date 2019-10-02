@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: './learning-app.component.html',
   styleUrls: ['./learning-app.component.scss']
 })
-export class LearningAppComponent {
+export class LearningComponent {
   title = 'quizApp';
   constructor () {}
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FirebaseService } from '../services/firebase.service';
-import { _document } from '@angular/platform-browser/src/browser';
+// import { _document } from '@angular/platform-browser/src/browser';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { UserComment } from '../services/user-comment';

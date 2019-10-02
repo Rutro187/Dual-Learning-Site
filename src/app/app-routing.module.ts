@@ -6,8 +6,8 @@ const routes: Routes = [
 
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterFormComponent},
-  { path: 'quiz-app', loadChildren: './quiz-app/quiz-app.module#QuizAppComponent' },
-  { path: 'learning-app', loadChildren: './learning-app/learning-app.module#QuizAppComponent' },
+  { path: 'learning', loadChildren: () => import('./learning-content-app/learning-content-app.module').then(mod => mod.LearningContentAppModule) },
+  { path: 'quiz', loadChildren: () => import('./quiz-app/quiz-app.module').then(mod => mod.QuizAppModule) },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 
@@ -16,3 +16,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+

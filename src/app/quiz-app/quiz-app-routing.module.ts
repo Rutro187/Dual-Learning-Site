@@ -1,4 +1,4 @@
-import { ModuleWithProviders } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { QuizFormComponent } from './quiz-form/quiz-form.component'
@@ -16,17 +16,20 @@ import { AdminGuard } from '../shared/guards/admin.guard';
 import { QuizAppComponent } from './quiz-app.component';
 
 const routes: Routes = [
-
-  { path: 'quiz-app', children: [
-  { path: '', component: QuizAppComponent },
+  { path: 'quiz', children: [
+    {path: '', component: QuizAppComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [UserGuard] },
   { path: 'quiz-form', component: QuizFormComponent, canActivate: [TeacherGuard] },
   { path: 'quiz-guard', component: QuizGuardComponent, canActivate: [UserGuard]},
   { path: 'take-quiz/:id',  component: DisplayQuizComponent, canActivate: [UserGuard]},
   { path: 'admin', component: QuizAdminComponent, canActivate: [AdminGuard]  },
   { path: 'my-quizzes', component: MyQuizzesComponent, canActivate: [TeacherGuard] },
-  { path: 'quiz-results', component: QuizResultsComponent, canActivate: [UserGuard] },
-  
+  { path: 'quiz-results', component: QuizResultsComponent, canActivate: [UserGuard] }
 ]}];
 
-export const QuizAppRoutingModule: ModuleWithProviders = RouterModule.forChild(routes)
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class QuizAppRoutingModule { }
+

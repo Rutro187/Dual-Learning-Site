@@ -1,4 +1,3 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 
 import { AuthGenericService } from './services/auth-generic.service';
