@@ -1,76 +1,68 @@
-mat-form-field{
-  width: 60%;
-  margin-left: 20%;
-}
-
-mat-card-title{
-  text-align: center;
-}
-
 .background {
-  background-image: linear-gradient(#0e2340,  #EE7623);
+  background-image: linear-gradient( #0e2340,  #EE7623);
+  display: grid;
+  grid-template-columns: 43% auto 43%;
+  min-height: 100vh;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-  
-.full-page {
-  height: 100vh;
-  // background-size: auto;
+
+mat-form-field{
+  margin-bottom: 10px;
 }
-  
-mat-card {
-  max-width: 330px;
+
+mat-card{
+  min-width: 330px;
   padding: 30px;
-  margin: 0 auto;
-  margin-top: 10%;
+  margin-bottom: 10%;
   background-color: rgb(255,255,255,0.95);
   box-shadow: none !important;
 }
-  
-  
+
 .center {
   margin: auto;
-  padding-top: 10px;
   text-align: center;
+  padding-bottom: 30px;
+
+}
+
+.transparent {
+  background-color: rgba(0,0,0,0);
+  color: white;
 }
 
 .subtitle {
   text-align: center;
 }
 
-.spacing {
-  padding-bottom: 50px;
+.form {
+  width: 100%;
 }
 
 .left {
-  flex-basis: 50%;
+  grid-column-start: 1;
+  margin: auto;
 }
 
-.flex {
-  display: flex;
-  flex-flow: column wrap;
+.center-img {
+  grid-column-start: 2;
+  margin: auto;
 }
 
-.first-card {
-  background-color: rgba(0,0,0,0);
-  color: white;
+.right {
+  grid-column-start: 3;
+  margin: auto;
 }
 
-.second-card {
-  height: 400px;
+.padding {
+  margin: 20px;
 }
-  
 
 @media (max-width: 768px) {
   .left {
     flex-basis: 100%;
-}
-
-.second-card {
-  background-color: rgba(255,255,255,1)
-}
-
-  mat-card {
-    min-width: 100%;
-    margin-bottom: 10px;
   }
 
   .flex {
