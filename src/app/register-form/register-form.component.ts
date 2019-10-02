@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthGenericService } from '../services/auth-generic.service';
+import { AuthGenericService } from '../shared/services/auth-generic.service';
 
 @Component({
   selector: 'app-register-form',

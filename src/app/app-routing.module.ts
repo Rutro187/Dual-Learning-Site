@@ -6,13 +6,15 @@ import { RegisterFormComponent } from './register-form/register-form.component';
 import { QuizFormComponent } from './quiz-form/quiz-form.component';
 import { QuizGuardComponent } from './quiz-guard/quiz-guard.component';
 import { DisplayQuizComponent } from './display-quiz/display-quiz.component';
-import { UserGuard } from './guards/user.guard';
-import { TeacherGuard } from './guards/teacher.guard';
+
 
 import { AdminComponent } from './admin/admin.component';
-import { AdminGuard } from './guards/admin.guard';
+
 import { MyQuizzesComponent } from './my-quizzes/my-quizzes.component';
 import { QuizResultsComponent } from './quiz-results/quiz-results.component';
+import { UserGuard } from './shared/guards/user.guard';
+import { TeacherGuard } from './shared/guards/teacher.guard';
+import { AdminGuard } from './shared/guards/admin.guard';
 
 const routes: Routes = [
   // { path: '', redirectTo: '/login', pathMatch: 'full' },

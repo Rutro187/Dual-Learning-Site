@@ -3,16 +3,14 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { map } from 'rxjs/operators';
-import { UserStoreService } from '../user-store.service';
-import { User } from '../interfaces/users';
+import { UserStoreService } from './user-store.service';
+import { User } from '../../interfaces/users';
 
 
 
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthGenericService {
   // userData: Observable<firebase.User>;
   userCollection: AngularFirestoreCollection<User>;

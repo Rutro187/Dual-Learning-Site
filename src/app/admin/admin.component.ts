@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { AuthGenericService } from '../services/auth-generic.service';
+import { AuthGenericService } from '../shared/services/auth-generic.service';
 import {MatTableDataSource} from '@angular/material/table';
-import {Users} from '../services/auth-generic.service';
 
 
 

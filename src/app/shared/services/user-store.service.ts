@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { User } from './Interfaces/users';
+import { User } from '../../Interfaces/users';
 import { map } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class UserStoreService {
 
   private readonly _user = new BehaviorSubject<User>({});

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { AuthGenericService } from '../services/auth-generic.service';
+import { AuthGenericService } from '../shared/services/auth-generic.service';
 
 @Component({
   selector: 'app-login',
