@@ -28,6 +28,7 @@ export class AuthGenericService {
 
 
   doLogin(email, password) {
+    console.log("I'm in auth-generic-service")
     return new Promise<any>((resolve, reject) => {
       this.angularFireAuth
         .auth
@@ -36,7 +37,7 @@ export class AuthGenericService {
           const token = this.getUserInfo();
           this.getUserbyID().subscribe(u =>{
             this.userStore.updateUser(u[0]);
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/dual-landing-page']);
           });
           resolve(token);
           if (res.user.emailVerified !== true) {

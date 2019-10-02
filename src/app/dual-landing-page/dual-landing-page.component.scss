@@ -1,0 +1,71 @@
+.background {
+  background-image: linear-gradient(#0e2340,  #EE7623);
+}
+
+.full-page {
+  height: 100vh;
+}
+
+mat-form-field{
+  margin-bottom: 10px;
+}
+mat-card{
+  min-width: 330px;
+  padding: 30px;
+  margin: 0 auto;
+  margin-top: 10%;
+  background-color: rgb(255,255,255,0.95);
+  box-shadow: none !important;
+}
+
+.center {
+  margin: auto;
+  text-align: center;
+}
+
+.spacing {
+  padding-bottom: 50px;
+}
+
+.subtitle {
+  text-align: center;
+}
+
+.form {
+  width: 100%;
+}
+
+.button {
+  margin: 1em;
+}
+
+.flex {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.left {
+  flex-basis: 50%;
+}
+
+.first-card {
+  background-color: rgba(0,0,0,0);
+  color: white;
+}
+
+.second-card {
+  height: 300px;
+}
+
+.padding {
+  margin: 20px;
+}
+@media (max-width: 768px) {
+  .left {
+    flex-basis: 100%;
+  }
+
+  .flex {
+    flex-flow: row wrap;
+  }
+}

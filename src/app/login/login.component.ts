@@ -17,10 +17,10 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthGenericService, private router: Router) { }
 
   tryLogin(){
+    console.log("in Login component")
     this.authService.doLogin(this.email, this.password)
     .then(res => {
       console.log(res);
-    
     }, err => {
       console.log(err);
       this.userMessage = "incorrect username or password";
