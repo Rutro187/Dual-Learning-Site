@@ -11,6 +11,7 @@ import { CommonModule } from './shared/common.module';
 import { SharedServicesModule } from './shared/shared-service.module';
 import { QuizAppModule } from './quiz-app/quiz-app.module';
 import { AdminComponent } from './admin/admin.component';
+import { LearningAppModule } from './learning-app/learning-app.module';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { AdminComponent } from './admin/admin.component';
     BrowserAnimationsModule,
     CommonModule,
     MaterialModule,
+    LearningAppModule,
     SharedServicesModule.forRoot()
   ],
   bootstrap: [AppComponent]

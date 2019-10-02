@@ -37,7 +37,13 @@
     "rxjs": "~6.5.2",
     "tslib": "^1.10.0",
     "typescript": "~3.4.5",
-    "zone.js": "~0.9.1"
+    "zone.js": "~0.9.1",
+    "@angular/fire": "^5.2.1",
+    "@bcodes/ngx-routerlink-delay": "^2.0.0",
+    "angular-star-rating": "^4.0.0-beta.3",
+    "css-star-rating": "^1.2.4",
+    "lodash": "^4.17.15",
+    "ng2-pdf-viewer": "^5.3.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.800.0",
