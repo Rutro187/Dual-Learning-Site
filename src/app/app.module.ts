@@ -5,6 +5,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { LoginComponent } from './login/login.component';
 import { RegisterFormComponent } from './register-form/register-form.component';
+import { DualLandingPageComponent } from './dual-landing-page/dual-landing-page';
 import { MaterialModule } from './shared/material.module';
 import { SharedModule } from './shared/shared.module';
 import { SharedServicesModule } from './shared/shared-service.module';
@@ -19,6 +20,7 @@ import { BrowserModule } from '@angular/platform-browser';
     AppComponent,
     LoginComponent,
     RegisterFormComponent,
+    DualLandingPageComponent,
     AdminComponent
   ],
   imports: [

@@ -1,50 +1,62 @@
 .background {
-  background-image: linear-gradient( #0e2340,  #EE7623);
-  display: grid;
-  grid-template-columns: 43% auto 43%;
+  background-image: linear-gradient(#0e2340,  #EE7623);
+}
+
+.full-page {
   height: 100vh;
 }
+
 mat-form-field{
   margin-bottom: 10px;
 }
 mat-card{
   min-width: 330px;
   padding: 30px;
-  margin-bottom: 10%;
-  // margin: 0 auto;
+  margin: 0 auto;
+  margin-top: 10%;
   background-color: rgb(255,255,255,0.95);
   box-shadow: none !important;
 }
-.transparent {
-  background-color: rgba(0,0,0,0);
-  color: white;
-}
+
 .center {
   margin: auto;
   text-align: center;
-  padding-bottom: 30px;
 }
+
+.spacing {
+  padding-bottom: 50px;
+}
+
 .subtitle {
   text-align: center;
 }
+
 .form {
   width: 100%;
 }
+
 .button {
   margin: 1em;
 }
+
+.flex {
+  display: flex;
+  flex-flow: column wrap;
+}
+
 .left {
-  grid-column-start: 1;
-  margin: auto;
+  flex-basis: 50%;
 }
-.center-img {
-  grid-column-start: 2;
-  margin: auto;
+
+.first-card {
+  background-color: rgba(0,0,0,0);
+  color: white;
 }
-.right {
-  grid-column-start: 3;
-  margin: auto;
+
+.second-card {
+  height: 300px;
 }
+
 .padding {
   margin: 20px;
 }
@@ -52,6 +64,7 @@ mat-card{
   .left {
     flex-basis: 100%;
   }
+
   .flex {
     flex-flow: row wrap;
   }

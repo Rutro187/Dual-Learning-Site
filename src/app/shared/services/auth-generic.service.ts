@@ -36,7 +36,7 @@ export class AuthGenericService {
           const token = this.getUserInfo();
           this.getUserbyID().subscribe(u =>{
             this.userStore.updateUser(u[0]);
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/dual-landing-page']);
           });
           resolve(token);
           if (res.user.emailVerified !== true) {
