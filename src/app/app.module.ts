@@ -12,6 +12,7 @@ import { QuizAppModule } from './quiz-app/quiz-app.module';
 import { AdminComponent } from './admin/admin.component';
 import { LearningContentAppModule } from './learning-content-app/learning-content-app.module';
 import { BrowserModule } from '@angular/platform-browser';
+import { AboutComponent } from './about/about.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { BrowserModule } from '@angular/platform-browser';
     AppComponent,
     LoginComponent,
     RegisterFormComponent,
-    AdminComponent
+    AdminComponent,
+    AboutComponent
   ],
   imports: [
     QuizAppModule,
