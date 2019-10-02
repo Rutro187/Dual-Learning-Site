@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../app/services/user-service';
 import { Router } from '@angular/router';
-import { NavbarService } from '../navbar.service';
 import { MatDialog } from '@angular/material/dialog';
-import { AuthService } from '../auth.service';
 import { AuthGenericService } from '../services/auth-generic.service';
 
 @Component({
@@ -17,7 +15,7 @@ export class LoginComponent implements OnInit {
   userId;
   error;
   userMessage = "enter your password"
-  constructor(private authService: AuthGenericService, private router: Router, public navbar: NavbarService) { }
+  constructor(private authService: AuthGenericService, private router: Router) { }
 
   tryLogin(){
     this.authService.doLogin(this.email, this.password)

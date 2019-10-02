@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NavbarService } from '../navbar.service';
 import { AuthGenericService } from '../services/auth-generic.service';
 
 @Component({
@@ -14,7 +13,7 @@ export class RegisterFormComponent implements OnInit {
   firstName = '';
   lastName = '';
 
-  constructor(private auth: AuthGenericService, public navbar: NavbarService) { }
+  constructor(private auth: AuthGenericService) { }
 
   signup() {
     let userName = this.firstName + " " + this.lastName;
@@ -22,7 +21,7 @@ export class RegisterFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.navbar.hide();
+    
   }
 
 }

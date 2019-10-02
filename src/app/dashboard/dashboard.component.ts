@@ -1,6 +1,5 @@
 import { AuthGenericService } from './../services/auth-generic.service';
 import { Component, OnInit } from '@angular/core';
-import { NavbarService } from '../navbar.service';
 import { QuizService } from '../services/quiz-service';
 
 @Component({
@@ -23,7 +22,7 @@ export class DashboardComponent implements OnInit {
   permission: string = '';
 
 
-  constructor(public navbar: NavbarService, private authService: AuthGenericService, private quizService: QuizService) { }
+  constructor(private authService: AuthGenericService, private quizService: QuizService) { }
 
   getQuizzes(creatorId) {
     console.log(this.quizzes);
