@@ -3,7 +3,6 @@ import { FormBuilder, Validators, FormControl, FormGroup, NgForm } from '@angula
 import { QuizService, Quiz, Questions } from '../services/quiz-service';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { UserService } from '../services/user-service';
 import { AuthGenericService } from '../services/auth-generic.service';
 
 // export class RadioNgModelExample {

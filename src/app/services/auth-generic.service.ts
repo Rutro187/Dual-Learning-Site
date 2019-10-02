@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { map } from 'rxjs/operators';
 import { UserStoreService } from '../user-store.service';
+import { User } from '../interfaces/users';
 
 
 
@@ -14,8 +15,8 @@ import { UserStoreService } from '../user-store.service';
 })
 export class AuthGenericService {
   // userData: Observable<firebase.User>;
-  userCollection: AngularFirestoreCollection<Users>;
-  userDoc: AngularFirestoreDocument<Users>;
+  userCollection: AngularFirestoreCollection<User>;
+  userDoc: AngularFirestoreDocument<User>;
   userAuth;
   constructor(private router: Router,
               private userStore: UserStoreService,
@@ -124,11 +125,3 @@ export class AuthGenericService {
   }))}
 
       }
-
-
-export interface Users {
-  uid?;
-  displayname?;
-  email?;
-  permission?;
-}

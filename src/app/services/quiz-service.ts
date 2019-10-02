@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { map } from 'rxjs/operators';
 
@@ -103,11 +101,4 @@ export interface Results {
   userId: string
   userName: string
   date: string
-}
-
-export interface User {
-  displayname: string
-  email: string
-  permission: string
-  uid: string
 }

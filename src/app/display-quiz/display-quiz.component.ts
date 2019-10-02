@@ -1,12 +1,12 @@
-import { QuizService, Quiz, Results, Questions, User } from '../services/quiz-service';
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { FormControl, FormGroup, ControlValueAccessor } from '@angular/forms';
-import { MatRadioChange, MatButton } from '@angular/material';
+import { QuizService, Quiz } from '../services/quiz-service';
+import { Component, OnInit} from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { MatButton } from '@angular/material';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { QuizGuardComponent } from '../quiz-guard/quiz-guard.component';
 import { AuthGenericService } from '../services/auth-generic.service';
-import { map } from 'rxjs/operators';
+import { User } from '../interfaces/users';
 
 @Component({
   selector: 'app-display-quiz',
