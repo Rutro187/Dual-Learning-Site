@@ -1,6 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { AuthGenericService } from '../../shared/services/auth-generic.service';
 import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
 
 
 
@@ -16,11 +18,16 @@ export interface Permission {
  styleUrls: ['./quiz-admin.component.scss']
 })
 export class QuizAdminComponent implements OnInit {
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+
+  displayedColumns: string[]= ['displayname', 'email', 'permission', 'editperm' ];
+  dataSource: MatTableDataSource<any>;
 
  constructor( private authGenServ: AuthGenericService) {
 
 }
- displayedColumns: string[]= ['displayname', 'email', 'permission', 'editperm' ];
+ 
 //  userCollection: AngularFirestoreCollection<Users>;
 
 
@@ -33,7 +40,7 @@ permissions: Permission[] = [
 
   
 allUsers;
-dataSource = new MatTableDataSource
+
 
 
 
@@ -45,10 +52,12 @@ changePermission(data, permission){
 }
 
 
-
 applyFilter(filterValue: string) {
- this.dataSource.filter = filterValue.trim().toLowerCase();
+ this.dataSource.filter = filterValue.trim().toLowerCase()
+ 
 }
+
+
 
 getAllUsers = () =>
 this.authGenServ
@@ -57,7 +66,8 @@ this.authGenServ
 
 
 
-ngOnInit() {this.getAllUsers()}
+ngOnInit() {this.getAllUsers(), this.dataSource.paginator = this.paginator, this.dataSource.sort = this.sort;
+}
 
 
 
