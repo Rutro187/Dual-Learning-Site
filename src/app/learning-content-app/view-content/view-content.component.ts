@@ -5,6 +5,7 @@ import { FirebaseService } from '../services/firebase.service';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { UserComment } from '../services/user-comment';
+import { DomSanitizer } from '@angular/platform-browser';
 import * as firebase from 'firebase';
 
 
@@ -33,7 +34,8 @@ export class ViewContentComponent implements OnInit {
     private route: ActivatedRoute,
     private db: AngularFirestore,
     private fb: FormBuilder,
-    private actr: ActivatedRoute
+    private actr: ActivatedRoute,
+    public sanitizer: DomSanitizer
   ) { }
 
   ngOnInit() {
