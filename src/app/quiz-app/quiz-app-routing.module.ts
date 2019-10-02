@@ -18,7 +18,6 @@ import { QuizAppComponent } from './quiz-app.component';
 const routes: Routes = [
 
   { path: 'quiz-app', children: [
-  { path: '', component: QuizAppComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [UserGuard] },
   { path: 'quiz-form', component: QuizFormComponent, canActivate: [TeacherGuard] },
   { path: 'quiz-guard', component: QuizGuardComponent, canActivate: [UserGuard]},
