@@ -1,0 +1,17 @@
+<div class="header">
+  <img class="headerLogo" src="./assets/images/learningapp.png" alt="">
+  <div class="content" >
+      <a class="navLink" [routerLink]="['/']"  routerLinkActive="active">Home</a>
+          <a class="navLink" [routerLink]="['/learning/content']" routerLinkActive="active">Learning Content</a>
+          
+          <a class="navLink" [routerLink]="[ '/learning/uploader' ]" routerLinkActive="active"
+                  *ngIf="(user$ | async).permission === 'admin' || (user$ | async).permission === 'teacher'">Upload</a>
+          <!-- <a class="navLink" [routerLink]="[ 'quiz/admin' ]" routerLinkActive="active"
+                  *ngIf="(user$ | async).permission === 'admin'">Admin</a> -->
+          <a class="navLink underline" *ngIf="(user$ | async).permission" (click)="signOut()">Sign Out</a>
+          
+
+
+  </div>
+
+</div>
