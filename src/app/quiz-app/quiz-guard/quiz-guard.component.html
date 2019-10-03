@@ -12,6 +12,7 @@
       <mat-form-field>
         <mat-label>Quiz Code</mat-label>
         <input matInput type="text" [(ngModel)]="token" name="token">
+        <mat-hint *ngIf="errorMessage" class="error">We didn't recognize this quizcode, please try again.</mat-hint>
       </mat-form-field>
     </div>
   </mat-card-content>

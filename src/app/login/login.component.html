@@ -37,7 +37,8 @@
           <mat-form-field>
             <mat-label>Password</mat-label>
             <input matInput placeholder="Password" name="password" [(ngModel)]="password" type="password">
-            <mat-hint>{{userMessage}}</mat-hint>
+            <mat-hint *ngIf="error === false">{{userMessage}}</mat-hint>
+            <mat-hint *ngIf="error === true" class="redtext">{{userMessage}}</mat-hint>
           </mat-form-field>
         </form>
       </mat-card-content>

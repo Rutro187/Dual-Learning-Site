@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   email: string = "";
   password: string = "";
   userId;
-  error;
+  error: boolean = false;
   userMessage = "enter your password"
   constructor(private authService: AuthGenericService, private router: Router) { }
 ​
@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
     }, err => {
       console.log(err);
       this.userMessage = err;
+      this.error = true;
     })
   }
 ​
