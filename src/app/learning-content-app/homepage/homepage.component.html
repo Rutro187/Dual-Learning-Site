@@ -4,8 +4,8 @@
 <div class="hero">
   <div class="buttonArea d-flex flex-column align-items-center justify-content-center">
     <h1 class="text-light heroTitle text-center">A learning content platform built by coding students for coding students</h1>
-    <div>
-      <a href='/login' class="btn btn-light btn-lg m-3">Login</a>
+    <div *ngIf="(user$ | async)">
+       <a href='/login' class="btn btn-light btn-lg m-3">Login</a>
       <a href='/registration' class="btn btn-light btn-lg m-3">Register</a>
     </div>
   </div>

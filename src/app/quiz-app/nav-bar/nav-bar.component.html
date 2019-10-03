@@ -1,6 +1,6 @@
 <div class="header">
     <img class="headerLogo" src="./assets/images/quizWhipSemiBold300.png" alt="">
-    <div class="content" *ngIf="(user$ | async).permission">
+    <div class="content" *ngIf="(user$ | async)">
             <a class="navLink" [routerLink]="[ '/quiz/dashboard' ]" routerLinkActive="active">Dashboard</a>
             <a class="navLink underline" (click)="takeQuiz()">Take Quiz</a>
             <a class="navLink" [routerLink]="[ '/quiz/quiz-form' ]" routerLinkActive="active"
