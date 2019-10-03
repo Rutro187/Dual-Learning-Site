@@ -1,52 +1,86 @@
 <quiz-app-nav-bar></quiz-app-nav-bar>
 <div class="background full-page">
-
-  <h2>User Panel</h2>
-  <div class="main-table table-responsive">
-    <table class="table table-dark">
-      <thead>
-        <tr>
-          <th scope="col">Score</th>
-          <th scope="col">Instructor</th>
-          <th scope="col">Quiz</th>
-          <th scope="col">Quiz ID</th>
-          <th scope="col">Date</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let quiz of userQuizes">
-          <td scope="row">{{quiz.score}}%</td>
-          <td>{{quiz.creator}}</td>
-          <td>{{quiz.title}}</td>
-          <td>{{quiz.id}}</td>
-          <td>{{quiz.date | formatDate}}</td>
-        </tr>
-      </tbody>
+  <div class="span"></div>
+  <mat-card class="matCard" >
+    <mat-card-header class="center">
+      <mat-card-title class="fontSize">Taken Quizzes</mat-card-title>
+    </mat-card-header>
+    
+    <mat-form-field>
+      <input matInput (keyup)="applyQuizzesFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+    
+    <table class = "mat-elevation-z8" mat-table [dataSource]="takenQuizzesData" matSort>
+      
+      <!-- The let user is just a variable for the data pulled from the datasource (could be let anything.displayname and work) -->
+     
+      <ng-container matColumnDef="score">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Score </th>
+        <td mat-cell *matCellDef="let quiz"> {{quiz.score}}% </td>
+      </ng-container>
+     
+      <ng-container matColumnDef="instructor">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Instructor </th>
+        <td mat-cell *matCellDef="let quiz"> {{quiz.creator}} </td>
+      </ng-container>
+     
+      <ng-container matColumnDef="quizTitle">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Quiz </th>
+        <td mat-cell *matCellDef="let quiz"> {{quiz.title}} </td>
+      </ng-container>
+      <ng-container matColumnDef="quizId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Quiz ID </th>
+        <td mat-cell *matCellDef="let quiz"> {{quiz.id}} </td>
+      </ng-container>
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+        <td mat-cell *matCellDef="let quiz"> {{quiz.date | formatDate}} </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="quizsTakenColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: quizsTakenColumns;"></tr>
     </table>
-  </div>
-
-  <h2 *ngIf="(user$ | async).permission === 'admin' || (user$ | async).permission === 'teacher'">Your Quizzes</h2>
-  <div class="main-table table-responsive" *ngIf="(user$ | async).permission === 'admin' || (user$ | async).permission === 'teacher'">
-      <table class="table table-dark">
-        <thead>
-          <tr>
-            <th scope="col">Score</th>
-            <th scope="col">Student</th>
-            <th scope="col">Quiz</th>
-            <th scope="col">Quiz ID</th>
-            <th scope="col">Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let quiz of adminScores">
-            <td scope="row">{{quiz.score}}%</td>
-            <td>{{quiz.username}}</td>
-            <td>{{quiz.title}}</td>
-            <td>{{quiz.id}}</td>
-            <td>{{quiz.date | formatDate}}</td>
-          </tr>
-        </tbody>
+    <mat-paginator [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>
+  </mat-card>
+  
+  <div class="span"></div>
+  <mat-card class="matCard" *ngIf="(user$ | async).permission === 'admin' || (user$ | async) === 'teacher'">
+      <mat-card-header class="center">
+        <mat-card-title class="fontSize">Created Quizzes</mat-card-title>
+      </mat-card-header>
+      
+      <mat-form-field>
+        <input matInput (keyup)="applyTeacherFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+      
+      <table class = "mat-elevation-z8" mat-table [dataSource]="teacherQuizzesData" matSort>
+        
+        <!-- The let user is just a variable for the data pulled from the datasource (could be let anything.displayname and work) -->
+       
+        <ng-container matColumnDef="score">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Score </th>
+          <td mat-cell *matCellDef="let created"> {{created.score}}% </td>
+        </ng-container>
+       
+        <ng-container matColumnDef="student">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Student </th>
+          <td mat-cell *matCellDef="let created"> {{created.username}} </td>
+        </ng-container>
+       
+        <ng-container matColumnDef="quizTitle">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Quiz Title </th>
+          <td mat-cell *matCellDef="let created"> {{created.title}} </td>
+        </ng-container>
+        <ng-container matColumnDef="quizId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Quiz ID </th>
+          <td mat-cell *matCellDef="let created"> {{created.id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+          <td mat-cell *matCellDef="let created"> {{created.date | formatDate}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="quizsCreatedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: quizsCreatedColumns;"></tr>
       </table>
-    </div>
-
+      <mat-paginator [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>
+    </mat-card>
 </div>
