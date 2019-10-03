@@ -47,9 +47,9 @@ export class PublicContentComponent implements OnInit {
 
 
   viewDetails(item: any){
-    console.log('View details was clicked')
-    console.log(item.payload.doc.id)
-    let itemId = item.payload.doc.id
+    // console.log('View details was clicked')
+    // console.log(item.payload.doc.id)
+    let itemId = item.payload.doc.id;
     // console.log(itemId);
     this.firebaseService.getOneFile(itemId);
     // window.open(item.payload.doc.data().downloadURL, '_blank');
