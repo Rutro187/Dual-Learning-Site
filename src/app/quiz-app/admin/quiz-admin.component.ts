@@ -24,58 +24,31 @@ export class QuizAdminComponent implements OnInit {
   displayedColumns: string[] = ['displayname', 'email', 'permission', 'editperm' ];
   dataSource: MatTableDataSource<any>;
 
- constructor( private authGenServ: AuthGenericService) {
-
-}
-
-
-
-
-
-permissions: Permission[] = [
+ constructor( private authGenServ: AuthGenericService) {}
+  permissions: Permission[] = [
     {viewValue: 'user'},
     {viewValue: 'teacher'},
     {viewValue: 'admin'}
   ];
+  // pulling the data from  the row attribute from material table
+  changePermission(data, permission) {
+    console.log(data, permission);
+    this.authGenServ.updateUserPerm(data, permission);
+  }
 
 
-
-
-
-
-
-
-// pulling the data from  the row attribute from material table
-changePermission(data, permission) {
-  console.log(data, permission);
-  this.authGenServ.updateUserPerm(data, permission);
-}
-
-
-applyFilter(filterValue: string) {
- this.dataSource.filter = filterValue.trim().toLowerCase();
-
-
-}
-
-
-
-getAllUsers = () =>
-this.authGenServ
-.getAllUsers()
-.subscribe(res => {
-                   this.dataSource = new MatTableDataSource(res);
-                   this.dataSource.sort = this.sort;
-                   this.dataSource.paginator = this.paginator;
-                   console.log(res);
-
-})
-
-
-
-ngOnInit() {this.getAllUsers(); }
-
-
-
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  getAllUsers = () =>
+  this.authGenServ.getAllUsers().subscribe(res => {
+    this.dataSource = new MatTableDataSource(res);
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+    console.log(res);
+  })
+  ngOnInit() {
+    this.getAllUsers();
+  }
 }
 
