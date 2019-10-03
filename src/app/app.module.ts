@@ -22,7 +22,7 @@ import { BrowserModule } from '@angular/platform-browser';
     LoginComponent,
     RegisterFormComponent,
     DualLandingPageComponent,
-    AdminComponent,
+    AdminComponent
   ],
   imports: [
     QuizAppModule,

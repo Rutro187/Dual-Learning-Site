@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
+
 import { AngularFireStorageModule } from '@angular/fire/storage';
 // import { RouterLinkDelayModule } from '@bcodes/ngx-routerlink-delay';
 import { HomepageComponent } from './homepage/homepage.component';
@@ -27,7 +27,7 @@ import { LearningComponent } from './learning-app.component';
 import { SharedServicesModule } from '../shared/shared-service.module';
 import { CommonModule } from '@angular/common';
 import { AboutComponent } from './about/about.component';
-
+import { LcNavBarComponent } from './lc-nav-bar/lc-nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -45,12 +45,14 @@ import { AboutComponent } from './about/about.component';
     TestimonialComponent,
     TestimonialsComponent,
     AboutComponent, 
+    LcNavBarComponent
+
   ],
   imports: [
     SharedModule,
     LearningAppRoutingModule,
     StarRatingModule.forRoot(),
-    AngularFireDatabaseModule,
+  
     AngularFireStorageModule,
     SharedServicesModule,
     PdfViewerModule,
@@ -71,7 +73,8 @@ import { AboutComponent } from './about/about.component';
     UploaderComponent,
     TestimonialComponent,
     TestimonialsComponent,
-    AboutComponent
+    AboutComponent,
+    LcNavBarComponent
   ]
   
 })

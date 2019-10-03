@@ -21,7 +21,7 @@ export class QuizAdminComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  displayedColumns: string[] = ['displayname', 'email', 'permission', 'editperm' ];
+  displayedColumns: string[] = ['displayname', 'email', 'editperm' ];
   dataSource: MatTableDataSource<any>;
 
  constructor( private authGenServ: AuthGenericService) {
