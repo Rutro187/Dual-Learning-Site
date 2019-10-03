@@ -24,7 +24,7 @@
     </div>
 </div>
 
-<div *ngIf="(user$ | async).permission !== null" class="w-100 center">
+<div *ngIf="(user$ | async).permission === 'admin' || (user$ | async).permission === 'teacher' || (user$ | async).permission === 'user'" class="w-100 center">
     <form class="addUserComment container center mt-3 mb-5">
         <div class="inputField">
             <input class="p-1" placeholder="Add a comment" [(ngModel)]="newComment.userInput" name="userInput">
