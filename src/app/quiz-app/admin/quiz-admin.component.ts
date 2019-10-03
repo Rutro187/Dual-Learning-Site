@@ -28,7 +28,7 @@ export class QuizAdminComponent implements OnInit {
 
 }
 
-//  userCollection: AngularFirestoreCollection<Users>;
+
 
 
 
@@ -39,7 +39,7 @@ permissions: Permission[] = [
   ];
 
 
-allUsers;
+
 
 
 
@@ -53,10 +53,8 @@ changePermission(data, permission) {
 
 
 applyFilter(filterValue: string) {
-//  this.dataSource.filter = filterValue.trim().toLowerCase();
-filterValue = filterValue.trim();
-filterValue = filterValue.toLowerCase();
-this.dataSource.filter = filterValue;
+ this.dataSource.filter = filterValue.trim().toLowerCase();
+
 
 }
 
@@ -65,7 +63,7 @@ this.dataSource.filter = filterValue;
 getAllUsers = () =>
 this.authGenServ
 .getAllUsers()
-.subscribe(res => {(this.allUsers = res);
+.subscribe(res => {
                    this.dataSource = new MatTableDataSource(res);
                    this.dataSource.sort = this.sort;
                    this.dataSource.paginator = this.paginator;
