@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { allFiles } from '../models/file.model'
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 
 @Injectable({

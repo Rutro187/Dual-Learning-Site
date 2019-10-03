@@ -78,7 +78,7 @@ export class UploaderComponent {
       res => {
         console.log(res);
         this.resetFields();
-        this.router.navigate(['/content']);
+        this.router.navigate(['/learning/content']);
     console.log('onSubmit happened');
       }).catch(err=> console.log(err)).finally(() => console.log('done'))
 
