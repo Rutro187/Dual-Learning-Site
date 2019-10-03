@@ -19,7 +19,7 @@ export class AuthGenericService {
   constructor(private router: Router,
               private userStore: UserStoreService,
               private angularFireAuth: AngularFireAuth,
-              private afs: AngularFirestore, ) 
+              private afs: AngularFirestore, )
   {
      this.userCollection = this.afs.collection('Users');
   }
@@ -34,7 +34,7 @@ export class AuthGenericService {
         .signInWithEmailAndPassword(email, password)
         .then(res => {
           const token = this.getUserInfo();
-          this.getUserbyID().subscribe(u =>{
+          this.getUserbyID().subscribe(u => {
             this.userStore.updateUser(u[0]);
             this.router.navigate(['/dual-landing-page']);
           });
@@ -113,9 +113,9 @@ export class AuthGenericService {
   }
   // Update a users permissions level in the firestore User Collection
   updateUserPerm(data, permission) {
-    return this.afs.collection("Users")
+    return this.afs.collection('Users')
     .doc(data.id)
-    .set({permission: permission}, {merge: true });
+    .set({permission}, {merge: true });
   }
 
   // Get All users and pipe data changes so Material Design tables display correctly //
@@ -127,6 +127,6 @@ export class AuthGenericService {
         return {id, ...data};
       });
 
-  }))}
+  }));}
 
       }
