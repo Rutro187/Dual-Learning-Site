@@ -14,7 +14,7 @@ export class TeacherGuard implements CanActivate {
     state: RouterStateSnapshot):
     Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       return this.userStore.user$.pipe(map( user => {
-        if (user && (user.permission === 'owner' || user.permission === 'admin')) {
+        if (user && (user.permission === 'teacher' || user.permission === 'admin')) {
           return true;
           }
         this.router.navigate(['/login']);
