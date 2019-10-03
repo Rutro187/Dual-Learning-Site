@@ -12,6 +12,7 @@ import { QuizAppModule } from './quiz-app/quiz-app.module';
 import { AdminComponent } from './admin/admin.component';
 import { LearningContentAppModule } from './learning-content-app/learning-content-app.module';
 import { BrowserModule } from '@angular/platform-browser';
+import { ClipboardModule } from 'ngx-clipboard';
 
 
 
@@ -24,6 +25,7 @@ import { BrowserModule } from '@angular/platform-browser';
     AdminComponent
   ],
   imports: [
+    ClipboardModule,
     QuizAppModule,
     BrowserModule,
     AppRoutingModule,

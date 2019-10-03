@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-
+import { ClipboardModule } from 'ngx-clipboard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -18,7 +18,8 @@ import { FormatDatePipe } from './pipes/format-date.pipe';
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ClipboardModule
   ],
   exports: [
     FormsModule,
@@ -26,7 +27,8 @@ import { FormatDatePipe } from './pipes/format-date.pipe';
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     FormsModule,
     ReactiveFormsModule,
-    FormatDatePipe
+    FormatDatePipe,
+    ClipboardModule
   ]
 })
 export class SharedModule { }

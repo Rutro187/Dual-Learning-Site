@@ -29,7 +29,10 @@
       <div class="tokenMessage" id="thankYou">
         <mat-card-subtitle>Your quiz has been submitted!</mat-card-subtitle>
         <mat-card-content>The token below can be shared to access the quiz: </mat-card-content>
-        <mat-card-content class="quizID">{{quizID}}</mat-card-content>
+        <mat-card-title class="titleFont" class="quizID">{{quizID}} 
+          <button mat-raised-button ngxClipboard [cbContent]="quizID" color="accent">Copy</button>
+        </mat-card-title >
+        
       </div>
     </mat-card>
   
