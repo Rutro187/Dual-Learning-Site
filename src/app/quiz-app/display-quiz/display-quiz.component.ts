@@ -96,7 +96,8 @@ export class DisplayQuizComponent implements OnInit {
           email: this.auth.userAuth.email,
           username: this.username,
           title: this.quiz.title,
-          creator: this.quiz.creator
+          creator: this.quiz.creator,
+          creatorId: this.quiz.creatorId
         }
       this.quizService.postUserAnswers(data);
     })

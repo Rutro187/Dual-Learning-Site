@@ -93,7 +93,8 @@ export class QuizFormComponent implements OnInit {
         title: this.quizTitle,
         description: this.desc,
         creator: this.creator,
-        questions: this.questions
+        questions: this.questions,
+        creatorId: this.authService.userAuth.uid
       }
       this.quizService.postQuiz(quiz)
       .then(res => { 

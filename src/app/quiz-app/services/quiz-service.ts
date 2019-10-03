@@ -24,7 +24,7 @@ export class QuizService {
   }
 
   getResultsByAdmin(id) {
-    return this.afs.collection('results', ref => ref.where('creator', '==', id)).snapshotChanges().pipe(map(actions => {
+    return this.afs.collection('results', ref => ref.where('creatorId', '==', id)).snapshotChanges().pipe(map(actions => {
       return actions.map(x => {
         const data = x.payload.doc.data() as Quiz;
         const id = x.payload.doc.id;
@@ -85,6 +85,7 @@ export interface Quiz {
   description?: string
   questions?: Array<Questions>
   creator?: string
+  creatorId?: string
 }
 
 export interface Questions {
