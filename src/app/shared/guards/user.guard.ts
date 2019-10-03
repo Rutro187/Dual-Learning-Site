@@ -14,6 +14,7 @@ export class UserGuard implements CanActivate {
     state: RouterStateSnapshot):
   Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.userStore.user$.pipe(map( user => {
+      console.log(user);
       if (user && (user.permission === 'teacher' || user.permission === 'admin' || user.permission === 'user')) {
         return true;
       }

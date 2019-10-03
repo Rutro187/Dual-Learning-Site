@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, Params, ActivatedRoute, ParamMap } from '@angular/router';
 import { FirebaseService } from '../services/firebase.service';
 import { switchMap } from 'rxjs/operators';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 
 @Component({
@@ -47,9 +47,9 @@ export class PublicContentComponent implements OnInit {
 
 
   viewDetails(item: any){
-    console.log('was clicked')
+    // console.log('View details was clicked')
     // console.log(item.payload.doc.id)
-    let itemId = item.payload.doc.id
+    let itemId = item.payload.doc.id;
     // console.log(itemId);
     this.firebaseService.getOneFile(itemId);
     // window.open(item.payload.doc.data().downloadURL, '_blank');

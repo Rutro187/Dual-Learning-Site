@@ -8,7 +8,6 @@ import { HeaderComponent } from './header/header.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { QuizResultsComponent } from './quiz-results/quiz-results.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { QuizAdminComponent } from './admin/quiz-admin.component';
 import { MyQuizzesComponent } from './my-quizzes/my-quizzes.component';
 import { MaterialModule } from '../shared/material.module';
 import { SharedModule } from '../shared/shared.module';
@@ -26,7 +25,6 @@ import { QuizAppRoutingModule } from './quiz-app-routing.module';
     QuizResultsComponent,
     NavBarComponent,
     QuizGuardComponent,
-    QuizAdminComponent,
     MyQuizzesComponent
   ],
   imports: [
@@ -46,7 +44,6 @@ import { QuizAppRoutingModule } from './quiz-app-routing.module';
     QuizResultsComponent,
     NavBarComponent,
     QuizGuardComponent,
-    QuizAdminComponent,
     MyQuizzesComponent
   ]
 })

@@ -34,17 +34,17 @@ export class AuthGenericService {
         .signInWithEmailAndPassword(email, password)
         .then(res => {
           const token = this.getUserInfo();
-          this.getUserbyID().subscribe(u => {
+          this.getUserbyID().subscribe(u =>{
+            if (res.user.emailVerified !== true) {
+              this.sendVerificationMail();
+              reject('Please validate your email address. Kindly check your inbox.');
+            }
             this.userStore.updateUser(u[0]);
-            this.router.navigate(['/dual-landing-page']);
+            resolve(token);
+           
           });
-          resolve(token);
-          if (res.user.emailVerified !== true) {
-            this.sendVerificationMail();
-            window.alert('Please validate your email address. Kindly check your inbox.');
-            this.router.navigate(['/login']);
-          }
-        }, err => reject(err));
+        
+        }, err => reject("incorrect username or password"));
     });
   }
 
@@ -60,12 +60,11 @@ export class AuthGenericService {
       .then(res => {
         const user = this.angularFireAuth.auth.currentUser;
         this.addGeneralUserInfo(user, username);
-        console.log('Successfully signed up!');
+        this.sendVerificationMail();
         window.alert('Successfully signed up! Please validate your email address. Kindly check your inbox.');
         this.router.navigate(['/login']);
       })
       .catch(error => {
-        console.log('Something is wrong:', error.message);
         window.alert(error.message);
       });
   }
@@ -103,10 +102,9 @@ export class AuthGenericService {
     this.angularFireAuth
       .auth
       .signOut().then(res => {
-        console.log("sign out succesful")
+        this.userStore.updateUser({uid: null});
         this.router.navigate([`/login`]);
       }).catch(error => {
-        console.log(error)
       });
 
 

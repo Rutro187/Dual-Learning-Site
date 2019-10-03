@@ -19,12 +19,11 @@ export class LoginComponent implements OnInit {
   
   tryLogin(){
     this.authService.doLogin(this.email, this.password)
-    .then(res => {
-      console.log('login sucessful, navigate to landing');
+    .then(res => {   
+      this.router.navigate(['/dual-landing-page']);   
     }, err => {
       console.log(err);
-      this.userMessage = "incorrect username or password";
-      this.router.navigate(['/login']);
+      this.userMessage = err;
     })
   }
 ​
