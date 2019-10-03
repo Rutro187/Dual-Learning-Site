@@ -8,8 +8,10 @@
                   *ngIf="(user$ | async).permission === 'admin' || (user$ | async).permission === 'teacher'">Upload</a>
           <!-- <a class="navLink" [routerLink]="[ 'quiz/admin' ]" routerLinkActive="active"
                   *ngIf="(user$ | async).permission === 'admin'">Admin</a> -->
-          <a class="navLink underline" *ngIf="(user$ | async).permission" (click)="signOut()">Sign Out</a>
           
+<a class="navLink" [routerLink]="[ '/admin' ]" routerLinkActive="active" *ngIf="(user$ | async).permission === 'admin'">Admin</a>        
+<a class="navLink" [routerLink]="[ '/quiz/dashboard' ]">To Quizwhip</a>
+<a class="navLink" *ngIf="(user$ | async).permission" (click)="signOut()">Sign Out</a>
 
 
   </div>

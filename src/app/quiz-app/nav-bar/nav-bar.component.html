@@ -7,7 +7,9 @@
                     *ngIf="(user$ | async).permission === 'admin' || (user$ | async).permission === 'teacher'">Create Quiz</a>
             <a class="navLink" [routerLink]="[ '/admin' ]" routerLinkActive="active"
                     *ngIf="(user$ | async).permission === 'admin'">Admin</a>
-            <a class="navLink underline" (click)="signOut()">Sign Out</a>
+                    <a class="navLink" [routerLink]="['/learning/homepage']">To Learning Content</a>
+                    <a class="navLink underline" (click)="signOut()">Sign Out</a>
+            
             
 
 
