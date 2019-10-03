@@ -1,27 +1,17 @@
 <app-lc-nav-bar></app-lc-nav-bar>
 
-<!-- Hero image with login buttons -->
-<div class="hero">
-  <div class="buttonArea d-flex flex-column align-items-center justify-content-center">
-    <h1 class="text-light heroTitle text-center">A learning content platform built by coding students for coding students</h1>
-    <div>
-      <a href='/login' class="btn btn-light btn-lg m-3">Login</a>
-      <a href='/registration' class="btn btn-light btn-lg m-3">Register</a>
+
+<div class="background">
+    <!-- Hero image with login buttons -->
+    <div class="hero">
+      <div class="buttonArea d-flex flex-column align-items-center justify-content-center">
+        <h1 class="text-light heroTitle text-center">A learning content platform built by coding students for coding students</h1>
+        <div>
+          <a *ngIf="user$" href='/login' class="btn btn-light btn-lg m-3">Login or Register</a>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-
-<!-- product description -->
-<div class="productPreview flex-wrap d-flex flex-row align-items-center justify-content-center p-5">
-  <img id="productShot" class="shadow mr-4 mb-3" src="https://firebasestorage.googleapis.com/v0/b/techwarriors-1c02e.appspot.com/o/Website%20assets%2FprojectPreview.png?alt=media&token=c7493819-3f04-4161-bd47-a360d0c7cb6e" alt="">
-  <div>
-    <h3 class="orange">Collaborating has never been easier</h3>
-    <ul>
-      <li>Share files and videos with classmates</li>
-      <li>Comment on content and add your own notes</li>
-      <li>Find learning content by topics</li>
-      <li>Available exclusively for Midland University students</li>
-    </ul>
-  </div>
-</div>
-
+    
+    <!-- About section -->
+    </div>
+    

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthGenericService } from 'src/app/shared/services/auth-generic.service';
+import { UserStoreService } from 'src/app/shared/services/user-store.service';
 
 @Component({
   selector: 'app-homepage',
@@ -7,8 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomepageComponent implements OnInit {
 
-  constructor() { }
+  user$;
+
+  constructor(private authGenericService: AuthGenericService, public userStore: UserStoreService) { }
 
   ngOnInit() {
+    this.user$ = this.userStore.user$;
   }
 }

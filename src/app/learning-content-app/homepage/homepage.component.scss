@@ -1,18 +1,24 @@
-.hero{
+.background {
+    background-image: linear-gradient( #EE7623, #0e2340);
+    min-height: 100vh;
+    // background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 5vh;
+  }
+
+.hero {
+    margin-left: calc(50% - 40vw);
     height: 400px;
+    max-width: 80vw;
     overflow: hidden;
     background-color: #0e2340;
     background-image:  linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://firebasestorage.googleapis.com/v0/b/techwarriors-1c02e.appspot.com/o/Website%20assets%2FMUCodeAcademy-6765.jpg?alt=media&token=cd5cf8ac-bb35-4e70-b2f1-636e0b86c9f8');
     background-size: cover;
     background-position: center;
-}
-
-.orange{
-    color: #ee7623;
-}
-
-.darkblue{
-    color: #0e2340;
+    box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);
+    color: white;
 }
 
 .heroTitle{
@@ -26,16 +32,12 @@
 
 
 
-.aboutContent{
-    max-width: 700px;
-}
+@media screen and (max-width: 800px) {
+    .shareIcon {
+      display: none;
+    }
 
-#productShot{
-    max-width: 500px;
-}
-
-.productPreview{
-    background-color: white;
-    min-height: 600px;
-}
-
+    .heroTitle {
+        font-size: 2em;
+    }
+  }

@@ -31,25 +31,26 @@
   
   .header{
   height: 75px;
-  background-color: #0e2340;
+  background-color: #EE7623;
   display: flex;
   }
   
   .headerLogo{
-  height: 60px;
+  height: 75px;
   margin-left: 30px;
-  margin-top: 15px;
+  // margin-top: 15px;
   }
   
-  .navLink{margin-top: 25px;
-  margin-left: 25px;
-  text-align: right;
-  align-items: center
+  .navLink {
+    margin-top: 25px;
+    margin-left: 25px;
+    text-align: right;
   }
   
   .content{
   display: flex;
   }
+
   .nameTitle{
   margin-left: 20px;
   font-size: 3vw;
