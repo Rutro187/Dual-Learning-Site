@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 // import { RouterLinkDelayModule } from '@bcodes/ngx-routerlink-delay';
 import { HomepageComponent } from './homepage/homepage.component';
-import { LearningHeaderComponent } from './header/header.component';
 import { PublicContentComponent } from './public-content/public-content.component';
 import { PublicCommentsComponent } from './public-comments/public-comments.component';
 import { PrivateNotesComponent } from './private-notes/private-notes.component';
@@ -33,7 +32,6 @@ import { LcNavBarComponent } from './lc-nav-bar/lc-nav-bar.component';
   declarations: [
     LearningComponent,
     HomepageComponent,
-    LearningHeaderComponent,
     PublicContentComponent,
     PublicCommentsComponent,
     PrivateNotesComponent,
@@ -62,7 +60,6 @@ import { LcNavBarComponent } from './lc-nav-bar/lc-nav-bar.component';
   exports:[
     LearningComponent,
     HomepageComponent,
-    LearningHeaderComponent,
     PublicContentComponent,
     PublicCommentsComponent,
     PrivateNotesComponent,
