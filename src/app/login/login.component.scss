@@ -66,11 +66,22 @@ mat-card{
 }
 
 @media (max-width: 768px) {
-  .left {
-    flex-basis: 100%;
+  .background {
+    grid-template-columns: auto;
   }
 
-  .flex {
-    flex-flow: row wrap;
+  .left {
+    grid-column-start: 1;
+    margin: auto;
   }
+
+  .right {
+    grid-column-start: 1;
+    margin: auto;
+  }
+
+  .center-img {
+    visibility: hidden;
+  }
+
 }
