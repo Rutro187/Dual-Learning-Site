@@ -4,7 +4,7 @@
             <a class="navLink" [routerLink]="[ 'quiz/dashboard' ]" routerLinkActive="active">Dashboard</a>
             <a class="navLink underline" (click)="takeQuiz()">Take Quiz</a>
             <a class="navLink" [routerLink]="[ 'quiz/quiz-form' ]" routerLinkActive="active"
-                    *ngIf="(user$ | async).permission === 'admin' || (user$ | async) === 'teacher'">Create Quiz</a>
+                    *ngIf="(user$ | async).permission === 'admin' || (user$ | async).permission === 'teacher'">Create Quiz</a>
             <a class="navLink" [routerLink]="[ 'quiz/admin' ]" routerLinkActive="active"
                     *ngIf="(user$ | async).permission === 'admin'">Admin</a>
             <a class="navLink underline" (click)="signOut()">Sign Out</a>
