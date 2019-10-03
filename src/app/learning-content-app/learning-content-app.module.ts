@@ -26,6 +26,7 @@ import { SharedModule } from '../shared/shared.module';
 import { LearningComponent } from './learning-app.component';
 import { SharedServicesModule } from '../shared/shared-service.module';
 import { CommonModule } from '@angular/common';
+import { AboutComponent } from './about/about.component';
 import { LcNavBarComponent } from './lc-nav-bar/lc-nav-bar.component';
 
 @NgModule({
@@ -43,7 +44,9 @@ import { LcNavBarComponent } from './lc-nav-bar/lc-nav-bar.component';
     UploaderComponent,
     TestimonialComponent,
     TestimonialsComponent,
+    AboutComponent, 
     LcNavBarComponent
+
   ],
   imports: [
     SharedModule,
@@ -70,6 +73,7 @@ import { LcNavBarComponent } from './lc-nav-bar/lc-nav-bar.component';
     UploaderComponent,
     TestimonialComponent,
     TestimonialsComponent,
+    AboutComponent,
     LcNavBarComponent
   ]
   

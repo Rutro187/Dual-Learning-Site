@@ -10,6 +10,7 @@ import { TestimonialComponent } from './testimonial/testimonial.component';
 import { PublicContentComponent } from './public-content/public-content.component';
 import { ViewContentComponent } from './view-content/view-content.component';
 import { LearningComponent } from './learning-app.component';
+import { AboutComponent} from './about/about.component';
 
 
 const routes: Routes = [
@@ -21,7 +22,8 @@ const routes: Routes = [
   { path: 'content', component: PublicContentComponent},
   // { path: '**', redirectTo: '/homepage' },
   { path: 'user', component: PublicContentComponent},
-  { path: 'details/:id', component: ViewContentComponent }
+  { path: 'details/:id', component: ViewContentComponent },
+  {path: 'about', component: AboutComponent}
   ]}];
 
 @NgModule({
