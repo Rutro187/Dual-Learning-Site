@@ -102,7 +102,14 @@ export class AuthGenericService {
   signout() {
     this.angularFireAuth
       .auth
-      .signOut();
+      .signOut().then(res => {
+        console.log("sign out succesful")
+        this.router.navigate([`/login`]);
+      }).catch(error => {
+        console.log(error)
+      });
+
+
   }
   // Update a users permissions level in the firestore User Collection
   updateUserPerm(data, permission) {

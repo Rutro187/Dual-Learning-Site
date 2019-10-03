@@ -1,6 +1,7 @@
 .header{
   background-color: #0e2340;
-  padding: 50px 10px 50px 10px;
+  padding: 0px 10px 0px 10px;
+
 }
 
 .center {
@@ -40,13 +41,13 @@ margin-left: 30px;
 }
 
 .navLink{
-padding: 20px;
+margin: 20px;
 text-align: right;
+align-items: center
 }
 
 .content{
-align-items: center;
-margin-top: 40px;
+display: flex;
 }
 .nameTitle{
 margin-left: 20px;

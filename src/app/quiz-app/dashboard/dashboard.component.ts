@@ -1,6 +1,8 @@
 import { AuthGenericService } from '../../shared/services/auth-generic.service';
 import { Component, OnInit } from '@angular/core';
 import { QuizService } from '../services/quiz-service';
+import { UserStoreService } from '../../shared/services/user-store.service';
+import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,10 +21,10 @@ export class DashboardComponent implements OnInit {
 
   userQuizes: Object[] = [];
   adminScores: Object[] = [];
-  permission: string = '';
+  user$
 
 
-  constructor(private authService: AuthGenericService, private quizService: QuizService) { }
+  constructor(private authService: AuthGenericService, private quizService: QuizService, public userStore: UserStoreService) { }
 
   getQuizzes(creatorId) {
     console.log(this.quizzes);
@@ -43,8 +45,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.permission = this.authService.userAuth.permission;
-    console.log(this.permission);
+    this.user$ = this.userStore.user$;
     this.getScores();
     this.getAdminScores();
   }

@@ -81,7 +81,7 @@ export class QuizFormComponent implements OnInit {
     this.questions.forEach(question => {
       if (question["type"] === "trueFalse"){
         question["answers"][0] = "true";
-        question["asnwers"][1] = "false";
+        question["answers"][1] = "false";
       }
     });
   }

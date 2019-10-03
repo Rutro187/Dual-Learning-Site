@@ -29,7 +29,7 @@ export class QuizGuardComponent implements OnInit {
       this.quizService.getQuizByToken(token).subscribe(data => 
           console.log(data)
       )
-      this.router.navigate([`/take-quiz/${token}`]);
+      this.router.navigate([`quiz/take-quiz/${token}`]);
       this.dialogRef.close();
   };
 

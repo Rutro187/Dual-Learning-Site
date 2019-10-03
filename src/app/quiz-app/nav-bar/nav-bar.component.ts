@@ -3,9 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { QuizGuardComponent } from '../quiz-guard/quiz-guard.component';
 import { AuthGenericService} from '../../shared/services/auth-generic.service';
-import { map } from 'rxjs/operators';
 import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore } from 'angularfire2/firestore';
-import { AngularFireAuth } from 'angularfire2/auth';
 import { User } from '../../shared/interfaces/users';
 
 
@@ -22,8 +20,6 @@ export class NavBarComponent implements OnInit {
   user$;
   constructor(public dialog: MatDialog,
               private authGenericService: AuthGenericService,
-              private angularFireAuth: AngularFireAuth,
-              private afs: AngularFirestore,
               public userStore: UserStoreService ) {}
   takeQuiz(): void {
     const dialogRef = this.dialog.open(QuizGuardComponent, {

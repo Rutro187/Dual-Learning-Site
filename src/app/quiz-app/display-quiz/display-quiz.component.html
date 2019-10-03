@@ -2,7 +2,7 @@
   <div class="flex">
 
       <h1 class="center">{{quiz?.title}}</h1>
-  
+      <h5 class="center">description: {{quiz?.description}}</h5>
     <div class="questionContainer" *ngFor="let question of quiz?.questions; let j = index; trackBy:trackByFn">
       <mat-card *ngIf="!completed">
         <mat-card-subtitle>{{question.title}}</mat-card-subtitle>

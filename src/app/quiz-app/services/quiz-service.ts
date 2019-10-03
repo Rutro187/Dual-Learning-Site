@@ -48,7 +48,7 @@ export class QuizService {
   }
 
   getQuizByToken(id: string) {
-    this.quizDoc = this.afs.doc<Quiz>(`quiz/${id}`);
+    this.quizDoc = this.afs.doc<Quiz>(`/quiz/${id}`);
     console.log(this.quizDoc);
     return this.quizDoc.valueChanges();
   }

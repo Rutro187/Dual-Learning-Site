@@ -1,12 +1,12 @@
 <div class="header">
     <img class="headerLogo" src="./assets/images/quizWhipSemiBold300.png" alt="">
     <div class="content" *ngIf="(user$ | async).permission">
-            <a class="navLink" [routerLink]="[ '/dashboard' ]" routerLinkActive="active">Dashboard</a>
+            <a class="navLink" [routerLink]="[ 'quiz/dashboard' ]" routerLinkActive="active">Dashboard</a>
             <a class="navLink underline" (click)="takeQuiz()">Take Quiz</a>
-            <a class="navLink" [routerLink]="[ '/quiz-form' ]" routerLinkActive="active"
-                    *ngIf="(user$ | async).permission === 'admin' || (user$ | async) === 'owner'">Create Quiz</a>
-            <a class="navLink" [routerLink]="[ '/admin' ]" routerLinkActive="active"
-                    *ngIf="(user$ | async).permission === 'owner'">Admin</a>
+            <a class="navLink" [routerLink]="[ 'quiz/quiz-form' ]" routerLinkActive="active"
+                    *ngIf="(user$ | async).permission === 'admin' || (user$ | async) === 'teacher'">Create Quiz</a>
+            <a class="navLink" [routerLink]="[ 'quiz/admin' ]" routerLinkActive="active"
+                    *ngIf="(user$ | async).permission === 'admin'">Admin</a>
             <a class="navLink underline" (click)="signOut()">Sign Out</a>
             
 
