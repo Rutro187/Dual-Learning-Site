@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   tryLogin(){
     this.authService.doLogin(this.email, this.password)
     .then(res => {   
-      this.router.navigate(['/quiz/dashboard']);   
+      this.router.navigate(['/dual-landing-page']);   
     }, err => {
       console.log(err);
       this.userMessage = err;
