@@ -13,9 +13,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 export class PublicContentComponent implements OnInit {
 
   items: Array<any>;
-
   id: string;
-
   contentId: any;
 
   constructor(

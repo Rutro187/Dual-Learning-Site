@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FirebaseService } from '../services/firebase.service';
+import { UserStoreService } from '../../shared/services/user-store.service';
 // import { _document } from '@angular/platform-browser/src/browser';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup } from '@angular/forms'
@@ -21,6 +22,8 @@ export class ViewContentComponent implements OnInit {
 
   items: any;
   comments: any;
+  userAuth;
+  user$;
 
   // uid = firebase.auth().currentUser.uid;
 
@@ -35,7 +38,8 @@ export class ViewContentComponent implements OnInit {
     private db: AngularFirestore,
     private fb: FormBuilder,
     private actr: ActivatedRoute,
-    public sanitizer: DomSanitizer
+    public sanitizer: DomSanitizer,
+    public userStore: UserStoreService
   ) { }
 
   ngOnInit() {
@@ -47,6 +51,7 @@ export class ViewContentComponent implements OnInit {
     //     this.items.id = data.payload.id;
     //   }
     // });
+    this.user$ = this.userStore.user$;
     this.firebaseService.getOneFile(this.actr.snapshot.params.id)
     this.loadData();
     this.loadUserComments();
