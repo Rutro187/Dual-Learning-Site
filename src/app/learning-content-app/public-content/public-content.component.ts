@@ -47,7 +47,7 @@ export class PublicContentComponent implements OnInit {
 
 
   viewDetails(item: any){
-    // console.log('was clicked')
+    console.log('was clicked')
     // console.log(item.payload.doc.id)
     let itemId = item.payload.doc.id
     // console.log(itemId);

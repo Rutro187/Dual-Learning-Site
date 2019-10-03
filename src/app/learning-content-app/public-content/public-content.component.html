@@ -3,34 +3,35 @@
 
 
 <!-- <a class="navLink" [routerLink]="[ '/details' ]" routerLinkActive="active">more</a> -->
+<div class="background">
+  <div class="welcomeContainer">
+  <h1 class="mat-h1 welcome">Welcome, Tech Warrior {{firstName}}!</h1>
+  </div>
+  <br> 
 
-<div class="darkBlue welcomeContainer">
-<h1 class="mat-h1 welcome">Welcome, Tech Warrior {{firstName}}!</h1></div>
-<br> 
+  <div class="list-group files-list" (click)="viewDetails(item)">
+    <div *ngFor="let item of items" class="list-group-item list-group-item-action flex-column align-items-start">
+      <div class="row">
+        <div class="col col-md-2 image-col">
+          <img class="image" *ngIf="downloadURL" src="item.payload.doc.data().files[0].downloadURL">
+        </div>
+        <div class="col col-md-8 text-col">
+          <h5 class="mb-1">{{item.payload.doc.data().title}}</h5>
+          <small>{{item.payload.doc.data().description}}</small>
+        </div>
+        <div class="col col-md-2 actions-col">
+          
+          <a [routerLink]="['/details', item.payload.doc.id]" >
+            <button mat-icon-button id="{{item.payload.newIndex}}"  type="button">
+              <mat-icon>keyboard_arrow_right</mat-icon>
+            </button>
+          </a>
 
-<div class="list-group files-list">
-  <div *ngFor="let item of items" class="list-group-item list-group-item-action flex-column align-items-start">
-    <div class="row">
-      <div class="col col-md-2 image-col">
-        <img class="image" *ngIf="downloadURL" src="item.payload.doc.data().files[0].downloadURL">
-      </div>
-      <div class="col col-md-8 text-col">
-        <h5 class="mb-1">{{item.payload.doc.data().title}}</h5>
-        <small>{{item.payload.doc.data().description}}</small>
-      </div>
-      <div class="col col-md-2 actions-col">
-        
-        <a [routerLink]="['/details', item.payload.doc.id]">
-          <button mat-icon-button id="{{item.payload.newIndex}}" (click)="viewDetails(item)" type="button">
-            <mat-icon>keyboard_arrow_right</mat-icon>
-          </button>
-        </a>
-
+        </div>
       </div>
     </div>
   </div>
 </div>
-
 
 
 
