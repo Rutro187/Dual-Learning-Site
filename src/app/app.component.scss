@@ -54,9 +54,7 @@
     position: fixed;
     z-index: 10;
     top: 0;
-    -moz-box-shadow:    3px 3px 1px 1px #EE7623;
-    -webkit-box-shadow: 3px 3px 1px 1px #EE7623;
-    box-shadow:         3px 3px 1px 1px #EE7623;
+    border-bottom: 3px solid #EE7623;
 }
 
 
@@ -73,7 +71,7 @@ mat-sidenav-container{
 
 .content-container{
     width: 100%;
-    padding-top: 40px;
+    padding-top: 50px;
 }
 
 .sidenav-content{
