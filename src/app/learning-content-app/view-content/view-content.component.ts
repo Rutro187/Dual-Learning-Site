@@ -55,7 +55,6 @@ export class ViewContentComponent implements OnInit {
     this.firebaseService.getOneFile(this.actr.snapshot.params.id)
     this.loadData();
     this.loadUserComments();
-
   }
 
   loadData() {
