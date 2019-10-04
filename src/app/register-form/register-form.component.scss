@@ -1,7 +1,7 @@
 .background {
   background-image: linear-gradient( #0e2340,  #EE7623);
-  display: grid;
-  grid-template-columns: 43% auto 43%;
+  display: flex;
+  flex-flow: row wrap;
   min-height: 100vh;
   background-attachment: fixed;
   background-position: center;
@@ -11,15 +11,20 @@
 
 mat-form-field{
   margin-bottom: 10px;
-  width: 90%;
 }
 
 mat-card{
   min-width: 330px;
   padding: 30px;
   margin-bottom: 10%;
+  // margin: 0 auto;
   background-color: rgb(255,255,255,0.95);
   box-shadow: none !important;
+}
+
+.transparent {
+  background-color: rgba(0,0,0,0);
+  color: white;
 }
 
 .center {
@@ -29,9 +34,8 @@ mat-card{
 
 }
 
-.transparent {
-  background-color: rgba(0,0,0,0);
-  color: white;
+.redtext{
+  color: red;
 }
 
 .subtitle {
@@ -40,6 +44,10 @@ mat-card{
 
 .form {
   width: 100%;
+}
+
+.button {
+  margin: 1em;
 }
 
 .left {
@@ -61,12 +69,30 @@ mat-card{
   margin: 20px;
 }
 
-@media (max-width: 768px) {
-  .left {
-    flex-basis: 100%;
+mat-form-field {
+  width: 95%;
+}
+
+@media (max-width: 880px) {
+  .background {
+    flex-flow: column wrap;
   }
 
-  .flex {
-    flex-flow: row wrap;
+  .right-card, .right {
+    width: 100vw;
   }
+
+  .center-img {
+    visibility: hidden;
+  }
+
+  mat-card {
+    margin-bottom: 0;
+  }
+
+  mat-form-field {
+    width: 60%;
+  }
+
+
 }
