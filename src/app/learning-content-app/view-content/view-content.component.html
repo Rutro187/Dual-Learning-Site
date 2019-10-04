@@ -8,7 +8,7 @@
       <iframe width="560" height="315" [src]="sanitizer.bypassSecurityTrustResourceUrl(items.embed)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 
-    <a class="btn btn-outline-success btn-lg mt-2 mb-2" href="{{items.files[0].downloadURL}}" target="_blank">View
+    <a  class="btn btn-outline-success btn-lg mt-2 mb-2" *ngIf="items.files.length > 0" href="{{items.files[0].downloadURL}}" target="_blank">View
         File</a>
     <p class="description">{{items.description}}</p>
 
