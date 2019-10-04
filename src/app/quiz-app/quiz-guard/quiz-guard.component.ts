@@ -11,37 +11,27 @@ import { resolve } from 'url';
   styleUrls: ['./quiz-guard.component.scss']
 })
 export class QuizGuardComponent implements OnInit {
-  
   quiz: any;
   token: string;
-  userMessage: string = "enter your quiz code here!";
-  errorMessage: boolean = false;
+  userMessage = 'enter your quiz code here!';
+  errorMessage = false;
+  constructor(
+    private quizService: QuizService,
+    private router: Router,
+    public dialogRef: MatDialogRef<QuizGuardComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {}
 
-  // submit() {
-  //   this.quizService.getQuizByToken(this.token);
-  //   // Need to pass error back somehow
-  // };
-
-  constructor(private quizService: QuizService, private router: Router, public dialogRef: MatDialogRef<QuizGuardComponent>,
-
-    @Inject(MAT_DIALOG_DATA) public data: any
-    ) 
-    { }
-
-   accessQuiz(token: string) {
-      this.quizService.getQuizByToken(token).subscribe(data => { 
-        if(data !== undefined){
-          this.router.navigate([`quiz/take-quiz/${token}`]);
-          this.dialogRef.close();
-          return
-        }
-        this.errorMessage = true
-        console.log("We didn't recognize this quizcode, it's probably user errror.")
-      })
-      };
-
-  ngOnInit() { 
+  accessQuiz(token: string) {
+    this.quizService.getQuizByToken(token).subscribe(data => {
+      if (data !== undefined) {
+        this.router.navigate([`quiz/take-quiz/${token}`]);
+        this.dialogRef.close();
+        return;
+      }
+      this.errorMessage = true;
+      console.log('We didn\'t recognize this quizcode');
+    });
   }
 
+  ngOnInit() {}
 }
- 
