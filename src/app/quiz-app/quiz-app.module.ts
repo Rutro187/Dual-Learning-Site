@@ -6,7 +6,6 @@ import { QuizFormComponent } from './quiz-form/quiz-form.component';
 import { QuizGuardComponent} from './quiz-guard/quiz-guard.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { QuizResultsComponent } from './quiz-results/quiz-results.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { MyQuizzesComponent } from './my-quizzes/my-quizzes.component';
 import { MaterialModule } from '../shared/material.module';
 import { SharedModule } from '../shared/shared.module';
@@ -21,7 +20,6 @@ import { QuizAppRoutingModule } from './quiz-app-routing.module';
     QuizFormComponent,
     DashboardComponent,
     QuizResultsComponent,
-    NavBarComponent,
     QuizGuardComponent,
     MyQuizzesComponent
   ],
@@ -39,7 +37,6 @@ import { QuizAppRoutingModule } from './quiz-app-routing.module';
     QuizFormComponent,
     DashboardComponent,
     QuizResultsComponent,
-    NavBarComponent,
     QuizGuardComponent,
     MyQuizzesComponent
   ]
