@@ -1,5 +1,5 @@
 
-<div class="background full-page inline">
+<div class="background">
 
   <div class="left">
   <mat-card class="transparent">
@@ -12,7 +12,7 @@
     </mat-card-content>
   </mat-card>
   <mat-card class="transparent">
-      <mat-card-title class="center"><b>Learning App</b></mat-card-title>
+      <mat-card-title class="center"><b>Brain Train</b> <img [routerLink]="['/learning/homepage']" class="arrow" src="./assets/images/arrow.png" width="50px"></mat-card-title>
       <mat-card-content>
           <p class="subtitle"><i>Share files and videos with classmates</i></p>
           <p class="subtitle"><i>Comment on content and add your own notes</i></p>
@@ -25,14 +25,14 @@
   <img class="center-img" src="./assets/images/M.png">
 
   <div class="right">
-  <mat-card>
+  <mat-card class="right-card">
       <mat-card-title class="center">Log In</mat-card-title>
       <mat-card-content>
         <form class="center form">
           <mat-form-field>
             <mat-label>Email</mat-label>
             <input matInput placeholder="Email" name="email" [(ngModel)]="email">
-            <mat-hint>Please enter your email address</mat-hint>
+            <mat-hint>Please enter your email</mat-hint>
           </mat-form-field><br>
           <mat-form-field>
             <mat-label>Password</mat-label>

@@ -1,5 +1,6 @@
-<app-lc-nav-bar></app-lc-nav-bar>
-<main class="padding">
+
+<div class="main">
+<main class=" padding">
       <form class="create-form" [formGroup]="exampleForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label>Title</label>
@@ -31,20 +32,18 @@
             <span class="file-icon">
               <i class="fa fa-upload"></i>
             </span>
-            <span class="file-label">
-              or choose a file…
-            </span>
           </span>
         </label>
       </div>
     </div>
 
 <h3>Uploads</h3>
-<div *ngFor="let file of files">
-  <upload-task [file]="file" (fileEvent)="addFile($event)" ></upload-task>
+<div  *ngFor="let file of files">
+  <upload-task  [file]="file" (fileEvent)="addFile($event)" ></upload-task>
 </div>
 
   <button type="submit">Submit data and files!</button>
 </form>
 
 </main>
+</div>
