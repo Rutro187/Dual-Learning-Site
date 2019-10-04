@@ -99,11 +99,14 @@ export class QuizFormComponent implements OnInit {
       this.quizService.postQuiz(quiz)
       .then(res => { 
         this.quizID = res;
+        window.scrollTo (0,0);
       });
       this.hideCreateQuiz();
       this.showThankYou();
       this.visible = false;
     })
+    
+
   }
   
   ngOnInit() {
