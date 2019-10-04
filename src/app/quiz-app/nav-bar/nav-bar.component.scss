@@ -25,8 +25,10 @@ font-family: 'Montserrat', sans-serif;
 font-weight: bold;
 color: white;
 }
-.underline{text-decoration: underline;
 
+.underline:hover {
+  text-decoration: underline;
+  color: blue;
 }
 
 .header{
@@ -44,6 +46,11 @@ margin-left: 30px;
 margin: 20px;
 text-align: right;
 align-items: center
+}
+
+.navLink:hover {
+  color: #EE7623;
+  text-decoration: none;
 }
 
 .content{
